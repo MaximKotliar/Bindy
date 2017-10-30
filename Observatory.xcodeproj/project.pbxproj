@@ -8,12 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		1969D9F51FA7DC8600AA6FDB /* Observatory.h in Headers */ = {isa = PBXBuildFile; fileRef = 1969D9F31FA7DC8600AA6FDB /* Observatory.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		19765A8B1FA7DE0700F9FCB8 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19765A8A1FA7DE0700F9FCB8 /* Observable.swift */; };
+		19765A8D1FA7DE2100F9FCB8 /* OptionalObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19765A8C1FA7DE2100F9FCB8 /* OptionalObservable.swift */; };
+		19765A901FA7DE5D00F9FCB8 /* ObservableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19765A8F1FA7DE5D00F9FCB8 /* ObservableArray.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1969D9F01FA7DC8600AA6FDB /* Observatory.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Observatory.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1969D9F31FA7DC8600AA6FDB /* Observatory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Observatory.h; sourceTree = "<group>"; };
 		1969D9F41FA7DC8600AA6FDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		19765A8A1FA7DE0700F9FCB8 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		19765A8C1FA7DE2100F9FCB8 /* OptionalObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalObservable.swift; sourceTree = "<group>"; };
+		19765A8F1FA7DE5D00F9FCB8 /* ObservableArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableArray.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +54,9 @@
 			children = (
 				1969D9F31FA7DC8600AA6FDB /* Observatory.h */,
 				1969D9F41FA7DC8600AA6FDB /* Info.plist */,
+				19765A8A1FA7DE0700F9FCB8 /* Observable.swift */,
+				19765A8C1FA7DE2100F9FCB8 /* OptionalObservable.swift */,
+				19765A8F1FA7DE5D00F9FCB8 /* ObservableArray.swift */,
 			);
 			path = Observatory;
 			sourceTree = "<group>";
@@ -95,6 +104,7 @@
 				TargetAttributes = {
 					1969D9EF1FA7DC8600AA6FDB = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -131,6 +141,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19765A901FA7DE5D00F9FCB8 /* ObservableArray.swift in Sources */,
+				19765A8D1FA7DE2100F9FCB8 /* OptionalObservable.swift in Sources */,
+				19765A8B1FA7DE0700F9FCB8 /* Observable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,6 +266,7 @@
 		1969D9F91FA7DC8600AA6FDB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -261,10 +275,12 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Observatory/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = MaximKotliar.Observatory;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -273,6 +289,7 @@
 		1969D9FA1FA7DC8600AA6FDB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -281,6 +298,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Observatory/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = MaximKotliar.Observatory;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
