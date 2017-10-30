@@ -10,16 +10,16 @@ import Foundation
 public class OptionalObservable<T: Equatable> {
     
     class Bind {
-        var actions: [Callback<T?>] = []
+        var actions: [(T?) -> Void] = []
     }
     
     private var bindings = NSMapTable<AnyObject, Bind>.weakToStrongObjects()
     
-    var bindingsCount: Int {
+    public var bindingsCount: Int {
         return bindings.count
     }
     
-    var value: T? {
+    public var value: T? {
         didSet {
             
             // We don't need to trigger callbacks if both are equal or nil
@@ -40,14 +40,15 @@ public class OptionalObservable<T: Equatable> {
         }
     }
     
-    @discardableResult func unbind(_ owner: AnyObject) -> Bool {
+    @discardableResult
+    public func unbind(_ owner: AnyObject) -> Bool {
         let hasBinding = bindings.object(forKey: owner) != nil
         bindings.removeObject(forKey: owner)
         return hasBinding
     }
     
     @discardableResult
-    func bind(_ owner: AnyObject, callback: @escaping Callback<T?>) -> Self {
+    public func bind(_ owner: AnyObject, callback: @escaping (T?) -> Void) -> Self {
         let bind = bindings.object(forKey: owner) ?? Bind()
         bind.actions.append(callback)
         bindings.setObject(bind, forKey: owner)
@@ -55,19 +56,19 @@ public class OptionalObservable<T: Equatable> {
     }
     
     @discardableResult
-    func observe(_ owner: AnyObject, callback: @escaping Callback<T?>) -> Self {
+    public func observe(_ owner: AnyObject, callback: @escaping (T?) -> Void) -> Self {
         callback(value)
         return bind(owner, callback: callback)
     }
     
-    init(_ value: T? = nil) {
+    public init(_ value: T? = nil) {
         self.value = value
     }
 }
 
 extension OptionalObservable: Equatable {
     
-    static func == (lhs: OptionalObservable<T>, rhs: OptionalObservable<T>) -> Bool {
+    public static func == (lhs: OptionalObservable<T>, rhs: OptionalObservable<T>) -> Bool {
         return lhs === rhs
     }
 }

@@ -8,17 +8,15 @@
 
 import Foundation
 
-typealias Callback<T> = (T) -> Void
-
 public class Observable<T: Equatable> {
     
     class Bind {
-        var actions: [Callback<T>] = []
+        var actions: [(T) -> Void] = []
     }
     
     private var bindings = NSMapTable<AnyObject, Bind>.weakToStrongObjects()
     
-    var value: T {
+    public var value: T {
         didSet {
             guard oldValue != self.value,
                 let enumerator = self.bindings.objectEnumerator() else { return }
@@ -29,7 +27,7 @@ public class Observable<T: Equatable> {
     }
     
     @discardableResult
-    func bind(_ owner: AnyObject, callback: @escaping Callback<T>) -> Self {
+    public func bind(_ owner: AnyObject, callback: @escaping (T) -> Void) -> Self {
         let bind = bindings.object(forKey: owner) ?? Bind()
         bind.actions.append(callback)
         bindings.setObject(bind, forKey: owner)
@@ -37,24 +35,25 @@ public class Observable<T: Equatable> {
     }
     
     @discardableResult
-    func observe(_ owner: AnyObject, callback: @escaping Callback<T>) -> Self {
+    public func observe(_ owner: AnyObject, callback: @escaping (T) -> Void) -> Self {
         callback(value)
         return bind(owner, callback: callback)
     }
     @discardableResult
-    func unbind(_ owner: AnyObject) -> Bool {
+    public func unbind(_ owner: AnyObject) -> Bool {
         let hasBinding = bindings.object(forKey: owner) != nil
         bindings.removeObject(forKey: owner)
         return hasBinding
     }
     
-    init(_ value: T) {
+    public init(_ value: T) {
         self.value = value
     }
 }
 
 extension Observable: Equatable {
-    static func == (lhs: Observable, rhs: Observable) -> Bool {
+    public static func == (lhs: Observable, rhs: Observable) -> Bool {
         return lhs === rhs
     }
 }
+
