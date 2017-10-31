@@ -20,6 +20,20 @@
                ReferencedContainer = "container:Bindy.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "1902B59E1FA84AE3001CC0BC"
+               BuildableName = "BindyTests.xctest"
+               BlueprintName = "BindyTests"
+               ReferencedContainer = "container:Bindy.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

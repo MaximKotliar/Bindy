@@ -14,6 +14,7 @@
 		19765A8B1FA7DE0700F9FCB8 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19765A8A1FA7DE0700F9FCB8 /* Observable.swift */; };
 		19765A8D1FA7DE2100F9FCB8 /* OptionalObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19765A8C1FA7DE2100F9FCB8 /* OptionalObservable.swift */; };
 		19765A901FA7DE5D00F9FCB8 /* ObservableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19765A8F1FA7DE5D00F9FCB8 /* ObservableArray.swift */; };
+		B7D6D1A9715E162B745B9E65 /* Pods_Bindy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4E8B34FBAD50D3443F6EB5C /* Pods_Bindy.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,9 @@
 		19765A8A1FA7DE0700F9FCB8 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		19765A8C1FA7DE2100F9FCB8 /* OptionalObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalObservable.swift; sourceTree = "<group>"; };
 		19765A8F1FA7DE5D00F9FCB8 /* ObservableArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableArray.swift; sourceTree = "<group>"; };
+		5CDDEB36833C1C3411D475FF /* Pods-Bindy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bindy.release.xcconfig"; path = "Pods/Target Support Files/Pods-Bindy/Pods-Bindy.release.xcconfig"; sourceTree = "<group>"; };
+		8AC52963C1522156917717FA /* Pods-Bindy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bindy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Bindy/Pods-Bindy.debug.xcconfig"; sourceTree = "<group>"; };
+		E4E8B34FBAD50D3443F6EB5C /* Pods_Bindy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bindy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,12 +57,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7D6D1A9715E162B745B9E65 /* Pods_Bindy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		06FD270D43F0638FFAEF8928 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8AC52963C1522156917717FA /* Pods-Bindy.debug.xcconfig */,
+				5CDDEB36833C1C3411D475FF /* Pods-Bindy.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		1902B5A01FA84AE3001CC0BC /* BindyTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -74,6 +88,8 @@
 				1969D9F21FA7DC8600AA6FDB /* Bindy */,
 				1902B5A01FA84AE3001CC0BC /* BindyTests */,
 				1969D9F11FA7DC8600AA6FDB /* Products */,
+				06FD270D43F0638FFAEF8928 /* Pods */,
+				61737E33FB05967FDFA1E182 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -98,6 +114,14 @@
 				1902B5991FA8479D001CC0BC /* Signal.swift */,
 			);
 			path = Bindy;
+			sourceTree = "<group>";
+		};
+		61737E33FB05967FDFA1E182 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E4E8B34FBAD50D3443F6EB5C /* Pods_Bindy.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,10 +160,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1969D9F81FA7DC8600AA6FDB /* Build configuration list for PBXNativeTarget "Bindy" */;
 			buildPhases = (
+				8515AF61A3DE11DDB3A8BCA9 /* [CP] Check Pods Manifest.lock */,
 				1969D9EB1FA7DC8600AA6FDB /* Sources */,
 				1969D9EC1FA7DC8600AA6FDB /* Frameworks */,
 				1969D9ED1FA7DC8600AA6FDB /* Headers */,
 				1969D9EE1FA7DC8600AA6FDB /* Resources */,
+				38F71A911AEB2FC04FBB5626 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -205,6 +231,42 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		38F71A911AEB2FC04FBB5626 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Bindy/Pods-Bindy-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8515AF61A3DE11DDB3A8BCA9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Bindy-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1902B59B1FA84AE3001CC0BC /* Sources */ = {
@@ -378,6 +440,7 @@
 		};
 		1969D9F91FA7DC8600AA6FDB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8AC52963C1522156917717FA /* Pods-Bindy.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -401,6 +464,7 @@
 		};
 		1969D9FA1FA7DC8600AA6FDB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5CDDEB36833C1C3411D475FF /* Pods-Bindy.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";

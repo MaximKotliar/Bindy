@@ -1,7 +1,7 @@
+[![Build Status](https://travis-ci.org/MaximKotliar/Bindy.svg?branch=master)](https://travis-ci.org/MaximKotliar/Bindy)
+
 # Bindy
 Just a simple bindings.
-
-
 
 ## Installation
 Add
