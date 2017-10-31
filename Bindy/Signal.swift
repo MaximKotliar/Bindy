@@ -13,6 +13,8 @@ public class Signal<T> {
         var actions: [(T) -> Void] = []
     }
     
+    public init() {}
+    
     private var bindings = NSMapTable<AnyObject, Bind>.weakToStrongObjects()
     
     public func send(_ value: T) {
