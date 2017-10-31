@@ -1,15 +1,15 @@
 //
-//  ObservatoryTests.swift
-//  ObservatoryTests
+//  BindyTests.swift
+//  BindyTests
 //
 //  Created by Maxim Kotliar on 10/31/17.
 //  Copyright © 2017 Maxim Kotliar. All rights reserved.
 //
 
 import XCTest
-@testable import Observatory
+@testable import Bindy
 
-class ObservatoryTests: XCTestCase {
+class BindyTests: XCTestCase {
     
     var observable: Observable<String>?
     var optionalObservable: OptionalObservable<String>?

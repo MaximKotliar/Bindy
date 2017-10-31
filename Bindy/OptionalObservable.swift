@@ -1,6 +1,6 @@
 //
 //  OptionalObservable.swift
-//  Observatory
+//  Bindy
 //
 //  Created by Maxim Kotliar on 10/31/17.
 //  Copyright © 2017 Maxim Kotliar. All rights reserved.

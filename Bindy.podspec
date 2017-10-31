@@ -1,5 +1,5 @@
 #
-#  Be sure to run `pod spec lint Observatory.podspec' to ensure this is a
+#  Be sure to run `pod spec lint Bindy.podspec' to ensure this is a
 #  valid spec and to remove all comments including this before submitting the spec.
 #
 #  To learn more about Podspec attributes see http://docs.cocoapods.org/specification.html
@@ -15,8 +15,8 @@ Pod::Spec.new do |s|
   #  summary should be tweet-length, and the description more in depth.
   #
 
-  s.name         = "Swiftervatory"
-  s.version      = "0.0.3"
+  s.name         = "Bindy"
+  s.version      = "0.0.1"
   s.summary      = "Simple, lightweight swift bindings."
 
   # This description is used to generate tags and improve search results.
@@ -27,7 +27,7 @@ Pod::Spec.new do |s|
   #s.description  = <<-DESC
    #                DESC
 
-  s.homepage     = "https://github.com/MaximKotliar/Observatory"
+  s.homepage     = "https://github.com/MaximKotliar/Bindy"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -77,7 +77,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/MaximKotliar/Observatory.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/MaximKotliar/Bindy.git", :tag => "#{s.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -88,7 +88,7 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "Classes", "Observatory/**/*.{h,m,swift}"
+  s.source_files  = "Classes", "Bindy/**/*.{h,m,swift}"
   #s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"

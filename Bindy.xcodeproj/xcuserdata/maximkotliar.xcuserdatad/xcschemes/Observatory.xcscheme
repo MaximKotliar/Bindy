@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1969D9EF1FA7DC8600AA6FDB"
-               BuildableName = "Observatory.framework"
-               BlueprintName = "Observatory"
-               ReferencedContainer = "container:Observatory.xcodeproj">
+               BuildableName = "Bindy.framework"
+               BlueprintName = "Bindy"
+               ReferencedContainer = "container:Bindy.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,9 +34,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1902B59E1FA84AE3001CC0BC"
-               BuildableName = "ObservatoryTests.xctest"
-               BlueprintName = "ObservatoryTests"
-               ReferencedContainer = "container:Observatory.xcodeproj">
+               BuildableName = "BindyTests.xctest"
+               BlueprintName = "BindyTests"
+               ReferencedContainer = "container:Bindy.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -44,9 +44,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1969D9EF1FA7DC8600AA6FDB"
-            BuildableName = "Observatory.framework"
-            BlueprintName = "Observatory"
-            ReferencedContainer = "container:Observatory.xcodeproj">
+            BuildableName = "Bindy.framework"
+            BlueprintName = "Bindy"
+            ReferencedContainer = "container:Bindy.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -67,9 +67,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1969D9EF1FA7DC8600AA6FDB"
-            BuildableName = "Observatory.framework"
-            BlueprintName = "Observatory"
-            ReferencedContainer = "container:Observatory.xcodeproj">
+            BuildableName = "Bindy.framework"
+            BlueprintName = "Bindy"
+            ReferencedContainer = "container:Bindy.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -85,9 +85,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1969D9EF1FA7DC8600AA6FDB"
-            BuildableName = "Observatory.framework"
-            BlueprintName = "Observatory"
-            ReferencedContainer = "container:Observatory.xcodeproj">
+            BuildableName = "Bindy.framework"
+            BlueprintName = "Bindy"
+            ReferencedContainer = "container:Bindy.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
