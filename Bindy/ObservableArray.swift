@@ -38,20 +38,20 @@ public class ObservableArray<T: Equatable>: MutableCollection, CustomStringConve
     }
     
     @discardableResult
-    func observe(_ owner: AnyObject, callback: @escaping ([T]) -> Void) -> Self {
+    public func observe(_ owner: AnyObject, callback: @escaping ([T]) -> Void) -> Self {
         callback(array)
         return bind(owner, callback: callback)
     }
     
     @discardableResult
-    func bind(_ owner: AnyObject, callback: @escaping ([T]) -> Void) -> Self {
+    public func bind(_ owner: AnyObject, callback: @escaping ([T]) -> Void) -> Self {
         let bind = bindings.object(forKey: owner) ?? Bind()
         bind.actions.append(callback)
         bindings.setObject(bind, forKey: owner)
         return self
     }
     
-    func unbind(_ owner: AnyObject) {
+    public func unbind(_ owner: AnyObject) {
         bindings.removeObject(forKey: owner)
     }
     
