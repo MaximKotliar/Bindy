@@ -89,9 +89,7 @@ public class ObservableArray<T: Equatable>: MutableCollection, CustomStringConve
     public func replaceSubrange<C>(_ subrange: Range<ObservableArray.Index>,
                                    with newElements: C) where C: Collection,
         C.Iterator.Element == T {
-            var copy = array
-            copy.replaceSubrange(subrange, with: newElements)
-            swap(&array, &copy)
+            array.replaceSubrange(subrange, with: newElements)
     }
     
     public func removeLast() {

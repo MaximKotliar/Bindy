@@ -1,14 +1,13 @@
 //
-//  Observable.swift
+//  Signal.swift
 //  Observatory
 //
 //  Created by Maxim Kotliar on 10/31/17.
 //  Copyright © 2017 Maxim Kotliar. All rights reserved.
 //
-
 import Foundation
 
-public class Observable<T: Equatable> {
+public class Signal<T> {
     
     class Bind {
         var actions: [(T) -> Void] = []
@@ -16,13 +15,10 @@ public class Observable<T: Equatable> {
     
     private var bindings = NSMapTable<AnyObject, Bind>.weakToStrongObjects()
     
-    public var value: T {
-        didSet {
-            guard oldValue != self.value,
-                let enumerator = self.bindings.objectEnumerator() else { return }
-            enumerator.allObjects.forEach { bind in
-                (bind as? Bind)?.actions.forEach { $0(self.value) }
-            }
+    public func send(_ value: T) {
+        guard let enumerator = self.bindings.objectEnumerator() else { return }
+        enumerator.allObjects.forEach { bind in
+            (bind as? Bind)?.actions.forEach { $0(value) }
         }
     }
     
@@ -33,26 +29,17 @@ public class Observable<T: Equatable> {
         bindings.setObject(bind, forKey: owner)
         return self
     }
-    
-    @discardableResult
-    public func observe(_ owner: AnyObject, callback: @escaping (T) -> Void) -> Self {
-        callback(value)
-        return bind(owner, callback: callback)
-    }
+ 
     @discardableResult
     public func unbind(_ owner: AnyObject) -> Bool {
         let hasBinding = bindings.object(forKey: owner) != nil
         bindings.removeObject(forKey: owner)
         return hasBinding
     }
-    
-    public init(_ value: T) {
-        self.value = value
-    }
 }
 
-extension Observable: Equatable {
-    public static func == (lhs: Observable, rhs: Observable) -> Bool {
+extension Signal: Equatable {
+    public static func == (lhs: Signal, rhs: Signal) -> Bool {
         return lhs === rhs
     }
 }

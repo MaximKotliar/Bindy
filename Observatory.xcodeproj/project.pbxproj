@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1902B59A1FA8479D001CC0BC /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1902B5991FA8479D001CC0BC /* Signal.swift */; };
 		1969D9F51FA7DC8600AA6FDB /* Observatory.h in Headers */ = {isa = PBXBuildFile; fileRef = 1969D9F31FA7DC8600AA6FDB /* Observatory.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		19765A8B1FA7DE0700F9FCB8 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19765A8A1FA7DE0700F9FCB8 /* Observable.swift */; };
 		19765A8D1FA7DE2100F9FCB8 /* OptionalObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19765A8C1FA7DE2100F9FCB8 /* OptionalObservable.swift */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1902B5991FA8479D001CC0BC /* Signal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signal.swift; sourceTree = "<group>"; };
 		1969D9F01FA7DC8600AA6FDB /* Observatory.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Observatory.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1969D9F31FA7DC8600AA6FDB /* Observatory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Observatory.h; sourceTree = "<group>"; };
 		1969D9F41FA7DC8600AA6FDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -57,6 +59,7 @@
 				19765A8A1FA7DE0700F9FCB8 /* Observable.swift */,
 				19765A8C1FA7DE2100F9FCB8 /* OptionalObservable.swift */,
 				19765A8F1FA7DE5D00F9FCB8 /* ObservableArray.swift */,
+				1902B5991FA8479D001CC0BC /* Signal.swift */,
 			);
 			path = Observatory;
 			sourceTree = "<group>";
@@ -142,6 +145,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				19765A901FA7DE5D00F9FCB8 /* ObservableArray.swift in Sources */,
+				1902B59A1FA8479D001CC0BC /* Signal.swift in Sources */,
 				19765A8D1FA7DE2100F9FCB8 /* OptionalObservable.swift in Sources */,
 				19765A8B1FA7DE0700F9FCB8 /* Observable.swift in Sources */,
 			);
