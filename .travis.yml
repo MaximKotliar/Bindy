@@ -1,4 +1,4 @@
-osx_image: xcode9.1
+osx_image: xcode9.0
 language: objective-c
 xcode_project: Bindy.xcodeproj
 xcode_scheme: BindyTests
