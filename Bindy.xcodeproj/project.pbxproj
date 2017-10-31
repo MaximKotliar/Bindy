@@ -31,6 +31,7 @@
 		1902B59F1FA84AE3001CC0BC /* BindyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BindyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1902B5A11FA84AE3001CC0BC /* BindyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindyTests.swift; sourceTree = "<group>"; };
 		1902B5A31FA84AE3001CC0BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1902B5AD1FA88040001CC0BC /* Bindy.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = Bindy.podspec; sourceTree = SOURCE_ROOT; };
 		1969D9F01FA7DC8600AA6FDB /* Bindy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bindy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1969D9F31FA7DC8600AA6FDB /* Bindy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bindy.h; sourceTree = "<group>"; };
 		1969D9F41FA7DC8600AA6FDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -88,6 +89,7 @@
 		1969D9F21FA7DC8600AA6FDB /* Bindy */ = {
 			isa = PBXGroup;
 			children = (
+				1902B5AD1FA88040001CC0BC /* Bindy.podspec */,
 				1969D9F31FA7DC8600AA6FDB /* Bindy.h */,
 				1969D9F41FA7DC8600AA6FDB /* Info.plist */,
 				19765A8A1FA7DE0700F9FCB8 /* Observable.swift */,
