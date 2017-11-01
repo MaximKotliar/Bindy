@@ -9,11 +9,12 @@
 import Foundation
 
 public class ObservableArray<T: Equatable>: MutableCollection, CustomStringConvertible, CustomDebugStringConvertible, ExpressibleByArrayLiteral, RangeReplaceableCollection, Equatable {
-    
+
+    public typealias Callback = (Change<[T]>) -> Void
     public typealias Element = T
     
     class Bind {
-        var actions: [([T]) -> Void] = []
+        var actions: [Callback] = []
     }
     
     public required init() {
@@ -30,21 +31,24 @@ public class ObservableArray<T: Equatable>: MutableCollection, CustomStringConve
         didSet {
             guard oldValue != array,
                 let enumerator = bindings.objectEnumerator() else { return }
-            
+            let change = Change(oldValue: oldValue,
+                                newValue: array)
             enumerator.allObjects.forEach { bind in
-                (bind as? Bind)?.actions.forEach { $0(array) }
+                (bind as? Bind)?.actions.forEach { $0(change) }
             }
         }
     }
     
     @discardableResult
-    public func observe(_ owner: AnyObject, callback: @escaping ([T]) -> Void) -> Self {
-        callback(array)
+    public func observe(_ owner: AnyObject, callback: @escaping Callback) -> Self {
+        let change = Change(oldValue: [],
+                            newValue: array)
+        callback(change)
         return bind(owner, callback: callback)
     }
     
     @discardableResult
-    public func bind(_ owner: AnyObject, callback: @escaping ([T]) -> Void) -> Self {
+    public func bind(_ owner: AnyObject, callback: @escaping Callback) -> Self {
         let bind = bindings.object(forKey: owner) ?? Bind()
         bind.actions.append(callback)
         bindings.setObject(bind, forKey: owner)
@@ -86,7 +90,7 @@ public class ObservableArray<T: Equatable>: MutableCollection, CustomStringConve
         array = Array(elements)
     }
     
-    public func replaceSubrange<C>(_ subrange: Range<ObservableArray.Index>,
+    public func replaceSubrange<C>(_ subrange: Range<Index>,
                                    with newElements: C) where C: Collection,
         C.Iterator.Element == T {
             array.replaceSubrange(subrange, with: newElements)
@@ -96,7 +100,8 @@ public class ObservableArray<T: Equatable>: MutableCollection, CustomStringConve
         array.removeLast()
     }
     
-    public static func == (lhs: ObservableArray<T>, rhs: ObservableArray<T>) -> Bool {
+    public static func == (lhs: ObservableArray<T>,
+                           rhs: ObservableArray<T>) -> Bool {
         return lhs.array == rhs.array
     }
 }
