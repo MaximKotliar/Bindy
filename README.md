@@ -21,7 +21,7 @@ For now, bindy has a couple basic types
 
 ### Observables Sample
 
-```
+```swift
 var firstname = Observable("Salvador")
 var age = Observable(54)
 
@@ -37,7 +37,7 @@ Don't forget always use `[weak self]` in closure to prevent retain cycle
 
 ### Signal and Array Sample
 
-```
+```swift
 var messages = ObservableArray<Message>()
 var newMessage = Signal<Message>()
     
