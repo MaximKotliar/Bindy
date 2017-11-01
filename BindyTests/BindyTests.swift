@@ -9,26 +9,48 @@
 import XCTest
 @testable import Bindy
 
+class TestListener: NSObject {
+    var tag = 0
+}
+
 class BindyTests: XCTestCase {
-    
+
     var observable: Observable<String>?
     var optionalObservable: OptionalObservable<String>?
     var observableArray: ObservableArray<String>?
     var signal: Signal<String>?
-    
+
     func testObservable() {
         let old = "Test"
         let new = "Test_New"
-        let asyncExpectation = expectation(description: "")
+        let bindCallExpectation = expectation(description: "bind did call")
         observable = Observable(old)
-        observable?.bind(self, callback: { (newValue) in
+        observable?.bind(self) { (newValue) in
             guard newValue == new else { return }
-            asyncExpectation.fulfill()
-        })
+            bindCallExpectation.fulfill()
+        }
         observable?.value = new
         waitForExpectations(timeout: 1, handler: nil)
     }
-    
+
+    var testObservableListener: TestListener? = TestListener()
+    func testObservableCleanup() {
+        observable = Observable("testString")
+
+        let bindNotCallExpectation = expectation(description: "bind did not call")
+        bindNotCallExpectation.isInverted = true
+
+        observable!.bind(testObservableListener!) { (newValue) in
+            self.testObservableListener!.tag = 3
+            bindNotCallExpectation.fulfill()
+        }
+        // Force listener to release
+        testObservableListener = nil
+        // Perform change
+        observable?.value = "testObservableCleanup"
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+
     func testOptionalObservable() {
         let old = "Test"
         let new: String? = nil
