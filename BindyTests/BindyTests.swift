@@ -45,11 +45,16 @@ class BindyTests: XCTestCase {
     func testObservableArray() {
         let old = ["Test"]
         let new = ["Test", "1", "2", "3", "4"]
-        let asyncExpectation = expectation(description: "")
+        let oldValueExpectation = expectation(description: "oldValue")
+        let newValueExpectation = expectation(description: "newValue")
         observableArray = ObservableArray(old)
-        observableArray?.bind(self, callback: { (newValue) in
-            guard newValue == new else { return }
-            asyncExpectation.fulfill()
+        observableArray?.bind(self, callback: { (change) in
+            if change.oldValue == old {
+                oldValueExpectation.fulfill()
+            }
+            if change.newValue == new {
+                newValueExpectation.fulfill()
+            }
         })
         observableArray?.append(contentsOf: ["1", "2", "3", "4"])
         waitForExpectations(timeout: 1, handler: nil)
