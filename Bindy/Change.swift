@@ -9,6 +9,6 @@
 import Foundation
 
 public struct Change<T> {
-    let oldValue: T
-    let newValue: T
+    public let oldValue: T
+    public let newValue: T
 }
