@@ -20,7 +20,7 @@ For now, bindy has a couple basic types
 * Signal - allows to trigger callback when some signal recieved.
 * Observable - allows to observe changing of value.
 * OptionalObservable - same as Observable, but with optional value.
-* ObservableArray - Observable array, it conforms to MutableCollection protocol, so you can work with it like with regular array: subscript index, replace objects, map, enumerate, etc...
+* ObservableArray - Observable array, it conforms to MutableCollection protocol, so you can work with it like with regular array: subscript index, replace objects, map, enumerate, etc... Also, ObservableArray has ```updates``` signal, which will you about any changes in array, such as insert, replace
 
 ### Observables Sample
 
@@ -47,6 +47,22 @@ func setupBindings() {
     newMessage.bind(self) { [unowned self] message in
             self.messages.append(message)
 	}
+	
+    messages.updates.bind(self) { [unowned tableView] updates in
+            tableView.beginUpdates()
+            updates.forEach { update in
+                let indexPaths = update.indexes.map { IndexPath(row: $0, section: 0) }
+                switch update.event {
+                case .insert:
+                    tableView.insertRows(at: indexPaths, with: .bottom)
+                case .replace:
+                    tableView.reloadRows(at: indexPaths, with: .fade)
+                case .delete:
+                    tableView.deleteRows(at: indexPaths, with: .left)
+                }
+            }
+            tableView.endUpdates()
+       }
 }
 ```
 
