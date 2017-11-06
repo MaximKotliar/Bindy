@@ -7,22 +7,9 @@
 //
 import Foundation
 
-final public class Signal<T>: ObserveCapable {
+final public class Signal<T>: ObserveCapable<T, T> {
 
-    public typealias ObservableType = T
-    public typealias ChangeType = T
-
-    public init() {}
-
-    var bindings = NSMapTable<AnyObject, Binding>.weakToStrongObjects()
-    
     public func send(_ value: T) {
         fireBindings(with: value)
-    }
-}
-
-extension Signal: Equatable {
-    public static func == (lhs: Signal, rhs: Signal) -> Bool {
-        return lhs === rhs
     }
 }

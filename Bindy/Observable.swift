@@ -8,27 +8,12 @@
 
 import Foundation
 
-public final class Observable<T: Equatable>: ObservableValueHolder {
+public final class Observable<T: Equatable>: ObservableValueHolder<T, T> {
 
-    public typealias ObservableType = T
-    public typealias ChangeType = T
-
-    var bindings = NSMapTable<AnyObject, Binding>.weakToStrongObjects()
-    
-    public var value: T {
+    public override var value: T {
         didSet {
             guard oldValue != self.value else { return }
             fireBindings(with: value)
         }
-    }
-
-    public init(_ value: T) {
-        self.value = value
-    }
-}
-
-extension Observable: Equatable {
-    public static func == (lhs: Observable, rhs: Observable) -> Bool {
-        return lhs === rhs
     }
 }

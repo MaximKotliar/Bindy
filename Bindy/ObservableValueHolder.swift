@@ -8,15 +8,11 @@
 
 import Foundation
 
-protocol ObservableValueHolder: ObserveCapable {
-    
-    var value: ObservableType { get }
-    func transform(_ value: ObservableType) -> ChangeType
-}
+public class ObservableValueHolder<ObservableType, ChangeType>: ObserveCapable<ObservableType, ChangeType> {
 
-extension ObservableValueHolder {
+    open var value: ObservableType
 
-    func transform(_ value: ObservableType) -> ChangeType {
+    open func transform(_ value: ObservableType) -> ChangeType {
         guard let value = value as? ChangeType else {
             let fromType = String(describing: ObservableType.self)
             let toType = String(describing: ChangeType.self)
@@ -26,9 +22,13 @@ extension ObservableValueHolder {
     }
 
     @discardableResult
-    func observe(_ owner: AnyObject,
-                 callback: @escaping (ChangeType) -> Void) -> Self {
+    public func observe(_ owner: AnyObject,
+                        callback: @escaping (ChangeType) -> Void) -> Self {
         callback(transform(value))
         return bind(owner, callback: callback)
+    }
+
+    public init(_ value: ObservableType) {
+        self.value = value
     }
 }

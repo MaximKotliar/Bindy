@@ -32,12 +32,7 @@ extension Range {
     }
 }
 
-public final class ObservableArray<T: Equatable>: ObservableValueHolder, Collection, MutableCollection, CustomStringConvertible, CustomDebugStringConvertible, ExpressibleByArrayLiteral, RangeReplaceableCollection, Equatable {
-
-    public typealias ObservableType = [T]
-    public typealias ChangeType = Change<[T]>
-
-    var value: ObservableArray<T>.ObservableType { return array }
+public final class ObservableArray<T: Equatable>: ObservableValueHolder<[T], Change<[T]>>, Collection, MutableCollection, CustomStringConvertible, CustomDebugStringConvertible, ExpressibleByArrayLiteral, RangeReplaceableCollection {
 
     public typealias Element = T
 
@@ -59,60 +54,54 @@ public final class ObservableArray<T: Equatable>: ObservableValueHolder, Collect
     }
 
     public let updates = Signal<[Update]>()
-    
-    public required init() {
-        array = []
-    }
-    
-    public init(array: [Element]) {
-        self.array = array
-    }
-    
-    var bindings = NSMapTable<AnyObject, Binding>.weakToStrongObjects()
 
-    internal var array: [T] {
+    public init() {
+        super.init([])
+    }
+
+    override public var value: [T] {
         didSet {
-            guard oldValue != array else { return }
+            guard oldValue != value else { return }
             let change = Change(oldValue: oldValue,
-                                newValue: array)
+                                newValue: value)
             fireBindings(with: change)
         }
     }
 
-    func transform(_ value: [T]) -> Change<[T]> {
+    override public func transform(_ value: [T]) -> Change<[T]> {
         return Change(oldValue: value, newValue: value)
     }
     
-    public var startIndex: Int { return array.startIndex }
+    public var startIndex: Int { return value.startIndex }
     
-    public var endIndex: Int { return array.endIndex }
+    public var endIndex: Int { return value.endIndex }
     
-    public func index(after i: Int) -> Int { return array.index(after: i) }
+    public func index(after i: Int) -> Int { return value.index(after: i) }
     
     public func index(before i: Int) -> Int {
-        return array.index(before: i)
+        return value.index(before: i)
     }
     
     public var description: String {
-        return array.description
+        return value.description
     }
     
     public var debugDescription: String {
-        return array.debugDescription
+        return value.debugDescription
     }
     
     public required init(arrayLiteral elements: T...) {
-        array = Array(elements)
+        super.init(elements)
     }
 
     // Subscripts
     public subscript(index: Int) -> T {
         get {
-            return array[index]
+            return value[index]
         }
         set {
-            array[index] = newValue
-            if index == array.count {
+            value[index] = newValue
+            if index == value.count {
                 updates.send([Update(.insert, [index])])
             } else {
                 updates.send([Update(.replace, [index])])
@@ -122,10 +111,10 @@ public final class ObservableArray<T: Equatable>: ObservableValueHolder, Collect
 
     public subscript(bounds: Range<Int>) -> ArraySlice<Element> {
         get {
-            return array[bounds]
+            return value[bounds]
         }
         set {
-            array[bounds] = newValue
+            value[bounds] = newValue
             let first = bounds.lowerBound
             updates.send([Update(.insert, Array(first..<first + newValue.count)),
                           Update(.delete, Array(bounds.lowerBound..<bounds.upperBound))])
@@ -134,48 +123,48 @@ public final class ObservableArray<T: Equatable>: ObservableValueHolder, Collect
 
     // Insertions
     public func insert(_ newElement: T, at i: Index) {
-        array.insert(newElement, at: i)
+        value.insert(newElement, at: i)
         updates.send([Update(.insert, [i])])
     }
 
     public func insert<C>(contentsOf newElements: C, at i: Int) where C : Collection, T == C.Element {
         guard !newElements.isEmpty else { return }
-        let oldCount = array.count
-        array.insert(contentsOf: newElements, at: i)
-        let insertedCount = array.count - oldCount
+        let oldCount = value.count
+        value.insert(contentsOf: newElements, at: i)
+        let insertedCount = value.count - oldCount
         updates.send([Update(.insert, Array(i..<i + insertedCount))])
     }
 
     public func append(_ newElement: T) {
-        array.append(newElement)
-        updates.send([Update(.insert, [array.count - 1])])
+        value.append(newElement)
+        updates.send([Update(.insert, [value.count - 1])])
     }
 
     public func append<S>(contentsOf newElements: S) where S : Sequence, T == S.Element {
-        let end = array.count
-        array.append(contentsOf: newElements)
-        guard end != array.count else { return }
-        updates.send([Update(.insert, Array(end..<array.count))])
+        let end = value.count
+        value.append(contentsOf: newElements)
+        guard end != value.count else { return }
+        updates.send([Update(.insert, Array(end..<value.count))])
     }
 
     // Deletions
     public func removeLast() -> Element {
-        let element = array.removeLast()
-        updates.send([Update(.delete, [array.count])])
+        let element = value.removeLast()
+        updates.send([Update(.delete, [value.count])])
         return element
     }
 
     @discardableResult
     public func remove(at position: Int) -> Element {
-        let element = array.remove(at: position)
+        let element = value.remove(at: position)
         updates.send([Update(.delete, [position])])
         return element
     }
 
     public func removeAll(keepingCapacity keepCapacity: Bool) {
-        guard !array.isEmpty else { return }
-        let oldCount = array.count
-        array.removeAll(keepingCapacity: keepCapacity)
+        guard !value.isEmpty else { return }
+        let oldCount = value.count
+        value.removeAll(keepingCapacity: keepCapacity)
         updates.send([Update(.delete, Array(0..<oldCount))])
     }
 
@@ -184,17 +173,17 @@ public final class ObservableArray<T: Equatable>: ObservableValueHolder, Collect
                                    with newElements: C) where C: Collection,
         C.Iterator.Element == T {
 
-            let oldCount = array.count
-            array.replaceSubrange(subrange, with: newElements)
+            let oldCount = value.count
+            value.replaceSubrange(subrange, with: newElements)
             let first = subrange.lowerBound
-            let newCount = array.count
+            let newCount = value.count
             let end = first + (newCount - oldCount) + subrange.count
             updates.send([Update(.insert, Array(first..<end)),
                           Update(.delete, Array(subrange.lowerBound..<subrange.upperBound))])
     }
 
     public func replaceAll(with new: [T]) {
-        let old = array
+        let old = value
         let maxCount = Swift.max(old.count, new.count)
 
         var replacements: [Index] = []
@@ -227,15 +216,10 @@ public final class ObservableArray<T: Equatable>: ObservableValueHolder, Collect
             updates.append(Update(.delete, deletions))
         }
 
-        array = new
+        value = new
 
         if !updates.isEmpty {
             self.updates.send(updates)
         }
-    }
-
-    public static func == (lhs: ObservableArray<T>,
-                           rhs: ObservableArray<T>) -> Bool {
-        return lhs.array == rhs.array
     }
 }

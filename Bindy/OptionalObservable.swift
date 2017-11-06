@@ -7,14 +7,9 @@
 //
 import Foundation
 
-public final class OptionalObservable<T: Equatable>: ObservableValueHolder {
+public final class OptionalObservable<T: Equatable>: ObservableValueHolder<Optional<T>, Optional<T>> {
 
-    public typealias ObservableType = T?
-    public typealias ChangeType = T?
-
-    var bindings = NSMapTable<AnyObject, Binding>.weakToStrongObjects()
-
-    public var value: T? {
+    public override var value: T? {
         didSet {
             // We don't need to trigger callbacks if both are equal or nil
             switch (oldValue, value) {
@@ -27,17 +22,5 @@ public final class OptionalObservable<T: Equatable>: ObservableValueHolder {
             }
             fireBindings(with: value)
         }
-    }
-    
-    public init(_ value: T? = nil) {
-        self.value = value
-    }
-}
-
-extension OptionalObservable: Equatable {
-    
-    public static func == (lhs: OptionalObservable<T>,
-                           rhs: OptionalObservable<T>) -> Bool {
-        return lhs === rhs
     }
 }

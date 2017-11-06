@@ -40,7 +40,7 @@ class BindyTests: XCTestCase {
         let bindNotCallExpectation = expectation(description: "bind did not call")
         bindNotCallExpectation.isInverted = true
 
-        observable!.bind(testObservableListener!) { (newValue) in
+        observable!.bind(testObservableListener!) { newValue in
             self.testObservableListener!.tag = 3
             bindNotCallExpectation.fulfill()
         }
