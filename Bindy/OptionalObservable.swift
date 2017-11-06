@@ -7,21 +7,15 @@
 //
 import Foundation
 
-public class OptionalObservable<T: Equatable> {
-    
-    class Bind {
-        var actions: [(T?) -> Void] = []
-    }
-    
-    private var bindings = NSMapTable<AnyObject, Bind>.weakToStrongObjects()
-    
-    public var bindingsCount: Int {
-        return bindings.count
-    }
-    
+public final class OptionalObservable<T: Equatable>: ObservableValueHolder {
+
+    public typealias ObservableType = T?
+    public typealias ChangeType = T?
+
+    var bindings = NSMapTable<AnyObject, Binding>.weakToStrongObjects()
+
     public var value: T? {
         didSet {
-            
             // We don't need to trigger callbacks if both are equal or nil
             switch (oldValue, value) {
             case (.some(let unwrappedOldValue), .some(let unwrappedValue)):
@@ -31,34 +25,8 @@ public class OptionalObservable<T: Equatable> {
             default:
                 break
             }
-            
-            guard let enumerator = bindings.objectEnumerator() else { return }
-            
-            enumerator.allObjects.forEach { bind in
-                (bind as? Bind)?.actions.forEach { $0(value) }
-            }
+            fireBindings(with: value)
         }
-    }
-    
-    @discardableResult
-    public func unbind(_ owner: AnyObject) -> Bool {
-        let hasBinding = bindings.object(forKey: owner) != nil
-        bindings.removeObject(forKey: owner)
-        return hasBinding
-    }
-    
-    @discardableResult
-    public func bind(_ owner: AnyObject, callback: @escaping (T?) -> Void) -> Self {
-        let bind = bindings.object(forKey: owner) ?? Bind()
-        bind.actions.append(callback)
-        bindings.setObject(bind, forKey: owner)
-        return self
-    }
-    
-    @discardableResult
-    public func observe(_ owner: AnyObject, callback: @escaping (T?) -> Void) -> Self {
-        callback(value)
-        return bind(owner, callback: callback)
     }
     
     public init(_ value: T? = nil) {
@@ -68,7 +36,8 @@ public class OptionalObservable<T: Equatable> {
 
 extension OptionalObservable: Equatable {
     
-    public static func == (lhs: OptionalObservable<T>, rhs: OptionalObservable<T>) -> Bool {
+    public static func == (lhs: OptionalObservable<T>,
+                           rhs: OptionalObservable<T>) -> Bool {
         return lhs === rhs
     }
 }

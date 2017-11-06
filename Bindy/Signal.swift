@@ -7,36 +7,17 @@
 //
 import Foundation
 
-public class Signal<T> {
-    
-    class Bind {
-        var actions: [(T) -> Void] = []
-    }
-    
+final public class Signal<T>: ObserveCapable {
+
+    public typealias ObservableType = T
+    public typealias ChangeType = T
+
     public init() {}
-    
-    private var bindings = NSMapTable<AnyObject, Bind>.weakToStrongObjects()
+
+    var bindings = NSMapTable<AnyObject, Binding>.weakToStrongObjects()
     
     public func send(_ value: T) {
-        guard let enumerator = self.bindings.objectEnumerator() else { return }
-        enumerator.allObjects.forEach { bind in
-            (bind as? Bind)?.actions.forEach { $0(value) }
-        }
-    }
-    
-    @discardableResult
-    public func bind(_ owner: AnyObject, callback: @escaping (T) -> Void) -> Self {
-        let bind = bindings.object(forKey: owner) ?? Bind()
-        bind.actions.append(callback)
-        bindings.setObject(bind, forKey: owner)
-        return self
-    }
- 
-    @discardableResult
-    public func unbind(_ owner: AnyObject) -> Bool {
-        let hasBinding = bindings.object(forKey: owner) != nil
-        bindings.removeObject(forKey: owner)
-        return hasBinding
+        fireBindings(with: value)
     }
 }
 

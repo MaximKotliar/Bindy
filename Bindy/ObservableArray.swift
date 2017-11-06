@@ -32,14 +32,14 @@ extension Range {
     }
 }
 
-public class ObservableArray<T: Equatable>: Collection, MutableCollection, CustomStringConvertible, CustomDebugStringConvertible, ExpressibleByArrayLiteral, RangeReplaceableCollection, Equatable {
+public final class ObservableArray<T: Equatable>: ObservableValueHolder, Collection, MutableCollection, CustomStringConvertible, CustomDebugStringConvertible, ExpressibleByArrayLiteral, RangeReplaceableCollection, Equatable {
 
-    public typealias Callback = (Change<[T]>) -> Void
+    public typealias ObservableType = [T]
+    public typealias ChangeType = Change<[T]>
+
+    var value: ObservableArray<T>.ObservableType { return array }
+
     public typealias Element = T
-    
-    class Bind {
-        var actions: [Callback] = []
-    }
 
     public struct Update {
         public enum Event {
@@ -68,38 +68,19 @@ public class ObservableArray<T: Equatable>: Collection, MutableCollection, Custo
         self.array = array
     }
     
-    private var bindings = NSMapTable<AnyObject, Bind>.weakToStrongObjects()
+    var bindings = NSMapTable<AnyObject, Binding>.weakToStrongObjects()
 
     internal var array: [T] {
         didSet {
-            guard oldValue != array,
-                let enumerator = bindings.objectEnumerator() else { return }
+            guard oldValue != array else { return }
             let change = Change(oldValue: oldValue,
                                 newValue: array)
-            enumerator.allObjects.forEach { bind in
-                (bind as? Bind)?.actions.forEach { $0(change) }
-            }
+            fireBindings(with: change)
         }
     }
-    
-    @discardableResult
-    public func observe(_ owner: AnyObject, callback: @escaping Callback) -> Self {
-        let change = Change(oldValue: [],
-                            newValue: array)
-        callback(change)
-        return bind(owner, callback: callback)
-    }
-    
-    @discardableResult
-    public func bind(_ owner: AnyObject, callback: @escaping Callback) -> Self {
-        let bind = bindings.object(forKey: owner) ?? Bind()
-        bind.actions.append(callback)
-        bindings.setObject(bind, forKey: owner)
-        return self
-    }
-    
-    public func unbind(_ owner: AnyObject) {
-        bindings.removeObject(forKey: owner)
+
+    func transform(_ value: [T]) -> Change<[T]> {
+        return Change(oldValue: value, newValue: value)
     }
     
     public var startIndex: Int { return array.startIndex }
