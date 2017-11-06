@@ -20,7 +20,7 @@ For now, bindy has a couple basic types
 * Signal - allows to trigger callback when some signal recieved.
 * Observable - allows to observe changing of value.
 * OptionalObservable - same as Observable, but with optional value.
-* ObservableArray - Observable array, it conforms to MutableCollection protocol, so you can work with it like with regular array: subscript index, replace objects, map, enumerate, etc... Also, ObservableArray has ```updates``` signal, which will you about any changes in array, such as insert, replace
+* ObservableArray - Observable array, it conforms to MutableCollection protocol, so you can work with it like with regular array: subscript index, replace objects, map, enumerate, etc... Also, ObservableArray has ```updates``` signal, which will notify you about any changes in array, such as insert, replace
 
 ### Observables Sample
 
