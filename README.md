@@ -29,14 +29,13 @@ var firstname = Observable("Salvador")
 var age = Observable(54)
 
 func setupBindings() {
-	age.bind(self) { [weak self] newAge in
-            guard let name = self?.firstname.value else { return }
-            print("Happy \(newAge) birthday, \(name)")
+	age.bind(self) { [unowned self] newAge in
+            print("Happy \(newAge) birthday, \(self.firstname.value)")
 	}
 }
 ```
 
-Don't forget always use `[weak self]` in closure to prevent retain cycle
+Don't forget always use `[unowned owner]` in closure to prevent retain cycle.
 
 ### Signal and Array Sample
 
@@ -45,8 +44,8 @@ var messages = ObservableArray<Message>()
 var newMessage = Signal<Message>()
     
 func setupBindings() {
-    newMessage.bind(self) { [weak self] message in
-            self?.messages.append(message)
+    newMessage.bind(self) { [unowned self] message in
+            self.messages.append(message)
 	}
 }
 ```
