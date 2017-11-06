@@ -99,20 +99,20 @@ class BindyTests: XCTestCase {
     func testArrayUpdates() {
         let array = ObservableArray(["1", "2", "3", "4", "5"])
         var insertions: [Int] = []
-        var replcaements: [Int] = []
+        var replacements: [Int] = []
         array.updates.bind(self) { (updates) in
             updates.forEach({ (update) in
                 switch update.event {
                 case .insert:
                     insertions = update.indexes
                 case .replace:
-                    replcaements = update.indexes
+                    replacements = update.indexes
                 default:
                     break
                 }
             })
         }
         array.replaceAll(with: ["5", "4", "3", "2", "1", "0"])
-        XCTAssert(insertions == [5] && replcaements == [0, 1, 3, 4])
+        XCTAssert(insertions == [5] && replacements == [0, 1, 3, 4])
     }
 }
