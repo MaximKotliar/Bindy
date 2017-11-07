@@ -1,7 +1,7 @@
-[![Build Status](https://travis-ci.org/MaximKotliar/Bindy.svg?branch=master)](https://travis-ci.org/MaximKotliar/Bindy)
-[![Version](https://img.shields.io/cocoapods/v/Bindy.svg?style=flat)](http://cocoapods.org/pods/Bindy)
-[![License](https://img.shields.io/cocoapods/l/Bindy.svg?style=flat)](http://cocoapods.org/pods/Bindy)
-[![Platform](https://img.shields.io/cocoapods/p/Bindy.svg?style=flat)](http://cocoapods.org/pods/Bindy)
+[![Build status](https://img.shields.io/travis/MaximKotliar/Bindy/master.svg?style=flat-square)](https://travis-ci.org/MaximKotliar/Bindy)
+[![Version](https://img.shields.io/cocoapods/v/Bindy.svg?style=flat-square)](http://cocoapods.org/pods/Bindy)
+[![License](https://img.shields.io/cocoapods/l/Bindy.svg?style=flat-square)](http://cocoapods.org/pods/Bindy)
+[![Platform](https://img.shields.io/cocoapods/p/Bindy.svg?style=flat-square)](http://cocoapods.org/pods/Bindy)
 
 # Bindy
 Just a simple bindings.
