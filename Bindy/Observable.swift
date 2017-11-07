@@ -8,7 +8,7 @@
 
 import Foundation
 
-public final class Observable<T: Equatable>: ObservableValueHolder<T, T> {
+public class Observable<T: Equatable>: ObservableValueHolder<T> {
 
     public override var value: T {
         didSet {

@@ -8,27 +8,60 @@
 
 import Foundation
 
-public class ObservableValueHolder<ObservableType, ChangeType>: ObserveCapable<ObservableType, ChangeType> {
+public class ObservableValueHolder<ObservableType>: ObserveCapable<ObservableType> {
 
     open var value: ObservableType
 
-    open func transform(_ value: ObservableType) -> ChangeType {
-        guard let value = value as? ChangeType else {
-            let fromType = String(describing: ObservableType.self)
-            let toType = String(describing: ChangeType.self)
-            fatalError("Can't cast \(fromType) to \(toType), you should provide custom transform by overriding func transform(_ value: ObservableType) function.")
-        }
-        return value
-    }
-
     @discardableResult
     public func observe(_ owner: AnyObject,
-                        callback: @escaping (ChangeType) -> Void) -> Self {
-        callback(transform(value))
+                        callback: @escaping (ObservableType) -> Void) -> Self {
+        callback(value)
         return bind(owner, callback: callback)
     }
 
     public init(_ value: ObservableType) {
         self.value = value
+    }
+}
+
+extension ObservableValueHolder {
+
+    open func combined<T, R>(with other: Observable<T>, transform: @escaping (ObservableType, T) -> R) -> Observable<R> {
+        let combined = transform(self.value, other.value)
+        let observable = Observable(combined)
+        self.bind(observable) { (value) in
+            observable.value = transform(self.value, other.value)
+        }
+        other.bind(observable) { (value) in
+            observable.value = transform(self.value, other.value)
+        }
+        return observable
+    }
+
+    open func combined<T, R>(with other: ObservableArray<T>, transform: @escaping (ObservableType, [T]) -> [R]) -> ObservableArray<R> {
+        let combined = transform(self.value, other.value)
+        let observable = ObservableArray(combined)
+        self.bind(observable) { (value) in
+            observable.value = transform(self.value, other.value)
+        }
+        other.bind(observable) { (value) in
+            observable.value = transform(self.value, other.value)
+        }
+        return observable
+    }
+}
+
+extension ObservableArray {
+
+    open func combined<R>(with other: Observable<T>, transform: @escaping ([Element], T) -> R) -> Observable<R> {
+        let combined = transform(self.value, other.value)
+        let observable = Observable(combined)
+        self.bind(observable) { (value) in
+            observable.value = transform(self.value, other.value)
+        }
+        other.bind(observable) { (value) in
+            observable.value = transform(self.value, other.value)
+        }
+        return observable
     }
 }

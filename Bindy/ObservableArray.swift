@@ -32,7 +32,7 @@ extension Range {
     }
 }
 
-public final class ObservableArray<T: Equatable>: ObservableValueHolder<[T], Change<[T]>>, Collection, MutableCollection, CustomStringConvertible, CustomDebugStringConvertible, ExpressibleByArrayLiteral, RangeReplaceableCollection {
+public final class ObservableArray<T: Equatable>: ObservableValueHolder<[T]>, Collection, MutableCollection, CustomStringConvertible, CustomDebugStringConvertible, ExpressibleByArrayLiteral, RangeReplaceableCollection {
 
     public typealias Element = T
 
@@ -62,14 +62,8 @@ public final class ObservableArray<T: Equatable>: ObservableValueHolder<[T], Cha
     override public var value: [T] {
         didSet {
             guard oldValue != value else { return }
-            let change = Change(oldValue: oldValue,
-                                newValue: value)
-            fireBindings(with: change)
+            fireBindings(with: value)
         }
-    }
-
-    override public func transform(_ value: [T]) -> Change<[T]> {
-        return Change(oldValue: value, newValue: value)
     }
     
     public var startIndex: Int { return value.startIndex }

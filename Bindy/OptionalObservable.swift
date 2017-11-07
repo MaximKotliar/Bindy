@@ -7,7 +7,7 @@
 //
 import Foundation
 
-public final class OptionalObservable<T: Equatable>: ObservableValueHolder<Optional<T>, Optional<T>> {
+public final class OptionalObservable<T: Equatable>: ObservableValueHolder<Optional<T>> {
 
     public override var value: T? {
         didSet {

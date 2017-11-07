@@ -12,15 +12,15 @@ public class BindingsContainer<T> {
     var actions: [(T) -> Void] = []
 }
 
-public class ObserveCapable<ObservableType, ChangeType> {
+public class ObserveCapable<ObservableType> {
 
-    typealias Binding = BindingsContainer<ChangeType>
+    typealias Binding = BindingsContainer<ObservableType>
 
     internal var bindings = NSMapTable<AnyObject, Binding>.weakToStrongObjects()
 
     @discardableResult
     public func bind(_ owner: AnyObject,
-                     callback: @escaping (ChangeType) -> Void) -> Self {
+                     callback: @escaping (ObservableType) -> Void) -> Self {
         let bind = bindings.object(forKey: owner) ?? Binding()
         bind.actions.append(callback)
         bindings.setObject(bind, forKey: owner)
@@ -34,7 +34,7 @@ public class ObserveCapable<ObservableType, ChangeType> {
         return hasBinding
     }
 
-    func fireBindings(with change: ChangeType) {
+    func fireBindings(with change: ObservableType) {
         guard let enumerator = self.bindings.objectEnumerator() else { return }
         enumerator.allObjects.forEach { bind in
             guard let bind = bind as? Binding else { return }
@@ -46,8 +46,8 @@ public class ObserveCapable<ObservableType, ChangeType> {
 }
 
 extension ObserveCapable: Equatable {
-    public static func == (lhs: ObserveCapable<ObservableType, ChangeType>,
-                           rhs: ObserveCapable<ObservableType, ChangeType>) -> Bool {
+    public static func == (lhs: ObserveCapable<ObservableType>,
+                           rhs: ObserveCapable<ObservableType>) -> Bool {
         return lhs === rhs
     }
 }

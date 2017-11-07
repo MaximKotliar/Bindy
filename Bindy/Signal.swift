@@ -7,7 +7,7 @@
 //
 import Foundation
 
-final public class Signal<T>: ObserveCapable<T, T> {
+final public class Signal<T>: ObserveCapable<T> {
 
     public func send(_ value: T) {
         fireBindings(with: value)
