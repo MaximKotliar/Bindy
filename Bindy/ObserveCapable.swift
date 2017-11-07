@@ -42,7 +42,7 @@ public class ObserveCapable<ObservableType> {
         }
     }
 
-    init() {}
+    public init() {}
 }
 
 extension ObserveCapable: Equatable {

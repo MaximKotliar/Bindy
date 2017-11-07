@@ -23,4 +23,8 @@ public final class OptionalObservable<T: Equatable>: ObservableValueHolder<Optio
             fireBindings(with: value)
         }
     }
+
+    public init() {
+        super.init(nil)
+    }
 }
