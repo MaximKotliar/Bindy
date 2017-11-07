@@ -40,7 +40,7 @@ class BindyTests: XCTestCase {
         let bindNotCallExpectation = expectation(description: "bind did not call")
         bindNotCallExpectation.isInverted = true
 
-        observable!.bind(testObservableListener!) { (newValue) in
+        observable!.bind(testObservableListener!) { newValue in
             self.testObservableListener!.tag = 3
             bindNotCallExpectation.fulfill()
         }
@@ -100,6 +100,10 @@ class BindyTests: XCTestCase {
         let array = ObservableArray(["1", "2", "3", "4", "5"])
         var insertions: [Int] = []
         var replacements: [Int] = []
+        array.observe(self) { (change) in
+            XCTAssert(change.newValue == ["1", "2", "3", "4", "5"])
+        }
+        array.unbind(self)
         array.updates.bind(self) { (updates) in
             updates.forEach({ (update) in
                 switch update.event {
