@@ -33,8 +33,9 @@ class BindyTests: XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
 
-    var testObservableListener: TestListener? = TestListener()
+    var testObservableListener: TestListener?
     func testObservableCleanup() {
+        testObservableListener = TestListener()
         observable = Observable("testString")
 
         let bindNotCallExpectation = expectation(description: "bind did not call")
@@ -174,5 +175,32 @@ class BindyTests: XCTestCase {
         tasks.remove(at: 2)
         priority.remove(at: 2)
         XCTAssert(callCount == 7)
+    }
+
+    func testTransform() {
+        let intValue = Observable(20)
+        let stringValue = intValue.transform { return "\($0)"}
+        stringValue.bind(self) { string in
+            XCTAssert(string == "420")
+        }
+        intValue.value = 420
+        XCTAssert(stringValue.value != "20")
+    }
+
+    func testTransformCleanup() {
+        testObservableListener = TestListener()
+        let intValue = Observable(20)
+        let stringValue = intValue.transform { return "\($0)"}
+        let asyncExpectation = expectation(description: "Expect not call")
+        asyncExpectation.isInverted = true
+        stringValue.bind(testObservableListener!) { string in
+            self.testObservableListener!.tag = 12
+            asyncExpectation.fulfill()
+            XCTAssert(string == "420")
+        }
+        testObservableListener = nil
+        intValue.value = 420
+        XCTAssert(stringValue.value != "20")
+        waitForExpectations(timeout: 1, handler: nil)
     }
 }

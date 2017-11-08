@@ -27,4 +27,8 @@ public final class OptionalObservable<T: Equatable>: ObservableValueHolder<Optio
     public init() {
         super.init(nil)
     }
+
+    public override init(_ value: T?) {
+        super.init(value)
+    }
 }
