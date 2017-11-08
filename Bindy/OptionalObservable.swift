@@ -32,3 +32,14 @@ public final class OptionalObservable<T: Equatable>: ObservableValueHolder<Optio
         super.init(value)
     }
 }
+
+extension OptionalObservable {
+
+    func transform<U: Equatable>(_ transform: @escaping (T?) -> U) -> OptionalObservable<U> {
+        let transformedObserver = OptionalObservable<U>(transform(value))
+        observe(self) { [unowned self] (value) in
+            transformedObserver.value = transform(self.value)
+        }
+        return transformedObserver
+    }
+}
