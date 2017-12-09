@@ -7,7 +7,7 @@
 //
 import Foundation
 
-public final class OptionalObservable<T: Equatable>: ObservableValueHolder<Optional<T>, Optional<T>> {
+public final class OptionalObservable<T: Equatable>: ObservableValueHolder<Optional<T>> {
 
     public override var value: T? {
         didSet {
@@ -22,5 +22,24 @@ public final class OptionalObservable<T: Equatable>: ObservableValueHolder<Optio
             }
             fireBindings(with: value)
         }
+    }
+
+    public init() {
+        super.init(nil)
+    }
+
+    public override init(_ value: T?) {
+        super.init(value)
+    }
+}
+
+extension OptionalObservable {
+
+    public func transform<U: Equatable>(_ transform: @escaping (T?) -> U) -> OptionalObservable<U> {
+        let transformedObserver = OptionalObservable<U>(transform(value))
+        observe(self) { [unowned self] (value) in
+            transformedObserver.value = transform(self.value)
+        }
+        return transformedObserver
     }
 }
