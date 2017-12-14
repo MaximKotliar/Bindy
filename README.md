@@ -32,6 +32,7 @@ func setupBindings() {
 	age.bind(self) { [unowned self] newAge in
             print("Happy \(newAge) birthday, \(self.firstname.value)")
 	}
+	age.value = 55
 }
 ```
 
