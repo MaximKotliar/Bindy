@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "Bindy"
-  s.version      = "0.0.8"
+  s.version      = "0.0.9"
   s.summary      = "Simple, lightweight swift bindings."
 
   # This description is used to generate tags and improve search results.

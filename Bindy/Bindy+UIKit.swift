@@ -8,13 +8,13 @@
 
 import UIKit
 
-extension UITableView {
+public extension UITableView {
 
-    func perform(updates: [ArrayUpdate],
-                 in section: Int = 0,
-                 insertAnimation: UITableViewRowAnimation = .automatic,
-                 deleteAnimation: UITableViewRowAnimation = .automatic,
-                 replaceAnimation: UITableViewRowAnimation = .automatic) {
+    public func perform(updates: [ArrayUpdate],
+                        in section: Int = 0,
+                        insertAnimation: UITableViewRowAnimation = .automatic,
+                        deleteAnimation: UITableViewRowAnimation = .automatic,
+                        replaceAnimation: UITableViewRowAnimation = .automatic) {
         var insertions: [IndexPath] = []
         var deletions: [IndexPath] = []
         var replacements: [IndexPath] = []
