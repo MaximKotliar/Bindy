@@ -10,6 +10,8 @@
 		1902B59A1FA8479D001CC0BC /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1902B5991FA8479D001CC0BC /* Signal.swift */; };
 		1902B5A21FA84AE3001CC0BC /* BindyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1902B5A11FA84AE3001CC0BC /* BindyTests.swift */; };
 		1902B5A41FA84AE3001CC0BC /* Bindy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1969D9F01FA7DC8600AA6FDB /* Bindy.framework */; };
+		1936A70B1FE6E220004CA64B /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1936A70A1FE6E220004CA64B /* Bindable.swift */; };
+		1936A70D1FE6E677004CA64B /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1936A70C1FE6E677004CA64B /* Property.swift */; };
 		19488F5E1FB0F8D80004E606 /* ObserveCapable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19488F5D1FB0F8D80004E606 /* ObserveCapable.swift */; };
 		19488F601FB1099B0004E606 /* ObservableValueHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19488F5F1FB1099B0004E606 /* ObservableValueHolder.swift */; };
 		194C1EDF1FE53A4B0009D1D0 /* Bindy+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194C1EDE1FE53A4B0009D1D0 /* Bindy+UITableView.swift */; };
@@ -38,6 +40,8 @@
 		1902B5A11FA84AE3001CC0BC /* BindyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindyTests.swift; sourceTree = "<group>"; };
 		1902B5A31FA84AE3001CC0BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1902B5AD1FA88040001CC0BC /* Bindy.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = Bindy.podspec; sourceTree = SOURCE_ROOT; };
+		1936A70A1FE6E220004CA64B /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
+		1936A70C1FE6E677004CA64B /* Property.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
 		19488F5D1FB0F8D80004E606 /* ObserveCapable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserveCapable.swift; sourceTree = "<group>"; };
 		19488F5F1FB1099B0004E606 /* ObservableValueHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableValueHolder.swift; sourceTree = "<group>"; };
 		194C1EDE1FE53A4B0009D1D0 /* Bindy+UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bindy+UITableView.swift"; sourceTree = "<group>"; };
@@ -105,6 +109,8 @@
 			children = (
 				194C1EDE1FE53A4B0009D1D0 /* Bindy+UITableView.swift */,
 				194C1EE01FE53A720009D1D0 /* Bindy+UIView.swift */,
+				1936A70A1FE6E220004CA64B /* Bindable.swift */,
+				1936A70C1FE6E677004CA64B /* Property.swift */,
 			);
 			path = UITableView;
 			sourceTree = "<group>";
@@ -314,8 +320,10 @@
 			files = (
 				19765A901FA7DE5D00F9FCB8 /* ObservableArray.swift in Sources */,
 				19488F5E1FB0F8D80004E606 /* ObserveCapable.swift in Sources */,
+				1936A70D1FE6E677004CA64B /* Property.swift in Sources */,
 				194C1EDF1FE53A4B0009D1D0 /* Bindy+UITableView.swift in Sources */,
 				19756CA01FA9BEC400E9CF00 /* Change.swift in Sources */,
+				1936A70B1FE6E220004CA64B /* Bindable.swift in Sources */,
 				194C1EE11FE53A720009D1D0 /* Bindy+UIView.swift in Sources */,
 				1902B59A1FA8479D001CC0BC /* Signal.swift in Sources */,
 				19765A8D1FA7DE2100F9FCB8 /* OptionalObservable.swift in Sources */,

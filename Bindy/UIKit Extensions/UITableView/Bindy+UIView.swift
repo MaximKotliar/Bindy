@@ -8,30 +8,54 @@
 
 import UIKit
 
-public enum Animation {
-    case some(duration: TimeInterval)
-    case none
-}
-
 public extension UIView {
 
-    func bindAlpha(to isHidden: Observable<Bool>,
-                   animation: Animation) {
-        isHidden.observe(self) { [unowned self] isHidden in
-            let performAlphaUpdate = { self.alpha = isHidden ? 0 : 1 }
-            switch animation {
-            case .some(let duration):
-                UIView.animate(withDuration: duration,
-                               animations: performAlphaUpdate)
-            case .none:
-                performAlphaUpdate()
-            }
+    public var bind: Bindable<UIView> {
+        return Bindable(base: self)
+    }
+}
+
+public struct Animation {
+
+    let duration: TimeInterval
+    let options: UIViewAnimationOptions
+}
+
+public extension Property where Parent == UIView {
+
+    public func bind(to observable: Observable<Type>, with animation: Animation) {
+        observable.observe(parent) { value in
+            UIView.animate(withDuration: animation.duration,
+                           delay: 0,
+                           options: animation.options,
+                           animations: {
+                            self.update(value)
+            }, completion: nil)
         }
     }
 
-    func bindIsHidden(to isHidden: Observable<Bool>) {
-        isHidden.observe(self) { [unowned self] isHidden in
-            self.isHidden = isHidden
+    public func to(_ observable: Observable<Type>, with animation: Animation) {
+        bind(to: observable, with: animation)
+    }
+}
+
+extension Bindable where Base == UIView {
+
+    public var isHidden: Property<UIView, Bool> {
+        return Property<UIView, Bool> (parent: base) { [unowned base] value in
+            base.isHidden = value
+        }
+    }
+
+    public var alpha: Property<UIView, CGFloat> {
+        return Property<UIView, CGFloat> (parent: base) { [unowned base] value in
+            base.alpha = value
+        }
+    }
+
+    public var isUserInteractionEnabled: Property<UIView, Bool> {
+        return Property<UIView, Bool> (parent: base) { [unowned base] value in
+            base.isUserInteractionEnabled = value
         }
     }
 }

@@ -203,4 +203,41 @@ class BindyTests: XCTestCase {
         XCTAssert(stringValue.value != "20")
         waitForExpectations(timeout: 1, handler: nil)
     }
+
+    func testUIViewIsHidden() {
+        let isHidden = Observable(false)
+        var view: UIView? = UIView()
+        view?.bind.isHidden.to(isHidden)
+        isHidden.value = true
+        XCTAssert(view?.isHidden == true)
+        isHidden.value = false
+        XCTAssert(view?.isHidden == false)
+        isHidden.value = true
+        XCTAssert(view?.isHidden == true)
+        view = nil
+        isHidden.value = false
+    }
+
+    func testUIViewIsUserInteractionEnabled() {
+        let isUserInteractionEnabled = Observable(false)
+        var view: UIView? = UIView()
+        view?.bind.isUserInteractionEnabled.to(isUserInteractionEnabled)
+        isUserInteractionEnabled.value = true
+        XCTAssert(view?.isUserInteractionEnabled == true)
+        isUserInteractionEnabled.value = false
+        XCTAssert(view?.isUserInteractionEnabled == false)
+        isUserInteractionEnabled.value = true
+        XCTAssert(view?.isUserInteractionEnabled == true)
+        view = nil
+        isUserInteractionEnabled.value = false
+    }
+
+    func testUIViewAlpha() {
+        let view = UIView()
+        let alpha = Observable<CGFloat>(0)
+        view.bind.alpha.to(alpha)
+        XCTAssert(view.alpha == alpha.value)
+        alpha.value = 0.5
+        XCTAssert(view.alpha == alpha.value)
+    }
 }
