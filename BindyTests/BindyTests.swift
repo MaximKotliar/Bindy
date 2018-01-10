@@ -214,6 +214,10 @@ class BindyTests: XCTestCase {
         XCTAssert(view?.isHidden == false)
         isHidden.value = true
         XCTAssert(view?.isHidden == true)
+        isHidden.unbind(view!)
+        view?.bind.isHidden.to(isHidden, inverted: true)
+        isHidden.value = false
+        XCTAssert(view?.isHidden == true)
         view = nil
         isHidden.value = false
     }

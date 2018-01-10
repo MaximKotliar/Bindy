@@ -16,14 +16,28 @@ public struct Property<Parent: AnyObject, Type: Equatable> {
 
 extension Property {
 
-    func bind(to observable: Observable<Type>){
+    public func bind(to observable: Observable<Type>){
         observable.observe(parent) { value in
             self.update(value)
         }
     }
 
     // Syntax sugar
-    func to(_ observable: Observable<Type>) {
+    public func to(_ observable: Observable<Type>) {
         bind(to: observable)
+    }
+}
+
+extension Property where Type: Invertable {
+
+    public func bind(to observable: Observable<Type>, inverted: Bool = false) {
+        observable.observe(parent) { value in
+            self.update(inverted ? value.inverted : value)
+        }
+    }
+
+    // Syntax sugar
+    public func to(_ observable: Observable<Type>, inverted: Bool = false) {
+        bind(to: observable, inverted: inverted)
     }
 }

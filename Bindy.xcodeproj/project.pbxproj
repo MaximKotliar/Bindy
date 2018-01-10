@@ -21,6 +21,7 @@
 		19765A8B1FA7DE0700F9FCB8 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19765A8A1FA7DE0700F9FCB8 /* Observable.swift */; };
 		19765A8D1FA7DE2100F9FCB8 /* OptionalObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19765A8C1FA7DE2100F9FCB8 /* OptionalObservable.swift */; };
 		19765A901FA7DE5D00F9FCB8 /* ObservableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19765A8F1FA7DE5D00F9FCB8 /* ObservableArray.swift */; };
+		19D44FBD20065689009233EE /* Invertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D44FBC20065689009233EE /* Invertable.swift */; };
 		B7D6D1A9715E162B745B9E65 /* Pods_Bindy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4E8B34FBAD50D3443F6EB5C /* Pods_Bindy.framework */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 		19765A8A1FA7DE0700F9FCB8 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		19765A8C1FA7DE2100F9FCB8 /* OptionalObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalObservable.swift; sourceTree = "<group>"; };
 		19765A8F1FA7DE5D00F9FCB8 /* ObservableArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableArray.swift; sourceTree = "<group>"; };
+		19D44FBC20065689009233EE /* Invertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invertable.swift; sourceTree = "<group>"; };
 		5CDDEB36833C1C3411D475FF /* Pods-Bindy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bindy.release.xcconfig"; path = "Pods/Target Support Files/Pods-Bindy/Pods-Bindy.release.xcconfig"; sourceTree = "<group>"; };
 		8AC52963C1522156917717FA /* Pods-Bindy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bindy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Bindy/Pods-Bindy.debug.xcconfig"; sourceTree = "<group>"; };
 		E4E8B34FBAD50D3443F6EB5C /* Pods_Bindy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bindy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -111,6 +113,7 @@
 				194C1EE01FE53A720009D1D0 /* Bindy+UIView.swift */,
 				1936A70A1FE6E220004CA64B /* Bindable.swift */,
 				1936A70C1FE6E677004CA64B /* Property.swift */,
+				19D44FBC20065689009233EE /* Invertable.swift */,
 			);
 			path = UITableView;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 				19765A8D1FA7DE2100F9FCB8 /* OptionalObservable.swift in Sources */,
 				19488F601FB1099B0004E606 /* ObservableValueHolder.swift in Sources */,
 				19765A8B1FA7DE0700F9FCB8 /* Observable.swift in Sources */,
+				19D44FBD20065689009233EE /* Invertable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
