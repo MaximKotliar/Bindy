@@ -26,7 +26,8 @@ public class ObservableValueHolder<ObservableType>: ObserveCapable<ObservableTyp
 
 extension ObservableValueHolder {
 
-    open func combined<T, R>(with other: Observable<T>, transform: @escaping (ObservableType, T) -> R) -> Observable<R> {
+    open func combined<T, R>(with other: Observable<T>,
+                             transform: @escaping (ObservableType, T) -> R) -> Observable<R> {
         let combined = transform(self.value, other.value)
         let observable = Observable(combined)
         self.bind(observable) { (value) in
@@ -38,7 +39,8 @@ extension ObservableValueHolder {
         return observable
     }
 
-    open func combined<T, R>(with other: ObservableArray<T>, transform: @escaping (ObservableType, [T]) -> [R]) -> ObservableArray<R> {
+    open func combined<T, R>(with other: ObservableArray<T>,
+                             transform: @escaping (ObservableType, [T]) -> [R]) -> ObservableArray<R> {
         let combined = transform(self.value, other.value)
         let observable = ObservableArray(combined)
         self.bind(observable) { (value) in
@@ -53,7 +55,7 @@ extension ObservableValueHolder {
 
 extension ObservableArray {
 
-    open func combined<R>(with other: Observable<T>, transform: @escaping ([Element], T) -> R) -> Observable<R> {
+    open func combinedArray<R>(with other: Observable<T>, transform: @escaping ([Element], T) -> R) -> Observable<R> {
         let combined = transform(self.value, other.value)
         let observable = Observable(combined)
         self.bind(observable) { (value) in
