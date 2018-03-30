@@ -1,8 +1,8 @@
 //
-//  Bindy+UIKit.swift
+//  Bindy+UITableView.swift
 //  Bindy
 //
-//  Created by Maxim Kotliar on 12/15/17.
+//  Created by Maxim Kotliar on 12/16/17.
 //  Copyright © 2017 Maxim Kotliar. All rights reserved.
 //
 

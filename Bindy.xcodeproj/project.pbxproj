@@ -10,14 +10,18 @@
 		1902B59A1FA8479D001CC0BC /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1902B5991FA8479D001CC0BC /* Signal.swift */; };
 		1902B5A21FA84AE3001CC0BC /* BindyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1902B5A11FA84AE3001CC0BC /* BindyTests.swift */; };
 		1902B5A41FA84AE3001CC0BC /* Bindy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1969D9F01FA7DC8600AA6FDB /* Bindy.framework */; };
+		1936A70B1FE6E220004CA64B /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1936A70A1FE6E220004CA64B /* Bindable.swift */; };
+		1936A70D1FE6E677004CA64B /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1936A70C1FE6E677004CA64B /* Property.swift */; };
 		19488F5E1FB0F8D80004E606 /* ObserveCapable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19488F5D1FB0F8D80004E606 /* ObserveCapable.swift */; };
 		19488F601FB1099B0004E606 /* ObservableValueHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19488F5F1FB1099B0004E606 /* ObservableValueHolder.swift */; };
+		194C1EDF1FE53A4B0009D1D0 /* Bindy+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194C1EDE1FE53A4B0009D1D0 /* Bindy+UITableView.swift */; };
+		194C1EE11FE53A720009D1D0 /* Bindy+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194C1EE01FE53A720009D1D0 /* Bindy+UIView.swift */; };
 		1969D9F51FA7DC8600AA6FDB /* Bindy.h in Headers */ = {isa = PBXBuildFile; fileRef = 1969D9F31FA7DC8600AA6FDB /* Bindy.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		196B406C1FE342EB009AA7E4 /* Bindy+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196B406B1FE342EB009AA7E4 /* Bindy+UIKit.swift */; };
 		19756CA01FA9BEC400E9CF00 /* Change.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19756C9F1FA9BEC400E9CF00 /* Change.swift */; };
 		19765A8B1FA7DE0700F9FCB8 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19765A8A1FA7DE0700F9FCB8 /* Observable.swift */; };
 		19765A8D1FA7DE2100F9FCB8 /* OptionalObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19765A8C1FA7DE2100F9FCB8 /* OptionalObservable.swift */; };
 		19765A901FA7DE5D00F9FCB8 /* ObservableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19765A8F1FA7DE5D00F9FCB8 /* ObservableArray.swift */; };
+		19D44FBD20065689009233EE /* Invertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D44FBC20065689009233EE /* Invertable.swift */; };
 		B7D6D1A9715E162B745B9E65 /* Pods_Bindy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4E8B34FBAD50D3443F6EB5C /* Pods_Bindy.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,16 +41,20 @@
 		1902B5A11FA84AE3001CC0BC /* BindyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindyTests.swift; sourceTree = "<group>"; };
 		1902B5A31FA84AE3001CC0BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1902B5AD1FA88040001CC0BC /* Bindy.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = Bindy.podspec; sourceTree = SOURCE_ROOT; };
+		1936A70A1FE6E220004CA64B /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
+		1936A70C1FE6E677004CA64B /* Property.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
 		19488F5D1FB0F8D80004E606 /* ObserveCapable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserveCapable.swift; sourceTree = "<group>"; };
 		19488F5F1FB1099B0004E606 /* ObservableValueHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableValueHolder.swift; sourceTree = "<group>"; };
+		194C1EDE1FE53A4B0009D1D0 /* Bindy+UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bindy+UITableView.swift"; sourceTree = "<group>"; };
+		194C1EE01FE53A720009D1D0 /* Bindy+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bindy+UIView.swift"; sourceTree = "<group>"; };
 		1969D9F01FA7DC8600AA6FDB /* Bindy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bindy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1969D9F31FA7DC8600AA6FDB /* Bindy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bindy.h; sourceTree = "<group>"; };
 		1969D9F41FA7DC8600AA6FDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		196B406B1FE342EB009AA7E4 /* Bindy+UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bindy+UIKit.swift"; sourceTree = "<group>"; };
 		19756C9F1FA9BEC400E9CF00 /* Change.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Change.swift; sourceTree = "<group>"; };
 		19765A8A1FA7DE0700F9FCB8 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		19765A8C1FA7DE2100F9FCB8 /* OptionalObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalObservable.swift; sourceTree = "<group>"; };
 		19765A8F1FA7DE5D00F9FCB8 /* ObservableArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableArray.swift; sourceTree = "<group>"; };
+		19D44FBC20065689009233EE /* Invertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invertable.swift; sourceTree = "<group>"; };
 		5CDDEB36833C1C3411D475FF /* Pods-Bindy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bindy.release.xcconfig"; path = "Pods/Target Support Files/Pods-Bindy/Pods-Bindy.release.xcconfig"; sourceTree = "<group>"; };
 		8AC52963C1522156917717FA /* Pods-Bindy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bindy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Bindy/Pods-Bindy.debug.xcconfig"; sourceTree = "<group>"; };
 		E4E8B34FBAD50D3443F6EB5C /* Pods_Bindy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bindy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,6 +98,26 @@
 			path = BindyTests;
 			sourceTree = "<group>";
 		};
+		194C1EDC1FE53A220009D1D0 /* UIKit Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				194C1EDD1FE53A310009D1D0 /* UITableView */,
+			);
+			path = "UIKit Extensions";
+			sourceTree = "<group>";
+		};
+		194C1EDD1FE53A310009D1D0 /* UITableView */ = {
+			isa = PBXGroup;
+			children = (
+				194C1EDE1FE53A4B0009D1D0 /* Bindy+UITableView.swift */,
+				194C1EE01FE53A720009D1D0 /* Bindy+UIView.swift */,
+				1936A70A1FE6E220004CA64B /* Bindable.swift */,
+				1936A70C1FE6E677004CA64B /* Property.swift */,
+				19D44FBC20065689009233EE /* Invertable.swift */,
+			);
+			path = UITableView;
+			sourceTree = "<group>";
+		};
 		1969D9E61FA7DC8600AA6FDB = {
 			isa = PBXGroup;
 			children = (
@@ -113,11 +141,11 @@
 		1969D9F21FA7DC8600AA6FDB /* Bindy */ = {
 			isa = PBXGroup;
 			children = (
+				194C1EDC1FE53A220009D1D0 /* UIKit Extensions */,
 				1902B5AD1FA88040001CC0BC /* Bindy.podspec */,
 				1969D9F31FA7DC8600AA6FDB /* Bindy.h */,
 				1969D9F41FA7DC8600AA6FDB /* Info.plist */,
 				19756C9F1FA9BEC400E9CF00 /* Change.swift */,
-				196B406B1FE342EB009AA7E4 /* Bindy+UIKit.swift */,
 				19765A8A1FA7DE0700F9FCB8 /* Observable.swift */,
 				19765A8C1FA7DE2100F9FCB8 /* OptionalObservable.swift */,
 				19765A8F1FA7DE5D00F9FCB8 /* ObservableArray.swift */,
@@ -195,7 +223,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Maxim Kotliar";
 				TargetAttributes = {
 					1902B59E1FA84AE3001CC0BC = {
@@ -295,12 +323,16 @@
 			files = (
 				19765A901FA7DE5D00F9FCB8 /* ObservableArray.swift in Sources */,
 				19488F5E1FB0F8D80004E606 /* ObserveCapable.swift in Sources */,
+				1936A70D1FE6E677004CA64B /* Property.swift in Sources */,
+				194C1EDF1FE53A4B0009D1D0 /* Bindy+UITableView.swift in Sources */,
 				19756CA01FA9BEC400E9CF00 /* Change.swift in Sources */,
-				196B406C1FE342EB009AA7E4 /* Bindy+UIKit.swift in Sources */,
+				1936A70B1FE6E220004CA64B /* Bindable.swift in Sources */,
+				194C1EE11FE53A720009D1D0 /* Bindy+UIView.swift in Sources */,
 				1902B59A1FA8479D001CC0BC /* Signal.swift in Sources */,
 				19765A8D1FA7DE2100F9FCB8 /* OptionalObservable.swift in Sources */,
 				19488F601FB1099B0004E606 /* ObservableValueHolder.swift in Sources */,
 				19765A8B1FA7DE0700F9FCB8 /* Observable.swift in Sources */,
+				19D44FBD20065689009233EE /* Invertable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,6 +387,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -362,6 +395,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -415,6 +449,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -422,6 +457,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -473,7 +509,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -496,7 +532,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "MaximKotliar.-Bindy";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
