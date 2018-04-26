@@ -244,4 +244,25 @@ class BindyTests: XCTestCase {
         alpha.value = 0.5
         XCTAssert(view.alpha == alpha.value)
     }
+
+    func testBoolCombine() {
+        testObservableListener = TestListener()
+        let a = Observable(false)
+        let b = Observable(false)
+        let c = Observable(false)
+        let d = Observable(false)
+        let result = a && b && c || d
+        XCTAssert(result.value == false)
+        a.value = true
+        XCTAssert(result.value == false)
+        b.value = true
+        XCTAssert(result.value == false)
+        let asyncExpectation = expectation(description: "Expect to call")
+        result.bind(testObservableListener!) { result in
+            XCTAssert(result)
+            asyncExpectation.fulfill()
+        }
+        d.value = true
+        waitForExpectations(timeout: 1, handler: nil)
+    }
 }
