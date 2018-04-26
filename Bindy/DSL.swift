@@ -10,7 +10,7 @@ import Foundation
 
 extension Observable where T == Bool {
 
-    static func &(lhs: Observable<Bool>, rhs: Observable<Bool>) -> Observable<Bool> {
+    public static func &(lhs: Observable<Bool>, rhs: Observable<Bool>) -> Observable<Bool> {
         return lhs.combined(with: rhs, transform: { $0 && $1 })
     }
 }
