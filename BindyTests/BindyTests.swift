@@ -250,7 +250,8 @@ class BindyTests: XCTestCase {
         let a = Observable(false)
         let b = Observable(false)
         let c = Observable(false)
-        let result = a & b & c
+        let d = Observable(false)
+        let result = a && b && c || d
         XCTAssert(result.value == false)
         a.value = true
         XCTAssert(result.value == false)
@@ -261,7 +262,7 @@ class BindyTests: XCTestCase {
             XCTAssert(result)
             asyncExpectation.fulfill()
         }
-        c.value = true
+        d.value = true
         waitForExpectations(timeout: 1, handler: nil)
     }
 }
