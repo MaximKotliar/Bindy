@@ -13,3 +13,9 @@ final public class Signal<T>: ObserveCapable<T> {
         fireBindings(with: value)
     }
 }
+
+public extension Signal where T == Void {
+    public func send() {
+        send(())
+    }
+}
