@@ -50,24 +50,17 @@ func setupBindings() {
 	}
 	
     messages.updates.bind(self) { [unowned tableView] updates in
-            tableView.beginUpdates()
-            updates.forEach { update in
-                let indexPaths = update.indexes.map { IndexPath(row: $0, section: 0) }
-                switch update.event {
-                case .insert:
-                    tableView.insertRows(at: indexPaths, with: .bottom)
-                case .replace:
-                    tableView.reloadRows(at: indexPaths, with: .fade)
-                case .delete:
-                    tableView.deleteRows(at: indexPaths, with: .left)
-                }
-            }
-            tableView.endUpdates()
+    	    self.tableView.pefrom(updates: updates)     
        }
+       
+func handleDidRecieveMessage(_ message: Message) {
+	 newMessage.send(message)      
+    }
 }
 ```
 
 You don't need remove binding manually if you don't want it, when object that you pass as owner in ```bind(_ owner: AnyObject...``` metod deallocates, corresponding bindings will clean. However, if you want to unbind manually, just call ```unbind(_ owner: AnyObject)```.
+Bindy have an extension for tableView for performing updates ```tableView.perform(updates:...```
 
 Also, observables has method ```observe(_ owner: AnyObject...```, it works like `bind`, but triggers callback immediately, this may be more comfortable in some situations.
 
