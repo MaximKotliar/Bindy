@@ -52,6 +52,7 @@ func setupBindings() {
     messages.updates.bind(self) { [unowned tableView] updates in
     	    self.tableView.pefrom(updates: updates)     
        }
+}
        
 func handleDidRecieveMessage(_ message: Message) {
 	 newMessage.send(message)      
