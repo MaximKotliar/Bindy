@@ -100,26 +100,6 @@
 			path = BindyTests;
 			sourceTree = "<group>";
 		};
-		194C1EDC1FE53A220009D1D0 /* UIKit Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				194C1EDD1FE53A310009D1D0 /* UITableView */,
-			);
-			path = "UIKit Extensions";
-			sourceTree = "<group>";
-		};
-		194C1EDD1FE53A310009D1D0 /* UITableView */ = {
-			isa = PBXGroup;
-			children = (
-				194C1EDE1FE53A4B0009D1D0 /* Bindy+UITableView.swift */,
-				194C1EE01FE53A720009D1D0 /* Bindy+UIView.swift */,
-				1936A70A1FE6E220004CA64B /* Bindable.swift */,
-				1936A70C1FE6E677004CA64B /* Property.swift */,
-				19D44FBC20065689009233EE /* Invertable.swift */,
-			);
-			path = UITableView;
-			sourceTree = "<group>";
-		};
 		1969D9E61FA7DC8600AA6FDB = {
 			isa = PBXGroup;
 			children = (
@@ -143,7 +123,8 @@
 		1969D9F21FA7DC8600AA6FDB /* Bindy */ = {
 			isa = PBXGroup;
 			children = (
-				194C1EDC1FE53A220009D1D0 /* UIKit Extensions */,
+				199A43752099F90300EA165F /* Bindable Properties */,
+				199A43742099F8D000EA165F /* Extensions */,
 				1902B5AD1FA88040001CC0BC /* Bindy.podspec */,
 				1969D9F31FA7DC8600AA6FDB /* Bindy.h */,
 				1969D9F41FA7DC8600AA6FDB /* Info.plist */,
@@ -157,6 +138,33 @@
 				197568482091AD2A005DA318 /* DSL.swift */,
 			);
 			path = Bindy;
+			sourceTree = "<group>";
+		};
+		199A43742099F8D000EA165F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				199A43762099F91B00EA165F /* Bindy+UIKit */,
+				19D44FBC20065689009233EE /* Invertable.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		199A43752099F90300EA165F /* Bindable Properties */ = {
+			isa = PBXGroup;
+			children = (
+				1936A70A1FE6E220004CA64B /* Bindable.swift */,
+				1936A70C1FE6E677004CA64B /* Property.swift */,
+			);
+			path = "Bindable Properties";
+			sourceTree = "<group>";
+		};
+		199A43762099F91B00EA165F /* Bindy+UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				194C1EDE1FE53A4B0009D1D0 /* Bindy+UITableView.swift */,
+				194C1EE01FE53A720009D1D0 /* Bindy+UIView.swift */,
+			);
+			path = "Bindy+UIKit";
 			sourceTree = "<group>";
 		};
 		61737E33FB05967FDFA1E182 /* Frameworks */ = {

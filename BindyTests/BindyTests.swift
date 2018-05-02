@@ -177,7 +177,18 @@ class BindyTests: XCTestCase {
         XCTAssert(callCount == 7)
     }
 
+    let firstname = Observable("Maxim")
+    let lastname = Observable("Kotliar")
+    let age = Observable(24)
+
+    lazy var userInfo = {
+        return firstname
+            .combined(with: lastname) { "\($0) \($1)" }
+            .combined(with: age) { "\($0) \($1)" }
+    }()
+
     func testTransform() {
+
         let intValue = Observable(20)
         let stringValue = intValue.transform { return "\($0)"}
         stringValue.bind(self) { string in
@@ -247,22 +258,26 @@ class BindyTests: XCTestCase {
 
     func testBoolCombine() {
         testObservableListener = TestListener()
-        let a = Observable(false)
-        let b = Observable(false)
-        let c = Observable(false)
-        let d = Observable(false)
-        let result = a && b && c || d
-        XCTAssert(result.value == false)
-        a.value = true
-        XCTAssert(result.value == false)
-        b.value = true
-        XCTAssert(result.value == false)
+        let isPremiumPurchased = Observable(false)
+        let isTrialPeriodEnded = Observable(false)
+        let isAdsShowForced = Observable(false)
+        let shouldShowAds = isAdsShowForced || !isPremiumPurchased && isTrialPeriodEnded
+        XCTAssert(shouldShowAds.value == false)
+        isTrialPeriodEnded.value = true
+        XCTAssert(shouldShowAds.value == true)
+        isPremiumPurchased.value = true
+        XCTAssert(shouldShowAds.value == false)
+        isPremiumPurchased.value = false
+        isAdsShowForced.value = true
+        XCTAssert(shouldShowAds.value == true)
         let asyncExpectation = expectation(description: "Expect to call")
-        result.bind(testObservableListener!) { result in
-            XCTAssert(result)
+        shouldShowAds.bind(testObservableListener!) { result in
+            XCTAssert(!result)
             asyncExpectation.fulfill()
         }
-        d.value = true
+        isAdsShowForced.value = false
+        isPremiumPurchased.value = false
+        isTrialPeriodEnded.value = false
         waitForExpectations(timeout: 1, handler: nil)
     }
 }
