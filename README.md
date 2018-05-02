@@ -25,8 +25,8 @@ For now, bindy has a couple basic types
 ### Observables Sample
 
 ```swift
-var firstname = Observable("Salvador")
-var age = Observable(54)
+let firstname = Observable("Salvador")
+let age = Observable(54)
 
 func setupBindings() {
 	age.bind(self) { [unowned self] newAge in
@@ -41,8 +41,8 @@ Don't forget always use `[unowned owner]` in closure to prevent retain cycle.
 ### Signal and Array Sample
 
 ```swift
-var messages = ObservableArray<Message>()
-var newMessage = Signal<Message>()
+let messages = ObservableArray<Message>()
+let newMessage = Signal<Message>()
     
 func setupBindings() {
     newMessage.bind(self) { [unowned self] message in
@@ -71,3 +71,54 @@ You don't need remove binding manually if you don't want it, when object that yo
 
 Also, observables has method ```observe(_ owner: AnyObject...```, it works like `bind`, but triggers callback immediately, this may be more comfortable in some situations.
 
+### Transformations
+
+If you want to recieve events with transformed type, you can use ```transform``` function on Observables like: 
+
+```swift
+let speed = Observable(20)
+lazy var speedString = {
+        speed.transform { "\($0)km/h" }
+}()
+    
+func setupBindings() {
+	speedString.observe(self) { [unowned self] speedString in
+	    // speedString = "20km/h"
+            self.speedLabel.text = speedString
+        }
+}
+```
+
+### Combinations
+
+You can combine two Observable types with ```combined(with: ..., transform: ...)``` function like: 
+
+```swift
+let firstname = Observable("Maxim")
+let lastname = Observable("Kotliar")
+let age = Observable(24)
+
+lazy var fullname = {
+        return firstname
+            .combined(with: lastname) { "name: \($0) \($1)" }
+            .combined(with: age) { "\($0), age: \($1)" }
+}()
+
+func setupBindings() {
+	userInfo.observe(self) { [unowned self] info in
+            // info = "name: Maxim Kotliar, age:24"
+            self.userInfoLabel.text = info
+        }
+```
+
+For Observable<Bool> combinations Bindy have more convenient operators ```&&``` and ```||```, so you can combine Observable<Bool> like regular Bool, also you can invert it with ```!```:
+	
+```swift
+let isPremiumPurchased = Observable(true)
+let isInTrialPeriodEnded = Observable(false)
+let isAdsShowForced = Observable(false)
+
+lazy var shouldShowAds = {
+        return isAdsShowForced || !isPremiumPurchased && isInTrialPeriodEnded
+}()
+```
