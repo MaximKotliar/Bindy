@@ -102,6 +102,7 @@ func setupBindings() {
             // info = "name: Maxim Kotliar, age:24"
             self.userInfoLabel.text = info
         }
+}
 ```
 
 For Observable<Bool> combinations Bindy have more convenient operators ```&&``` and ```||```, so you can combine Observable<Bool> like regular Bool, also you can invert it with ```!```:
