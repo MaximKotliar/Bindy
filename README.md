@@ -41,7 +41,7 @@ Don't forget always use `[unowned owner]` in closure to prevent retain cycle.
 ### Signal and Array Sample
 
 ```swift
-let messages = ObservableArray<Message>()
+let messages: ObservableArray<Message> = []
 let newMessage = Signal<Message>()
     
 func setupBindings() {
