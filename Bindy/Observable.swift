@@ -20,7 +20,7 @@ public final class Observable<T: Equatable>: ObservableValueHolder<T> {
 
 extension Observable {
 
-    func transform<U: Equatable>(_ transform: @escaping (T) -> U) -> Observable<U> {
+    public func transform<U: Equatable>(_ transform: @escaping (T) -> U) -> Observable<U> {
         let transformedObserver = Observable<U>(transform(value))
         observe(self) { [unowned self] (value) in
             transformedObserver.value = transform(self.value)

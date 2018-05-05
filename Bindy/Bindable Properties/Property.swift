@@ -32,7 +32,7 @@ extension Property where Type: Invertable {
 
     public func bind(to observable: Observable<Type>, inverted: Bool = false) {
         observable.observe(parent) { value in
-            self.update(inverted ? value.inverted : value)
+            self.update(inverted ? !value : value)
         }
     }
 

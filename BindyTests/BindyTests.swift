@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Bindy
+import Bindy
 
 class TestListener: NSObject {
     var tag = 0

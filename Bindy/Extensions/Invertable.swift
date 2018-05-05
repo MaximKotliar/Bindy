@@ -17,7 +17,7 @@ extension Invertable {
         self = inverted
     }
 
-    static prefix public func !(rhs: Self) -> Self {
+    static prefix public func ! (rhs: Self) -> Self {
         return rhs.inverted
     }
 }
@@ -29,5 +29,12 @@ extension Bool: Invertable {
 extension Observable: Invertable where T: Invertable {
     public var inverted: Observable<T> {
         return transform { $0.inverted }
+    }
+}
+
+extension Observable where T: Invertable {
+
+    static prefix public func ! (rhs: Observable<T>) -> T {
+        return rhs.value.inverted
     }
 }
