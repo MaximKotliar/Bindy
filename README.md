@@ -41,7 +41,7 @@ Don't forget always use `[unowned owner]` in closure to prevent retain cycle.
 ### Signal and Array Sample
 
 ```swift
-let messages = ObservableArray<Message>()
+let messages: ObservableArray<Message> = []
 let newMessage = Signal<Message>()
     
 func setupBindings() {
@@ -52,6 +52,7 @@ func setupBindings() {
     messages.updates.bind(self) { [unowned tableView] updates in
     	    self.tableView.pefrom(updates: updates)     
        }
+}
        
 func handleDidRecieveMessage(_ message: Message) {
 	 newMessage.send(message)      
@@ -102,6 +103,7 @@ func setupBindings() {
             // info = "name: Maxim Kotliar, age:24"
             self.userInfoLabel.text = info
         }
+}
 ```
 
 For Observable<Bool> combinations Bindy have more convenient operators ```&&``` and ```||```, so you can combine Observable<Bool> like regular Bool, also you can invert it with ```!```:
