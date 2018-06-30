@@ -28,3 +28,15 @@ extension Observable {
         return transformedObserver
     }
 }
+
+public protocol ExtendableClass: class {}
+extension NSObject: ExtendableClass {}
+
+public extension ExtendableClass {
+    public func attach<T>(to observable: Observable<T>, callback: @escaping (Self, T) -> Void) {
+        observable.observe(self) { [unowned self] value in
+            callback(self, value)
+        }
+    }
+}
+

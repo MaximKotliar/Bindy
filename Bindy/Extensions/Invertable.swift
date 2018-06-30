@@ -31,10 +31,3 @@ extension Observable: Invertable where T: Invertable {
         return transform { $0.inverted }
     }
 }
-
-extension Observable where T: Invertable {
-
-    static prefix public func ! (rhs: Observable<T>) -> T {
-        return rhs.value.inverted
-    }
-}

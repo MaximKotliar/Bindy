@@ -280,4 +280,12 @@ class BindyTests: XCTestCase {
         isTrialPeriodEnded.value = false
         waitForExpectations(timeout: 1, handler: nil)
     }
+
+    func testSugarObserve() {
+        let view = UIView()
+        let color = Observable(UIColor())
+        view.attach(to: color) { view, color in
+            view.backgroundColor = color
+        }
+    }
 }

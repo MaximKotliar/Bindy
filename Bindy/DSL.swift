@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Observable where T == Bool {
+public extension Observable where T == Bool {
 
     public static func && (lhs: Observable<T>, rhs: Observable<T>) -> Observable<T> {
         return lhs.combined(with: rhs, transform: { $0 && $1 })
