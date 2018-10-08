@@ -12,9 +12,9 @@ public extension UITableView {
 
     public func perform(updates: [ArrayUpdate],
                         in section: Int = 0,
-                        insertAnimation: UITableViewRowAnimation = .automatic,
-                        deleteAnimation: UITableViewRowAnimation = .automatic,
-                        replaceAnimation: UITableViewRowAnimation = .automatic) {
+                        insertAnimation: UITableView.RowAnimation = .automatic,
+                        deleteAnimation: UITableView.RowAnimation = .automatic,
+                        replaceAnimation: UITableView.RowAnimation = .automatic) {
         var insertions: [IndexPath] = []
         var deletions: [IndexPath] = []
         var replacements: [IndexPath] = []
