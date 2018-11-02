@@ -54,4 +54,22 @@ extension Bindable where Base == UIView {
             base.isUserInteractionEnabled = value
         }
     }
+
+    public var tintColor: Property<Base, UIColor> {
+        return Property<Base, UIColor> (parent: base) { [unowned base] value in
+            base.tintColor = value
+        }
+    }
+
+    public var backgroundColor: Property<Base, UIColor> {
+        return Property<Base, UIColor> (parent: base) { [unowned base] value in
+            base.backgroundColor = value
+        }
+    }
+
+    public var transform: Property<Base, CGAffineTransform> {
+        return Property<Base, CGAffineTransform> (parent: base) { [unowned base] value in
+            base.transform = value
+        }
+    }
 }

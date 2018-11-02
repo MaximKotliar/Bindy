@@ -10,4 +10,8 @@ import Foundation
 
 public struct Bindable<Base> {
     public let base: Base
+
+    public init(base: Base) {
+        self.base = base
+    }
 }

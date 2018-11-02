@@ -12,6 +12,11 @@ public struct Property<Parent: AnyObject, Type: Equatable> {
 
     public let parent: Parent
     public let update: (Type) -> ()
+
+    public init(parent: Parent, update: @escaping (Type) -> ()) {
+        self.parent = parent
+        self.update = update
+    }
 }
 
 extension Property {
