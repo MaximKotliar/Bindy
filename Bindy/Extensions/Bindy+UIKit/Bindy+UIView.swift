@@ -17,6 +17,11 @@ public extension UIView {
 public struct Animation {
     let duration: TimeInterval
     let options: UIView.AnimationOptions
+
+    public init(duration: TimeInterval, options: UIView.AnimationOptions = []) {
+        self.duration = duration
+        self.options = options
+    }
 }
 
 public extension Property where Parent == UIView {
