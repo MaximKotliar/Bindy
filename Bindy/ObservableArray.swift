@@ -56,7 +56,7 @@ public final class ObservableArray<T: Equatable>: ObservableValueHolder<[T]>, Co
     public let updates = Signal<[ArrayUpdate]>()
 
     public init() {
-        super.init([])
+        super.init([], options: nil)
     }
 
     override public var value: [T] {
@@ -85,7 +85,11 @@ public final class ObservableArray<T: Equatable>: ObservableValueHolder<[T]>, Co
     }
     
     public required init(arrayLiteral elements: T...) {
-        super.init(elements)
+        super.init(elements, options: nil)
+    }
+
+    public required init(_ value: [T], options: [ObservableValueHolderOptionKey: Any]?) {
+        super.init(value, options: options)
     }
 
     // Subscripts
@@ -221,7 +225,7 @@ public final class ObservableArray<T: Equatable>: ObservableValueHolder<[T]>, Co
 public extension ObservableArray {
 
     public func transform<U: Equatable>(_ transform: @escaping ([T]) -> U) -> Observable<U> {
-        let transformedObserver = Observable<U>(transform(value))
+        let transformedObserver = Observable<U>(transform(value), options: nil)
         observe(self) { [unowned self] (value) in
             transformedObserver.value = transform(self.value)
         }

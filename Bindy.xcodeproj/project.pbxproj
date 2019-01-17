@@ -20,7 +20,6 @@
 		197568492091AD2A005DA318 /* DSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197568482091AD2A005DA318 /* DSL.swift */; };
 		19756CA01FA9BEC400E9CF00 /* Change.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19756C9F1FA9BEC400E9CF00 /* Change.swift */; };
 		19765A8B1FA7DE0700F9FCB8 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19765A8A1FA7DE0700F9FCB8 /* Observable.swift */; };
-		19765A8D1FA7DE2100F9FCB8 /* OptionalObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19765A8C1FA7DE2100F9FCB8 /* OptionalObservable.swift */; };
 		19765A901FA7DE5D00F9FCB8 /* ObservableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19765A8F1FA7DE5D00F9FCB8 /* ObservableArray.swift */; };
 		1986FAEC218C50D300A3E175 /* Transformations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1986FAEB218C50D300A3E175 /* Transformations.swift */; };
 		19D44FBD20065689009233EE /* Invertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D44FBC20065689009233EE /* Invertable.swift */; };
@@ -55,7 +54,6 @@
 		197568482091AD2A005DA318 /* DSL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSL.swift; sourceTree = "<group>"; };
 		19756C9F1FA9BEC400E9CF00 /* Change.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Change.swift; sourceTree = "<group>"; };
 		19765A8A1FA7DE0700F9FCB8 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
-		19765A8C1FA7DE2100F9FCB8 /* OptionalObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalObservable.swift; sourceTree = "<group>"; };
 		19765A8F1FA7DE5D00F9FCB8 /* ObservableArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableArray.swift; sourceTree = "<group>"; };
 		1986FAEB218C50D300A3E175 /* Transformations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transformations.swift; sourceTree = "<group>"; };
 		19D44FBC20065689009233EE /* Invertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invertable.swift; sourceTree = "<group>"; };
@@ -132,7 +130,6 @@
 				1969D9F41FA7DC8600AA6FDB /* Info.plist */,
 				19756C9F1FA9BEC400E9CF00 /* Change.swift */,
 				19765A8A1FA7DE0700F9FCB8 /* Observable.swift */,
-				19765A8C1FA7DE2100F9FCB8 /* OptionalObservable.swift */,
 				19765A8F1FA7DE5D00F9FCB8 /* ObservableArray.swift */,
 				1902B5991FA8479D001CC0BC /* Signal.swift */,
 				19488F5D1FB0F8D80004E606 /* ObserveCapable.swift */,
@@ -328,7 +325,6 @@
 				197568492091AD2A005DA318 /* DSL.swift in Sources */,
 				194C1EE11FE53A720009D1D0 /* Bindy+UIView.swift in Sources */,
 				1902B59A1FA8479D001CC0BC /* Signal.swift in Sources */,
-				19765A8D1FA7DE2100F9FCB8 /* OptionalObservable.swift in Sources */,
 				19488F601FB1099B0004E606 /* ObservableValueHolder.swift in Sources */,
 				19765A8B1FA7DE0700F9FCB8 /* Observable.swift in Sources */,
 				1986FAEC218C50D300A3E175 /* Transformations.swift in Sources */,

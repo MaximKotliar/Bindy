@@ -11,7 +11,7 @@ import Foundation
 public extension Observable {
 
     public func debounced(_ delay: TimeInterval) -> Observable<T> {
-        let debounced = Observable<T>(value)
+        let debounced = Observable<T>(value, options: options)
         var debounceFunc: ((T) -> Void)?
         bind(debounced) { [weak debounced] value in
             guard let debounced = debounced else { return }
@@ -26,7 +26,7 @@ public extension Observable {
     }
 
     public func throttled(_ delay: TimeInterval) -> Observable<T> {
-        let throttled = Observable<T>(value)
+        let throttled = Observable<T>(value, options: options)
         var throttledFunc: ((T) -> Void)?
         bind(throttled) { [weak throttled] value in
             guard let throttled = throttled else { return }
