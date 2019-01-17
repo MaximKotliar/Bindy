@@ -8,20 +8,36 @@
 
 import Foundation
 
-public final class Observable<T: Equatable>: ObservableValueHolder<T> {
+public final class Observable<T>: ObservableValueHolder<T> {
+
+    let comparsionClosure: ((T, T) -> Bool)?
 
     public override var value: T {
         didSet {
-            guard oldValue != self.value else { return }
+            let isEqual = comparsionClosure?(oldValue, value) ?? false
+            guard !isEqual else { return }
             fireBindings(with: value)
         }
+    }
+
+    public required init(_ value: T, options: [ObservableValueHolderOptionKey: Any]? = nil) {
+        self.comparsionClosure = options.flatMap { $0[.comparsionClosure] as? (T, T) -> Bool }
+        super.init(value, options: options)
+    }
+}
+
+public extension Observable where T: Equatable {
+
+    public convenience init(_ value: T) {
+        let comparsion: (T, T) -> Bool = (==)
+        self.init(value, options: [.comparsionClosure: comparsion])
     }
 }
 
 extension Observable {
 
     public func transform<U: Equatable>(_ transform: @escaping (T) -> U) -> Observable<U> {
-        let transformedObserver = Observable<U>(transform(value))
+        let transformedObserver = Observable<U>(transform(value), options: nil)
         observe(self) { [unowned self] (value) in
             transformedObserver.value = transform(self.value)
         }

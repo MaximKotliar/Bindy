@@ -26,7 +26,7 @@ extension Bool: Invertable {
     public var inverted: Bool { return !self }
 }
 
-extension Observable: Invertable where T: Invertable {
+extension Observable: Invertable where T: Invertable, T: Equatable {
     public var inverted: Observable<T> {
         return transform { $0.inverted }
     }

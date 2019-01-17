@@ -16,7 +16,7 @@ class TestListener: NSObject {
 class BindyTests: XCTestCase {
 
     var observable: Observable<String>?
-    var optionalObservable: OptionalObservable<String>?
+    var optionalObservable: Observable<String?>?
     var observableArray: ObservableArray<String>?
     var signal: Signal<String>?
 
@@ -56,7 +56,7 @@ class BindyTests: XCTestCase {
         let old = "Test"
         let new: String? = nil
         let asyncExpectation = expectation(description: "")
-        optionalObservable = OptionalObservable(old)
+        optionalObservable = Observable(old)
         optionalObservable?.bind(self, callback: { (newValue) in
             guard newValue == new else { return }
             asyncExpectation.fulfill()
@@ -64,7 +64,7 @@ class BindyTests: XCTestCase {
         optionalObservable?.value = new
         waitForExpectations(timeout: 1, handler: nil)
     }
-    
+
     func testObservableArray() {
         let old = ["Test"]
         let new = ["Test", "1", "2", "3", "4"]
@@ -278,6 +278,46 @@ class BindyTests: XCTestCase {
         isAdsShowForced.value = false
         isPremiumPurchased.value = false
         isTrialPeriodEnded.value = false
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+
+    func testEquatableCallsReduce() {
+        let string = Observable("test")
+        let asyncExpectation = expectation(description: "Expect to call once")
+        string.bind(self) { _ in
+            asyncExpectation.fulfill()
+        }
+        string.value = "test"
+        string.value = "test"
+        string.value = "asdasd"
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+
+    func testOptionalEquatableCallsReduce() {
+        let string: Observable<String?> = Observable(nil)
+        let asyncExpectation = expectation(description: "Expect to call once")
+        string.bind(self) { _ in
+            asyncExpectation.fulfill()
+        }
+        string.value = nil
+        string.value = "test"
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+
+    func testNonEquatableCalls() {
+        struct NonEquatable {}
+        let observable = Observable(NonEquatable())
+        let asyncExpectation = expectation(description: "Expect to call 3 times")
+        var callsCount = 0
+        observable.bind(self) { _ in
+            callsCount += 1
+            if callsCount == 3 {
+                asyncExpectation.fulfill()
+            }
+        }
+        observable.value = NonEquatable()
+        observable.value = NonEquatable()
+        observable.value = NonEquatable()
         waitForExpectations(timeout: 1, handler: nil)
     }
 }
