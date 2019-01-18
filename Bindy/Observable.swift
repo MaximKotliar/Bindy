@@ -37,14 +37,21 @@ public extension Observable where T: Equatable {
     }
 }
 
-extension Observable {
+public extension Observable {
 
-    public func transform<U: Equatable>(_ transform: @escaping (T) -> U) -> Observable<U> {
-        let transformedObserver = Observable<U>(transform(value), options: nil)
+    public func transform<U>(_ transform: @escaping (T) -> U, comparison: ((U, U) -> Bool)?) -> Observable<U> {
+        let transformedObserver = Observable<U>(transform(value), comparison: comparison)
         observe(self) { [unowned self] (value) in
             transformedObserver.value = transform(self.value)
         }
         return transformedObserver
+    }
+}
+
+public extension Observable {
+
+    public func transform<R: Equatable>(_ transform: @escaping (T) -> R) -> Observable<R> {
+        return self.transform(transform, comparison: ==)
     }
 }
 
