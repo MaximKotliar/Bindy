@@ -320,4 +320,15 @@ class BindyTests: XCTestCase {
         observable.value = NonEquatable()
         waitForExpectations(timeout: 1, handler: nil)
     }
+
+    func testObservableWithOldValue() {
+        let observable = Observable<String?>(nil)
+        let asyncExpectation = expectation(description: "Expect to call")
+        observable.bind(self) { oldValue, newValue in
+            guard oldValue == nil, newValue == "test" else { return }
+            asyncExpectation.fulfill()
+        }
+        observable.value = "test"
+        waitForExpectations(timeout: 1, handler: nil)
+    }
 }

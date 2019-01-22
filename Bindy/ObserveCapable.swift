@@ -9,7 +9,11 @@
 import Foundation
 
 public class BindingsContainer<T> {
-    var actions: [(T) -> Void] = []
+    enum Change {
+        case oldValueNewValue(T, T)
+        case newValue(T)
+    }
+    var actions: [(Change) -> Void] = []
 }
 
 public class ObserveCapable<ObservableType> {
@@ -22,6 +26,14 @@ public class ObserveCapable<ObservableType> {
     public func bind(_ owner: AnyObject,
                      callback: @escaping (ObservableType) -> Void) -> Self {
         let bind = bindings.object(forKey: owner) ?? Binding()
+        let callback: (BindingsContainer<ObservableType>.Change) -> Void = {
+            switch $0 {
+            case .newValue(let value):
+                callback(value)
+            case .oldValueNewValue(_, let new):
+                callback(new)
+            }
+        }
         bind.actions.append(callback)
         bindings.setObject(bind, forKey: owner)
         return self
@@ -34,7 +46,7 @@ public class ObserveCapable<ObservableType> {
         return hasBinding
     }
 
-    func fireBindings(with change: ObservableType) {
+    func fireBindings(with change: BindingsContainer<ObservableType>.Change) {
         guard let enumerator = self.bindings.objectEnumerator() else { return }
         enumerator.allObjects.forEach { bind in
             guard let bind = bind as? Binding else { return }

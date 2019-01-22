@@ -33,6 +33,30 @@ public class ObservableValueHolder<ObservableType>: ObserveCapable<ObservableTyp
         return bind(owner, callback: callback)
     }
 
+    @discardableResult
+    public func bind(_ owner: AnyObject,
+                     callback: @escaping (ObservableType, ObservableType) -> Void) -> Self {
+        let bind = bindings.object(forKey: owner) ?? Binding()
+        let callback: (BindingsContainer<ObservableType>.Change) -> Void = {
+            switch $0 {
+            case .newValue:
+                break
+            case .oldValueNewValue(let old, let new):
+                callback(old, new)
+            }
+        }
+        bind.actions.append(callback)
+        bindings.setObject(bind, forKey: owner)
+        return self
+    }
+
+    @discardableResult
+    public func observe(_ owner: AnyObject,
+                        callback: @escaping (ObservableType, ObservableType) -> Void) -> Self {
+        callback(value, value)
+        return bind(owner, callback: callback)
+    }
+
     public required init(_ value: ObservableType, options: [ObservableValueHolderOptionKey: Any]?) {
         self.value = value
         self.options = options

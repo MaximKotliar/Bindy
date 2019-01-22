@@ -16,7 +16,7 @@ public final class Observable<T>: ObservableValueHolder<T> {
         didSet {
             let isEqual = comparisonClosure?(oldValue, value) ?? false
             guard !isEqual else { return }
-            fireBindings(with: value)
+            fireBindings(with: .oldValueNewValue(oldValue, value))
         }
     }
 
@@ -39,7 +39,7 @@ public extension Observable where T: Equatable {
 
 extension Observable {
 
-    public func transform<U: Equatable>(_ transform: @escaping (T) -> U) -> Observable<U> {
+    public func transform<U>(_ transform: @escaping (T) -> U) -> Observable<U> {
         let transformedObserver = Observable<U>(transform(value), options: nil)
         observe(self) { [unowned self] (value) in
             transformedObserver.value = transform(self.value)
