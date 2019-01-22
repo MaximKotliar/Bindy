@@ -10,8 +10,9 @@ import Foundation
 
 public class BindingsContainer<T> {
     enum Change {
-        case oldValueNewValue(T, T)
+        case oldValue(T)
         case newValue(T)
+        case oldValueNewValue(T, T)
     }
     var actions: [(Change) -> Void] = []
 }
@@ -28,8 +29,10 @@ public class ObserveCapable<ObservableType> {
         let bind = bindings.object(forKey: owner) ?? Binding()
         let callback: (BindingsContainer<ObservableType>.Change) -> Void = {
             switch $0 {
-            case .newValue(let value):
-                callback(value)
+            case .oldValue:
+                break
+            case .newValue(let new):
+                callback(new)
             case .oldValueNewValue(_, let new):
                 callback(new)
             }

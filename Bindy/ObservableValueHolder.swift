@@ -39,10 +39,29 @@ public class ObservableValueHolder<ObservableType>: ObserveCapable<ObservableTyp
         let bind = bindings.object(forKey: owner) ?? Binding()
         let callback: (BindingsContainer<ObservableType>.Change) -> Void = {
             switch $0 {
-            case .newValue:
+            case .newValue, .oldValue:
                 break
             case .oldValueNewValue(let old, let new):
                 callback(old, new)
+            }
+        }
+        bind.actions.append(callback)
+        bindings.setObject(bind, forKey: owner)
+        return self
+    }
+
+    @discardableResult
+    public func bindToOldValue(_ owner: AnyObject,
+                     callback: @escaping (ObservableType) -> Void) -> Self {
+        let bind = bindings.object(forKey: owner) ?? Binding()
+        let callback: (BindingsContainer<ObservableType>.Change) -> Void = {
+            switch $0 {
+            case .newValue:
+                 break
+            case .oldValue(let old):
+                callback(old)
+            case .oldValueNewValue(let old, _):
+                callback(old)
             }
         }
         bind.actions.append(callback)
