@@ -342,4 +342,28 @@ class BindyTests: XCTestCase {
         observable.value = "test"
         waitForExpectations(timeout: 1, handler: nil)
     }
+
+    func testEquatableTransformEqualityCheck() {
+        struct NonEquatable {
+            let test: String
+        }
+        let nonEquatable = Observable(NonEquatable(test: "1"))
+        let equatable = nonEquatable.transform { $0.test }
+
+        let nonEuqatableExpectation = expectation(description: "Expect to call twice")
+        var callCount = 0
+        nonEquatable.bind(self) { _ in
+            callCount += 1
+            if callCount == 2 {
+                nonEuqatableExpectation.fulfill()
+            }
+        }
+        let euqatableExpectation = expectation(description: "Expect to call once")
+        equatable.bind(self) { _ in
+            euqatableExpectation.fulfill()
+        }
+        nonEquatable.value = NonEquatable(test: "2")
+        nonEquatable.value = NonEquatable(test: "2")
+        waitForExpectations(timeout: 1, handler: nil)
+    }
 }

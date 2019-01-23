@@ -16,8 +16,6 @@ public final class Observable<T>: ObservableValueHolder<T> {
         didSet {
             let isEqual = comparisonClosure?(oldValue, value) ?? false
             guard !isEqual else { return }
-            fireBindings(with: .oldValue(oldValue))
-            fireBindings(with: .newValue(value))
             fireBindings(with: .oldValueNewValue(oldValue, value))
         }
     }
@@ -32,6 +30,25 @@ public final class Observable<T>: ObservableValueHolder<T> {
     }
 }
 
+extension Observable {
+
+    public func transform<U>(_ transform: @escaping (T) -> U, options: [ObservableValueHolderOptionKey: Any]? = nil) -> Observable<U> {
+        let transformedObserver = Observable<U>(transform(value), options: options)
+        observe(self) { [unowned self] (value) in
+            transformedObserver.value = transform(self.value)
+        }
+        return transformedObserver
+    }
+
+    public func transform<U>(_ transform: @escaping (T) -> U, comparison: ((U, U) -> Bool)?) -> Observable<U> {
+        return self.transform(transform, options: comparison.flatMap { [.comparisonClosure: $0] })
+    }
+
+    public func transform<U: Equatable>(_ transform: @escaping (T) -> U) -> Observable<U> {
+        return self.transform(transform, comparison: ==)
+    }
+}
+
 public extension Observable where T: Equatable {
 
     public convenience init(_ value: T) {
@@ -39,16 +56,6 @@ public extension Observable where T: Equatable {
     }
 }
 
-extension Observable {
-
-    public func transform<U>(_ transform: @escaping (T) -> U) -> Observable<U> {
-        let transformedObserver = Observable<U>(transform(value), options: nil)
-        observe(self) { [unowned self] (value) in
-            transformedObserver.value = transform(self.value)
-        }
-        return transformedObserver
-    }
-}
 
 public protocol ExtendableClass: class {}
 extension NSObject: ExtendableClass {}

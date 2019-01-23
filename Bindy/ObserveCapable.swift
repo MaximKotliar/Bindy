@@ -58,6 +58,8 @@ public class ObserveCapable<ObservableType> {
         case .oldValueNewValue(let old, let new):
             enumerator.allObjects.forEach { bind in
                 guard let bind = bind as? Binding else { return }
+                bind.oldValueActions.forEach { $0(old) }
+                bind.newValueActions.forEach { $0(new) }
                 bind.oldValueNewValueActions.forEach { $0(old, new) }
             }
         }
