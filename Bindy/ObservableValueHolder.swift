@@ -17,7 +17,7 @@ public struct ObservableValueHolderOptionKey: Hashable, ExpressibleByStringLiter
 }
 
 public extension ObservableValueHolderOptionKey {
-    public static let comparisonClosure: ObservableValueHolderOptionKey = "comparisonClosure"
+    public static let equalityClosure: ObservableValueHolderOptionKey = "equalityClosure"
 }
 
 public class ObservableValueHolder<ObservableType>: ObserveCapable<ObservableType> {

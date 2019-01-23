@@ -10,23 +10,23 @@ import Foundation
 
 public final class Observable<T>: ObservableValueHolder<T> {
 
-    let comparisonClosure: ((T, T) -> Bool)?
+    let equalityClosure: ((T, T) -> Bool)?
 
     public override var value: T {
         didSet {
-            let isEqual = comparisonClosure?(oldValue, value) ?? false
+            let isEqual = equalityClosure?(oldValue, value) ?? false
             guard !isEqual else { return }
             fireBindings(with: .oldValueNewValue(oldValue, value))
         }
     }
 
     public required init(_ value: T, options: [ObservableValueHolderOptionKey: Any]? = nil) {
-        self.comparisonClosure = options.flatMap { $0[.comparisonClosure] as? (T, T) -> Bool }
+        self.equalityClosure = options.flatMap { $0[.equalityClosure] as? (T, T) -> Bool }
         super.init(value, options: options)
     }
 
-    public convenience init(_ value: T, comparison: ((T, T) -> Bool)?) {
-        self.init(value, options: comparison.flatMap { [.comparisonClosure: $0] } )
+    public convenience init(_ value: T, equalityCheck: ((T, T) -> Bool)?) {
+        self.init(value, options: equalityCheck.flatMap { [.equalityClosure: $0] } )
     }
 }
 
@@ -40,19 +40,19 @@ extension Observable {
         return transformedObserver
     }
 
-    public func transform<U>(_ transform: @escaping (T) -> U, comparison: ((U, U) -> Bool)?) -> Observable<U> {
-        return self.transform(transform, options: comparison.flatMap { [.comparisonClosure: $0] })
+    public func transform<U>(_ transform: @escaping (T) -> U, equalityCheck: ((U, U) -> Bool)?) -> Observable<U> {
+        return self.transform(transform, options: equalityCheck.flatMap { [.equalityClosure: $0] })
     }
 
     public func transform<U: Equatable>(_ transform: @escaping (T) -> U) -> Observable<U> {
-        return self.transform(transform, comparison: ==)
+        return self.transform(transform, equalityCheck: ==)
     }
 }
 
 public extension Observable where T: Equatable {
 
     public convenience init(_ value: T) {
-        self.init(value, comparison: ==)
+        self.init(value, equalityCheck: ==)
     }
 }
 
