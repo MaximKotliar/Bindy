@@ -37,15 +37,7 @@ public class ObservableValueHolder<ObservableType>: ObserveCapable<ObservableTyp
     public func bind(_ owner: AnyObject,
                      callback: @escaping (ObservableType, ObservableType) -> Void) -> Self {
         let bind = bindings.object(forKey: owner) ?? Binding()
-        let callback: (BindingsContainer<ObservableType>.Change) -> Void = {
-            switch $0 {
-            case .newValue, .oldValue:
-                break
-            case .oldValueNewValue(let old, let new):
-                callback(old, new)
-            }
-        }
-        bind.actions.append(callback)
+        bind.oldValueNewValueActions.append(callback)
         bindings.setObject(bind, forKey: owner)
         return self
     }
@@ -54,17 +46,7 @@ public class ObservableValueHolder<ObservableType>: ObserveCapable<ObservableTyp
     public func bindToOldValue(_ owner: AnyObject,
                      callback: @escaping (ObservableType) -> Void) -> Self {
         let bind = bindings.object(forKey: owner) ?? Binding()
-        let callback: (BindingsContainer<ObservableType>.Change) -> Void = {
-            switch $0 {
-            case .newValue:
-                 break
-            case .oldValue(let old):
-                callback(old)
-            case .oldValueNewValue(let old, _):
-                callback(old)
-            }
-        }
-        bind.actions.append(callback)
+        bind.oldValueActions.append(callback)
         bindings.setObject(bind, forKey: owner)
         return self
     }

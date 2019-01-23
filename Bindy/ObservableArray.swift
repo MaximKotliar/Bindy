@@ -62,6 +62,8 @@ public final class ObservableArray<T: Equatable>: ObservableValueHolder<[T]>, Co
     override public var value: [T] {
         didSet {
             guard oldValue != value else { return }
+            fireBindings(with: .oldValue(oldValue))
+            fireBindings(with: .newValue(value))
             fireBindings(with: .oldValueNewValue(oldValue, value))
         }
     }

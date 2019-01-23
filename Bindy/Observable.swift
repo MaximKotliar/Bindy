@@ -16,6 +16,8 @@ public final class Observable<T>: ObservableValueHolder<T> {
         didSet {
             let isEqual = comparisonClosure?(oldValue, value) ?? false
             guard !isEqual else { return }
+            fireBindings(with: .oldValue(oldValue))
+            fireBindings(with: .newValue(value))
             fireBindings(with: .oldValueNewValue(oldValue, value))
         }
     }
