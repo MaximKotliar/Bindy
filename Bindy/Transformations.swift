@@ -13,7 +13,7 @@ public extension Observable {
     public func debounced(_ delay: TimeInterval) -> Observable<T> {
         let debounced = Observable<T>(value, options: options)
         var debounceFunc: ((T) -> Void)?
-        bind(debounced) { [weak debounced] value in
+        bind(debounced, callback: { [weak debounced] value in
             guard let debounced = debounced else { return }
             if debounceFunc == nil {
                 debounceFunc = debounce(delay: delay) {
@@ -21,14 +21,14 @@ public extension Observable {
                 }
             }
             debounceFunc?(value)
-        }
+        })
         return debounced
     }
 
     public func throttled(_ delay: TimeInterval) -> Observable<T> {
         let throttled = Observable<T>(value, options: options)
         var throttledFunc: ((T) -> Void)?
-        bind(throttled) { [weak throttled] value in
+        bind(throttled, callback: { [weak throttled] value in
             guard let throttled = throttled else { return }
             if throttledFunc == nil {
                 throttledFunc = throttle(delay: delay) {
@@ -36,7 +36,7 @@ public extension Observable {
                 }
             }
             throttledFunc?(value)
-        }
+        })
         return throttled
     }
 }
@@ -46,7 +46,7 @@ public extension Signal {
     public func debounced(_ delay: TimeInterval) -> Signal<T> {
         let debounced = Signal<T>()
         var debounceFunc: ((T) -> Void)?
-        bind(debounced) { [weak debounced] value in
+        bind(debounced, callback: { [weak debounced] value in
             guard let debounced = debounced else { return }
             if debounceFunc == nil {
                 debounceFunc = debounce(delay: delay) {
@@ -54,14 +54,14 @@ public extension Signal {
                 }
             }
             debounceFunc?(value)
-        }
+        })
         return debounced
     }
 
     public func throttled(_ delay: TimeInterval) -> Signal<T> {
         let throttled = Signal<T>()
         var throttledFunc: ((T) -> Void)?
-        bind(throttled) { [weak throttled] value in
+        bind(throttled, callback: { [weak throttled] value in
             guard let throttled = throttled else { return }
             if throttledFunc == nil {
                 throttledFunc = throttle(delay: delay) {
@@ -69,7 +69,7 @@ public extension Signal {
                 }
             }
             throttledFunc?(value)
-        }
+        })
         return throttled
     }
 }

@@ -226,17 +226,17 @@ public extension ObservableArray {
 
     public func transform<U: Equatable>(_ transform: @escaping ([T]) -> U) -> Observable<U> {
         let transformedObserver = Observable<U>(transform(value), options: nil)
-        observe(self) { [unowned self] (value) in
+        observe(self, callback: { value in
             transformedObserver.value = transform(self.value)
-        }
+        })
         return transformedObserver
     }
 
     public func transform<U: Equatable>(_ transform: @escaping ([T]) -> [U]) -> ObservableArray<U> {
         let transformedObserver = ObservableArray<U>(transform(value))
-        observe(self) { [unowned self] (value) in
+        observe(self, callback: { [unowned self] value in
             transformedObserver.value = transform(self.value)
-        }
+        })
         return transformedObserver
     }
 }
