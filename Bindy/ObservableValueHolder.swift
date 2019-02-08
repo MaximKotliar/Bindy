@@ -20,22 +20,22 @@ public extension ObservableValueHolderOptionKey {
     public static let equalityClosure: ObservableValueHolderOptionKey = "equalityClosure"
 }
 
-public class ObservableValueHolder<T>: ObserveCapable<T> {
+public class ObservableValueHolder<ObservableType>: ObserveCapable<ObservableType> {
 
-    open var value: T
+    open var value: ObservableType
 
     var options: [ObservableValueHolderOptionKey: Any]?
 
     @discardableResult
     public func observe(_ owner: AnyObject,
-                        callback: @escaping (T) -> Void) -> Self {
+                        callback: @escaping (ObservableType) -> Void) -> Self {
         callback(value)
         return bind(owner, callback: callback)
     }
 
     @discardableResult
     public func bind(_ owner: AnyObject,
-                     callbackWithOldValue callback: @escaping (T, T) -> Void) -> Self {
+                     callback: @escaping (ObservableType, ObservableType) -> Void) -> Self {
         let bind = bindings.object(forKey: owner) ?? Binding()
         bind.oldValueNewValueActions.append(callback)
         bindings.setObject(bind, forKey: owner)
@@ -44,7 +44,7 @@ public class ObservableValueHolder<T>: ObserveCapable<T> {
 
     @discardableResult
     public func bindToOldValue(_ owner: AnyObject,
-                     callback: @escaping (T) -> Void) -> Self {
+                     callback: @escaping (ObservableType) -> Void) -> Self {
         let bind = bindings.object(forKey: owner) ?? Binding()
         bind.oldValueActions.append(callback)
         bindings.setObject(bind, forKey: owner)
@@ -53,12 +53,12 @@ public class ObservableValueHolder<T>: ObserveCapable<T> {
 
     @discardableResult
     public func observe(_ owner: AnyObject,
-                        callbackWithOldValue callback: @escaping (T, T) -> Void) -> Self {
+                        callback: @escaping (ObservableType, ObservableType) -> Void) -> Self {
         callback(value, value)
-        return bind(owner, callbackWithOldValue: callback)
+        return bind(owner, callback: callback)
     }
 
-    public required init(_ value: T, options: [ObservableValueHolderOptionKey: Any]?) {
+    public required init(_ value: ObservableType, options: [ObservableValueHolderOptionKey: Any]?) {
         self.value = value
         self.options = options
     }
@@ -66,29 +66,29 @@ public class ObservableValueHolder<T>: ObserveCapable<T> {
 
 public extension ObservableValueHolder {
 
-    public func combined<U, R>(with other: Observable<U>,
-                             transform: @escaping (T, U) -> R) -> Observable<R> {
+    public func combined<T, R>(with other: Observable<T>,
+                             transform: @escaping (ObservableType, T) -> R) -> Observable<R> {
         let combined = transform(self.value, other.value)
         let observable = Observable(combined, options: options)
-        self.bind(observable, callback: { (value) in
+        self.bind(observable) { (value) in
             observable.value = transform(self.value, other.value)
-        })
-        other.bind(observable, callback: { (value) in
+        }
+        other.bind(observable) { (value) in
             observable.value = transform(self.value, other.value)
-        })
+        }
         return observable
     }
 
-    public func combined<U, R>(with other: ObservableArray<U>,
-                             transform: @escaping (T, [U]) -> [R]) -> ObservableArray<R> {
+    public func combined<T, R>(with other: ObservableArray<T>,
+                             transform: @escaping (ObservableType, [T]) -> [R]) -> ObservableArray<R> {
         let combined = transform(self.value, other.value)
         let observable = ObservableArray(combined, options: options)
-        self.bind(observable, callback: { (value) in
+        self.bind(observable) { (value) in
             observable.value = transform(self.value, other.value)
-        })
-        other.bind(observable, callback: { (value) in
+        }
+        other.bind(observable) { (value) in
             observable.value = transform(self.value, other.value)
-        })
+        }
         return observable
     }
 }
@@ -98,12 +98,12 @@ public extension ObservableArray {
     public func combinedArray<R>(with other: Observable<T>, transform: @escaping ([Element], T) -> R) -> Observable<R> {
         let combined = transform(self.value, other.value)
         let observable = Observable(combined, options: options)
-        self.bind(observable, callback: { (value) in
+        self.bind(observable) { (value) in
             observable.value = transform(self.value, other.value)
-        })
-        other.bind(observable, callback: { (value) in
+        }
+        other.bind(observable) { (value) in
             observable.value = transform(self.value, other.value)
-        })
+        }
         return observable
     }
 }
