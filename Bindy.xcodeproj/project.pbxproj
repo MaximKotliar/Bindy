@@ -18,7 +18,6 @@
 		194C1EE11FE53A720009D1D0 /* Bindy+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194C1EE01FE53A720009D1D0 /* Bindy+UIView.swift */; };
 		1969D9F51FA7DC8600AA6FDB /* Bindy.h in Headers */ = {isa = PBXBuildFile; fileRef = 1969D9F31FA7DC8600AA6FDB /* Bindy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		197568492091AD2A005DA318 /* DSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197568482091AD2A005DA318 /* DSL.swift */; };
-		19756CA01FA9BEC400E9CF00 /* Change.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19756C9F1FA9BEC400E9CF00 /* Change.swift */; };
 		19765A8B1FA7DE0700F9FCB8 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19765A8A1FA7DE0700F9FCB8 /* Observable.swift */; };
 		19765A901FA7DE5D00F9FCB8 /* ObservableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19765A8F1FA7DE5D00F9FCB8 /* ObservableArray.swift */; };
 		1986FAEC218C50D300A3E175 /* Transformations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1986FAEB218C50D300A3E175 /* Transformations.swift */; };
@@ -52,7 +51,6 @@
 		1969D9F31FA7DC8600AA6FDB /* Bindy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bindy.h; sourceTree = "<group>"; };
 		1969D9F41FA7DC8600AA6FDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		197568482091AD2A005DA318 /* DSL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSL.swift; sourceTree = "<group>"; };
-		19756C9F1FA9BEC400E9CF00 /* Change.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Change.swift; sourceTree = "<group>"; };
 		19765A8A1FA7DE0700F9FCB8 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		19765A8F1FA7DE5D00F9FCB8 /* ObservableArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableArray.swift; sourceTree = "<group>"; };
 		1986FAEB218C50D300A3E175 /* Transformations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transformations.swift; sourceTree = "<group>"; };
@@ -128,7 +126,6 @@
 				1902B5AD1FA88040001CC0BC /* Bindy.podspec */,
 				1969D9F31FA7DC8600AA6FDB /* Bindy.h */,
 				1969D9F41FA7DC8600AA6FDB /* Info.plist */,
-				19756C9F1FA9BEC400E9CF00 /* Change.swift */,
 				19765A8A1FA7DE0700F9FCB8 /* Observable.swift */,
 				19765A8F1FA7DE5D00F9FCB8 /* ObservableArray.swift */,
 				1902B5991FA8479D001CC0BC /* Signal.swift */,
@@ -320,7 +317,6 @@
 				19488F5E1FB0F8D80004E606 /* ObserveCapable.swift in Sources */,
 				1936A70D1FE6E677004CA64B /* Property.swift in Sources */,
 				194C1EDF1FE53A4B0009D1D0 /* Bindy+UITableView.swift in Sources */,
-				19756CA01FA9BEC400E9CF00 /* Change.swift in Sources */,
 				1936A70B1FE6E220004CA64B /* Bindable.swift in Sources */,
 				197568492091AD2A005DA318 /* DSL.swift in Sources */,
 				194C1EE11FE53A720009D1D0 /* Bindy+UIView.swift in Sources */,

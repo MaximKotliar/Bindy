@@ -17,7 +17,7 @@ public struct ObservableValueHolderOptionKey: Hashable, ExpressibleByStringLiter
 }
 
 public extension ObservableValueHolderOptionKey {
-    public static let comparisonClosure: ObservableValueHolderOptionKey = "comparisonClosure"
+    public static let equalityClosure: ObservableValueHolderOptionKey = "equalityClosure"
 }
 
 public class ObservableValueHolder<ObservableType>: ObserveCapable<ObservableType> {
@@ -30,6 +30,31 @@ public class ObservableValueHolder<ObservableType>: ObserveCapable<ObservableTyp
     public func observe(_ owner: AnyObject,
                         callback: @escaping (ObservableType) -> Void) -> Self {
         callback(value)
+        return bind(owner, callback: callback)
+    }
+
+    @discardableResult
+    public func bind(_ owner: AnyObject,
+                     callback: @escaping (ObservableType, ObservableType) -> Void) -> Self {
+        let bind = bindings.object(forKey: owner) ?? Binding()
+        bind.oldValueNewValueActions.append(callback)
+        bindings.setObject(bind, forKey: owner)
+        return self
+    }
+
+    @discardableResult
+    public func bindToOldValue(_ owner: AnyObject,
+                     callback: @escaping (ObservableType) -> Void) -> Self {
+        let bind = bindings.object(forKey: owner) ?? Binding()
+        bind.oldValueActions.append(callback)
+        bindings.setObject(bind, forKey: owner)
+        return self
+    }
+
+    @discardableResult
+    public func observe(_ owner: AnyObject,
+                        callback: @escaping (ObservableType, ObservableType) -> Void) -> Self {
+        callback(value, value)
         return bind(owner, callback: callback)
     }
 

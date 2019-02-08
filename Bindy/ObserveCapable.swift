@@ -9,7 +9,15 @@
 import Foundation
 
 public class BindingsContainer<T> {
-    var actions: [(T) -> Void] = []
+    enum Change {
+        case oldValue(T)
+        case newValue(T)
+        case oldValueNewValue(T, T)
+    }
+
+    var oldValueActions: [(T) -> Void] = []
+    var newValueActions: [(T) -> Void] = []
+    var oldValueNewValueActions: [(T, T) -> Void] = []
 }
 
 public class ObserveCapable<ObservableType> {
@@ -22,7 +30,7 @@ public class ObserveCapable<ObservableType> {
     public func bind(_ owner: AnyObject,
                      callback: @escaping (ObservableType) -> Void) -> Self {
         let bind = bindings.object(forKey: owner) ?? Binding()
-        bind.actions.append(callback)
+        bind.newValueActions.append(callback)
         bindings.setObject(bind, forKey: owner)
         return self
     }
@@ -34,11 +42,26 @@ public class ObserveCapable<ObservableType> {
         return hasBinding
     }
 
-    func fireBindings(with change: ObservableType) {
+    func fireBindings(with change: BindingsContainer<ObservableType>.Change) {
         guard let enumerator = self.bindings.objectEnumerator() else { return }
-        enumerator.allObjects.forEach { bind in
-            guard let bind = bind as? Binding else { return }
-            bind.actions.forEach { $0(change) }
+        switch change {
+        case .newValue(let new):
+            enumerator.allObjects.forEach { bind in
+                guard let bind = bind as? Binding else { return }
+                bind.newValueActions.forEach { $0(new) }
+            }
+        case .oldValue(let old):
+            enumerator.allObjects.forEach { bind in
+                guard let bind = bind as? Binding else { return }
+                bind.oldValueActions.forEach { $0(old) }
+            }
+        case .oldValueNewValue(let old, let new):
+            enumerator.allObjects.forEach { bind in
+                guard let bind = bind as? Binding else { return }
+                bind.oldValueActions.forEach { $0(old) }
+                bind.newValueActions.forEach { $0(new) }
+                bind.oldValueNewValueActions.forEach { $0(old, new) }
+            }
         }
     }
 
