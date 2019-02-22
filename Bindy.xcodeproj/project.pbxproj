@@ -10,6 +10,7 @@
 		1902B59A1FA8479D001CC0BC /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1902B5991FA8479D001CC0BC /* Signal.swift */; };
 		1902B5A21FA84AE3001CC0BC /* BindyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1902B5A11FA84AE3001CC0BC /* BindyTests.swift */; };
 		1902B5A41FA84AE3001CC0BC /* Bindy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1969D9F01FA7DC8600AA6FDB /* Bindy.framework */; };
+		1935BD98221FB2C600A9585B /* KVOSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1935BD97221FB2C600A9585B /* KVOSupport.swift */; };
 		1936A70B1FE6E220004CA64B /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1936A70A1FE6E220004CA64B /* Bindable.swift */; };
 		1936A70D1FE6E677004CA64B /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1936A70C1FE6E677004CA64B /* Property.swift */; };
 		19488F5E1FB0F8D80004E606 /* ObserveCapable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19488F5D1FB0F8D80004E606 /* ObserveCapable.swift */; };
@@ -41,6 +42,7 @@
 		1902B5A11FA84AE3001CC0BC /* BindyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindyTests.swift; sourceTree = "<group>"; };
 		1902B5A31FA84AE3001CC0BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1902B5AD1FA88040001CC0BC /* Bindy.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = Bindy.podspec; sourceTree = SOURCE_ROOT; };
+		1935BD97221FB2C600A9585B /* KVOSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVOSupport.swift; sourceTree = "<group>"; };
 		1936A70A1FE6E220004CA64B /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		1936A70C1FE6E677004CA64B /* Property.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
 		19488F5D1FB0F8D80004E606 /* ObserveCapable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserveCapable.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				19765A8A1FA7DE0700F9FCB8 /* Observable.swift */,
 				19765A8F1FA7DE5D00F9FCB8 /* ObservableArray.swift */,
 				1902B5991FA8479D001CC0BC /* Signal.swift */,
+				1935BD97221FB2C600A9585B /* KVOSupport.swift */,
 				19488F5D1FB0F8D80004E606 /* ObserveCapable.swift */,
 				19488F5F1FB1099B0004E606 /* ObservableValueHolder.swift */,
 				197568482091AD2A005DA318 /* DSL.swift */,
@@ -319,6 +322,7 @@
 				194C1EDF1FE53A4B0009D1D0 /* Bindy+UITableView.swift in Sources */,
 				1936A70B1FE6E220004CA64B /* Bindable.swift in Sources */,
 				197568492091AD2A005DA318 /* DSL.swift in Sources */,
+				1935BD98221FB2C600A9585B /* KVOSupport.swift in Sources */,
 				194C1EE11FE53A720009D1D0 /* Bindy+UIView.swift in Sources */,
 				1902B59A1FA8479D001CC0BC /* Signal.swift in Sources */,
 				19488F601FB1099B0004E606 /* ObservableValueHolder.swift in Sources */,

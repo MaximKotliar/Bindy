@@ -16,6 +16,7 @@ class TestListener: NSObject {
 class BindyTests: XCTestCase {
 
     var observable: Observable<String>?
+    var kvoObservable: Observable<CGRect>?
     var optionalObservable: Observable<String?>?
     var observableArray: ObservableArray<String>?
     var signal: Signal<String>?
@@ -364,6 +365,38 @@ class BindyTests: XCTestCase {
         }
         nonEquatable.value = NonEquatable(test: "2")
         nonEquatable.value = NonEquatable(test: "2")
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+
+    func testKVOObservable() {
+        let view = UIView()
+        let observable = view.observable(for: \.frame)
+        let asyncExpectation = expectation(description: "Expect to call")
+        observable.bind(self) { old, new in
+            guard old.width == 0 else { return }
+            guard new.width == 1 else { return }
+            asyncExpectation.fulfill()
+        }
+        view.frame = CGRect(x: 1, y: 1, width: 1, height: 1)
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+
+    func testKVOObservableCleanup() {
+        testObservableListener = TestListener()
+        let view = UIView()
+        kvoObservable = view[\.frame]
+
+        let bindNotCallExpectation = expectation(description: "bind did not call")
+        bindNotCallExpectation.isInverted = true
+
+        kvoObservable!.bind(testObservableListener!) { newValue in
+            self.testObservableListener!.tag = 4
+            bindNotCallExpectation.fulfill()
+        }
+        // Force listener to release
+        testObservableListener = nil
+        // Perform change
+        view.frame = CGRect(x: 1, y: 1, width: 1, height: 1)
         waitForExpectations(timeout: 1, handler: nil)
     }
 }
