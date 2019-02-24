@@ -94,6 +94,7 @@ private func throttle<T>(delay: TimeInterval, queue: DispatchQueue = .main, acti
             currentWorkItem = nil
         }
         let isPassed = Date().timeIntervalSinceReferenceDate - delay > lastFire
-        isPassed ? queue.async(execute: currentWorkItem!) : queue.asyncAfter(deadline: .now() + delay, execute: currentWorkItem!)
+        isPassed ? queue.async(execute: currentWorkItem!) : queue.asyncAfter(deadline: .now() + delay,
+                                                                             execute: currentWorkItem!)
     }
 }
