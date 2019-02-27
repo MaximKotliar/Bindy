@@ -18,6 +18,12 @@ public class BindingsContainer<T> {
     var oldValueActions: [(T) -> Void] = []
     var newValueActions: [(T) -> Void] = []
     var oldValueNewValueActions: [(T, T) -> Void] = []
+
+    var onDeinit: (() -> Void)!
+
+    deinit {
+        //onDeinit()
+    }
 }
 
 public class ObserveCapable<ObservableType> {
@@ -25,11 +31,12 @@ public class ObserveCapable<ObservableType> {
     typealias Binding = BindingsContainer<ObservableType>
 
     internal var bindings = NSMapTable<AnyObject, Binding>.weakToStrongObjects()
+    internal var bindingsCountObservationToken: NSKeyValueObservation!
 
     @discardableResult
     public func bind(_ owner: AnyObject,
                      callback: @escaping (ObservableType) -> Void) -> Self {
-        let bind = bindings.object(forKey: owner) ?? Binding()
+        let bind = binding(for: owner)
         bind.newValueActions.append(callback)
         bindings.setObject(bind, forKey: owner)
         return self
@@ -40,6 +47,17 @@ public class ObserveCapable<ObservableType> {
         let hasBinding = bindings.object(forKey: owner) != nil
         bindings.removeObject(forKey: owner)
         return hasBinding
+    }
+
+    private func binding(for owner: AnyObject) -> Binding {
+        if let existing = bindings.object(forKey: owner) {
+            return existing
+        }
+        let new = Binding()
+        new.onDeinit = { [weak bindings] in
+            print(bindings?.count)
+        }
+        return new
     }
 
     func fireBindings(with change: BindingsContainer<ObservableType>.Change) {
