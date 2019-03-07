@@ -1,26 +1,26 @@
-[![Build status](https://img.shields.io/travis/MaximKotliar/Bindy/master.svg?style=flat-square)](https://travis-ci.org/MaximKotliar/Bindy)
-[![Version](https://img.shields.io/cocoapods/v/Bindy.svg?style=flat-square)](http://cocoapods.org/pods/Bindy)
-[![License](https://img.shields.io/cocoapods/l/Bindy.svg?style=flat-square)](http://cocoapods.org/pods/Bindy)
-[![Platform](https://img.shields.io/cocoapods/p/Bindy.svg?style=flat-square)](http://cocoapods.org/pods/Bindy)
+[![Build status][image-1]][1]
+[![Version][image-2]][2]
+[![License][image-3]][3]
+[![Platform][image-4]][4]
 
 # Bindy
 Just a simple bindings.
 
 ## Installation
-Add
 
+Add
 `pod 'Bindy'`
 
 to your podfile, and run
 `pod install`
 
 ## Usage
-For now, bindy has a couple basic types
+For now, Bindy has a couple basic types
 
-* Signal - allows to trigger callback when some signal recieved.
+* Signal - allows to trigger callback when some signal received.
 * Observable - allows to observe changing of value.
 * OptionalObservable - same as Observable, but with optional value.
-* ObservableArray - conforms to MutableCollection protocol, so you can work with it like with regular array: subscript index, replace objects, map, enumerate, etc... Also, ObservableArray has ```updates``` signal, which will notify you about any changes in array, such as insert, replace, delete.
+* ObservableArray - conforms to MutableCollection protocol, so you can work with it like with regular array: subscript index, replace objects, map, enumerate, etc... Also, ObservableArray has `updates` signal, which will notify you about any changes in array, such as insert, replace, delete.
 
 ### Observables Sample
 
@@ -60,14 +60,14 @@ func handleDidRecieveMessage(_ message: Message) {
 }
 ```
 
-You don't need remove binding manually if you don't want it, when object that you pass as owner in ```bind(_ owner: AnyObject...``` metod deallocates, corresponding bindings will clean. However, if you want to unbind manually, just call ```unbind(_ owner: AnyObject)```.
-Bindy have an extension for tableView for performing updates ```tableView.perform(updates:...```
+You don't need remove binding manually if you don't want it, when object that you pass as owner in `bind(_ owner: AnyObject...` method deallocates, corresponding bindings will clean. However, if you want to unbind manually, just call `unbind(_ owner: AnyObject)`.
+Bindy have an extension for tableView for performing updates `tableView.perform(updates:...`
 
-Also, observables has method ```observe(_ owner: AnyObject...```, it works like `bind`, but triggers callback immediately, this may be more comfortable in some situations.
+Also, observables has method `observe(_ owner: AnyObject...`, it works like `bind`, but triggers callback immediately, this may be more comfortable in some situations.
 
 ### Transformations
 
-If you want to recieve events with transformed type, you can use ```transform``` function on Observables like: 
+If you want to receive events with transformed type, you can use `transform` function on Observables like: 
 
 ```swift
 let speed = Observable(20)
@@ -85,7 +85,7 @@ func setupBindings() {
 
 ### Combinations
 
-You can combine two Observable types with ```combined(with: ..., transform: ...)``` function like: 
+You can combine two Observable types with `combined(with: ..., transform: ...)` function like: 
 
 ```swift
 let firstname = Observable("Maxim")
@@ -106,8 +106,8 @@ func setupBindings() {
 }
 ```
 
-For Observable<Bool> combinations Bindy have more convenient operators ```&&``` and ```||```, so you can combine Observable<Bool> like regular Bool, also you can invert it with ```!```:
-	
+For `Observable~<Bool>~` combinations Bindy have more convenient operators `&&` and `||`, so you can combine `Observable~<Bool>~` like regular Bool, also you can invert it with `!`:
+
 ```swift
 let isPremiumPurchased = Observable(true)
 let isInTrialPeriodEnded = Observable(false)
@@ -117,3 +117,47 @@ lazy var shouldShowAds = {
         return isAdsShowForced || !isPremiumPurchased && isInTrialPeriodEnded
 }()
 ```
+
+### KVO support
+
+Bindy supports KVO, so you can create `Observable` from any KVC capable property with easy subscript syntax like:
+
+```swift
+let textField = UITextField()
+let text = textField[\.text] // type will be Observable<String?>
+
+text.observe(self) { newText in
+	print(newText)
+}
+```
+
+### Old value
+
+For any `Observable` type you can receive old value in closure, just pass two parameters to binding closure, first one will be old value, second one – new value: 
+
+```swift
+let observableString = Observable("test")
+
+observableString(self) { oldString, newString in
+	print("String changed from \(oldString) to \(newString)")
+}
+```
+
+### High order functions
+
+Bindy contains some high order functions:
+- `map` - applies on any type, behavior similar to swift map.
+- `flatMap` - applies on Observable with optional type, returns Signal with non-optional type.
+- `compactMap` - applies on Observable with Collection inside, behavior similar to swift version of function.
+- `reduce` - applies on Observable with Collection inside, behavior similar to swift version of function.
+- `filter` - applies on Observable with Collection inside, behavior similar to swift version of function.
+
+[1]:	https://travis-ci.org/MaximKotliar/Bindy
+[2]:	http://cocoapods.org/pods/Bindy
+[3]:	http://cocoapods.org/pods/Bindy
+[4]:	http://cocoapods.org/pods/Bindy
+
+[image-1]:	https://img.shields.io/travis/MaximKotliar/Bindy/master.svg?style=flat-square
+[image-2]:	https://img.shields.io/cocoapods/v/Bindy.svg?style=flat-square
+[image-3]:	https://img.shields.io/cocoapods/l/Bindy.svg?style=flat-square
+[image-4]:	https://img.shields.io/cocoapods/p/Bindy.svg?style=flat-square
