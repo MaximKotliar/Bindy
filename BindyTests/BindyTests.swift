@@ -462,4 +462,22 @@ class BindyTests: XCTestCase {
         observable.value.append("test")
         waitForExpectations(timeout: 1, handler: nil)
     }
+
+    func testCombinedCallsReduceByEquality() {
+        struct NonEquatable {
+            let test: String
+        }
+        let string = Observable(NonEquatable(test: "test"))
+        let secondString = Observable(NonEquatable(test: "test"))
+        let bothEmpty = string.combined(with: secondString) { ($0.test + $1.test).isEmpty }
+        let euqatableExpectation = expectation(description: "Expect to call once")
+        bothEmpty.bind(self) { _ in
+            euqatableExpectation.fulfill()
+        }
+        string.value = NonEquatable(test: "")
+        secondString.value = NonEquatable(test: "")
+        secondString.value = NonEquatable(test: "")
+        string.value = NonEquatable(test: "")
+        waitForExpectations(timeout: 1, handler: nil)
+    }
 }

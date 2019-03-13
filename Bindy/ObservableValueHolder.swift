@@ -67,8 +67,11 @@ public class ObservableValueHolder<ObservableType>: ObserveCapable<ObservableTyp
 public extension ObservableValueHolder {
 
     public func combined<T, R>(with other: Observable<T>,
+                               equalBy equalityClosure: ((R, R) -> Bool)?,
                              transform: @escaping (ObservableType, T) -> R) -> Observable<R> {
         let combined = transform(self.value, other.value)
+        var options = self.options ?? [:]
+        options[.equalityClosure] = equalityClosure
         let observable = Observable(combined, options: options)
         self.bind(observable) { (value) in
             observable.value = transform(self.value, other.value)
@@ -79,9 +82,17 @@ public extension ObservableValueHolder {
         return observable
     }
 
+    public func combined<T, R>(with other: Observable<T>,
+                               transform: @escaping (ObservableType, T) -> R) -> Observable<R> where R: Equatable {
+        return combined(with: other, equalBy: ==, transform: transform)
+    }
+
     public func combined<T, R>(with other: ObservableArray<T>,
-                             transform: @escaping (ObservableType, [T]) -> [R]) -> ObservableArray<R> {
+                               equalBy equalityClosure: ((R, R) -> Bool)?,
+                               transform: @escaping (ObservableType, [T]) -> [R]) -> ObservableArray<R> {
         let combined = transform(self.value, other.value)
+        var options = self.options ?? [:]
+        options[.equalityClosure] = equalityClosure
         let observable = ObservableArray(combined, options: options)
         self.bind(observable) { (value) in
             observable.value = transform(self.value, other.value)
@@ -90,6 +101,11 @@ public extension ObservableValueHolder {
             observable.value = transform(self.value, other.value)
         }
         return observable
+    }
+
+    public func combined<T, R>(with other: ObservableArray<T>,
+                               transform: @escaping (ObservableType, [T]) -> [R]) -> ObservableArray<R> where R: Equatable {
+        return combined(with: other, equalBy: ==, transform: transform)
     }
 }
 
