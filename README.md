@@ -105,7 +105,7 @@ func setupBindings() {
 }
 ```
 
-For `Observable~<Bool>~` combinations Bindy have more convenient operators `&&` and `||`, so you can combine `Observable~<Bool>~` like regular Bool, also you can invert it with `!`:
+For `Observable<Bool>` combinations Bindy have more convenient operators `&&` and `||`, so you can combine `Observable<Bool>` like regular Bool, also you can invert it with `!`:
 
 ```swift
 let isPremiumPurchased = Observable(true)
