@@ -15,12 +15,11 @@ to your podfile, and run
 `pod install`
 
 ## Usage
-For now, Bindy has a couple basic types
+For now, Bindy has a couple of basic types
 
-* Signal - allows to trigger callback when some signal received.
-* Observable - allows to observe changing of value.
-* OptionalObservable - same as Observable, but with optional value.
-* ObservableArray - conforms to MutableCollection protocol, so you can work with it like with regular array: subscript index, replace objects, map, enumerate, etc... Also, ObservableArray has `updates` signal, which will notify you about any changes in array, such as insert, replace, delete.
+* Signal - allows triggering a callback when some signal received.
+* Observable - allows observing changing of value.
+* ObservableArray - conforms to MutableCollection protocol, so you can work with it like with a regular array: subscript index, replace objects, map, enumerate, etc... Also, ObservableArray has `updates` signal, which will notify you about any changes in the array, such as insert, replace, delete.
 
 ### Observables Sample
 
@@ -29,14 +28,14 @@ let firstname = Observable("Salvador")
 let age = Observable(54)
 
 func setupBindings() {
-	age.bind(self) { [unowned self] newAge in
+    age.bind(self) { [unowned self] newAge in
             print("Happy \(newAge) birthday, \(self.firstname.value)")
-	}
-	age.value = 55
+    }
+    age.value = 55
 }
 ```
 
-Don't forget always use `[unowned owner]` in closure to prevent retain cycle.
+Don't forget always use `[unowned owner]` in closure to prevent the retain cycle.
 
 ### Signal and Array Sample
 
@@ -47,23 +46,23 @@ let newMessage = Signal<Message>()
 func setupBindings() {
     newMessage.bind(self) { [unowned self] message in
             self.messages.append(message)
-	}
-	
+    }
+    
     messages.updates.bind(self) { [unowned tableView] updates in
-    	    self.tableView.pefrom(updates: updates)     
+            self.tableView.pefrom(updates: updates)     
        }
 }
        
 func handleDidRecieveMessage(_ message: Message) {
-	 newMessage.send(message)      
+     newMessage.send(message)      
     }
 }
 ```
 
-You don't need remove binding manually if you don't want it, when object that you pass as owner in `bind(_ owner: AnyObject...` method deallocates, corresponding bindings will clean. However, if you want to unbind manually, just call `unbind(_ owner: AnyObject)`.
-Bindy have an extension for tableView for performing updates `tableView.perform(updates:...`
+You don't need to remove binding manually if you don't want. When the object that you pass as owner in `bind(_ owner: AnyObject...` method deallocates, corresponding bindings will clean. However, if you want to unbind manually, just call `unbind(_ owner: AnyObject)`.
+Bindy has an extension for tableView for performing updates `tableView.perform(updates:...`
 
-Also, observables has method `observe(_ owner: AnyObject...`, it works like `bind`, but triggers callback immediately, this may be more comfortable in some situations.
+Also, observables have a method `observe(_ owner: AnyObject...`, it works like `bind`, but triggers callback immediately, this may be more comfortable in some situations.
 
 ### Transformations
 
@@ -76,8 +75,8 @@ lazy var speedString = {
 }()
     
 func setupBindings() {
-	speedString.observe(self) { [unowned self] speedString in
-	    // speedString = "20km/h"
+    speedString.observe(self) { [unowned self] speedString in
+        // speedString = "20km/h"
             self.speedLabel.text = speedString
         }
 }
@@ -92,14 +91,14 @@ let firstname = Observable("Maxim")
 let lastname = Observable("Kotliar")
 let age = Observable(24)
 
-lazy var fullname = {
+lazy var fullName = {
         return firstname
             .combined(with: lastname) { "name: \($0) \($1)" }
             .combined(with: age) { "\($0), age: \($1)" }
 }()
 
 func setupBindings() {
-	userInfo.observe(self) { [unowned self] info in
+    userInfo.observe(self) { [unowned self] info in
             // info = "name: Maxim Kotliar, age:24"
             self.userInfoLabel.text = info
         }
@@ -127,37 +126,37 @@ let textField = UITextField()
 let text = textField[\.text] // type will be Observable<String?>
 
 text.observe(self) { newText in
-	print(newText)
+    print(newText)
 }
 ```
 
 ### Old value
 
-For any `Observable` type you can receive old value in closure, just pass two parameters to binding closure, first one will be old value, second one – new value: 
+For any `Observable` type you can receive old value in closure, just pass two parameters to binding closure, first one will be an old value, the second one – new value: 
 
 ```swift
 let observableString = Observable("test")
 
 observableString(self) { oldString, newString in
-	print("String changed from \(oldString) to \(newString)")
+    print("String changed from \(oldString) to \(newString)")
 }
 ```
 
 ### High order functions
 
 Bindy contains some high order functions:
-- `map` - applies on any type, behavior similar to swift map.
+- `map` - applies on any type, behavior similar to a swift map.
 - `flatMap` - applies on Observable with optional type, returns Signal with non-optional type.
-- `compactMap` - applies on Observable with Collection inside, behavior similar to swift version of function.
-- `reduce` - applies on Observable with Collection inside, behavior similar to swift version of function.
-- `filter` - applies on Observable with Collection inside, behavior similar to swift version of function.
+- `compactMap` - applies on Observable with Collection inside, behavior similar to a swift version of the function.
+- `reduce` - applies on Observable with Collection inside, behavior similar to a swift version of the function.
+- `filter` - applies on Observable with Collection inside, behavior similar to a swift version of the function.
 
-[1]:	https://travis-ci.org/MaximKotliar/Bindy
-[2]:	http://cocoapods.org/pods/Bindy
-[3]:	http://cocoapods.org/pods/Bindy
-[4]:	http://cocoapods.org/pods/Bindy
+[1]:    https://travis-ci.org/MaximKotliar/Bindy
+[2]:    http://cocoapods.org/pods/Bindy
+[3]:    http://cocoapods.org/pods/Bindy
+[4]:    http://cocoapods.org/pods/Bindy
 
-[image-1]:	https://img.shields.io/travis/MaximKotliar/Bindy/master.svg?style=flat-square
-[image-2]:	https://img.shields.io/cocoapods/v/Bindy.svg?style=flat-square
-[image-3]:	https://img.shields.io/cocoapods/l/Bindy.svg?style=flat-square
-[image-4]:	https://img.shields.io/cocoapods/p/Bindy.svg?style=flat-square
+[image-1]:    https://img.shields.io/travis/MaximKotliar/Bindy/master.svg?style=flat-square
+[image-2]:    https://img.shields.io/cocoapods/v/Bindy.svg?style=flat-square
+[image-3]:    https://img.shields.io/cocoapods/l/Bindy.svg?style=flat-square
+[image-4]:    https://img.shields.io/cocoapods/p/Bindy.svg?style=flat-square
