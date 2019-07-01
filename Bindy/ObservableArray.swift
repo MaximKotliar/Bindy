@@ -224,7 +224,7 @@ public final class ObservableArray<T: Equatable>: ObservableValueHolder<[T]>, Co
 
 public extension ObservableArray {
 
-    public func transform<U: Equatable>(_ transform: @escaping ([T]) -> U) -> Observable<U> {
+    func transform<U: Equatable>(_ transform: @escaping ([T]) -> U) -> Observable<U> {
         let transformedObserver = Observable<U>(transform(value), options: nil)
         observe(self) { [unowned self] (value) in
             transformedObserver.value = transform(self.value)
@@ -232,7 +232,7 @@ public extension ObservableArray {
         return transformedObserver
     }
 
-    public func transform<U: Equatable>(_ transform: @escaping ([T]) -> [U]) -> ObservableArray<U> {
+    func transform<U: Equatable>(_ transform: @escaping ([T]) -> [U]) -> ObservableArray<U> {
         let transformedObserver = ObservableArray<U>(transform(value))
         observe(self) { [unowned self] (value) in
             transformedObserver.value = transform(self.value)

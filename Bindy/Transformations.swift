@@ -10,7 +10,7 @@ import Foundation
 
 public extension Observable {
 
-    public func debounced(_ delay: TimeInterval) -> Observable<T> {
+    func debounced(_ delay: TimeInterval) -> Observable<T> {
         let debounced = Observable<T>(value, options: options)
         var debounceFunc: ((T) -> Void)?
         bind(debounced) { [weak debounced] value in
@@ -25,7 +25,7 @@ public extension Observable {
         return debounced
     }
 
-    public func throttled(_ delay: TimeInterval) -> Observable<T> {
+    func throttled(_ delay: TimeInterval) -> Observable<T> {
         let throttled = Observable<T>(value, options: options)
         var throttledFunc: ((T) -> Void)?
         bind(throttled) { [weak throttled] value in
@@ -43,7 +43,7 @@ public extension Observable {
 
 public extension Signal {
 
-    public func debounced(_ delay: TimeInterval) -> Signal<T> {
+    func debounced(_ delay: TimeInterval) -> Signal<T> {
         let debounced = Signal<T>()
         var debounceFunc: ((T) -> Void)?
         bind(debounced) { [weak debounced] value in
@@ -58,7 +58,7 @@ public extension Signal {
         return debounced
     }
 
-    public func throttled(_ delay: TimeInterval) -> Signal<T> {
+    func throttled(_ delay: TimeInterval) -> Signal<T> {
         let throttled = Signal<T>()
         var throttledFunc: ((T) -> Void)?
         bind(throttled) { [weak throttled] value in

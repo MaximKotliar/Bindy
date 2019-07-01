@@ -17,7 +17,7 @@ public struct ObservableValueHolderOptionKey: Hashable, ExpressibleByStringLiter
 }
 
 public extension ObservableValueHolderOptionKey {
-    public static let equalityClosure: ObservableValueHolderOptionKey = "equalityClosure"
+    static let equalityClosure: ObservableValueHolderOptionKey = "equalityClosure"
 }
 
 public class ObservableValueHolder<ObservableType>: ObserveCapable<ObservableType> {
@@ -66,7 +66,7 @@ public class ObservableValueHolder<ObservableType>: ObserveCapable<ObservableTyp
 
 public extension ObservableValueHolder {
 
-    public func combined<T, R>(with other: Observable<T>,
+    func combined<T, R>(with other: Observable<T>,
                                equalBy equalityClosure: ((R, R) -> Bool)?,
                              transform: @escaping (ObservableType, T) -> R) -> Observable<R> {
         let combined = transform(self.value, other.value)
@@ -82,12 +82,12 @@ public extension ObservableValueHolder {
         return observable
     }
 
-    public func combined<T, R>(with other: Observable<T>,
+    func combined<T, R>(with other: Observable<T>,
                                transform: @escaping (ObservableType, T) -> R) -> Observable<R> where R: Equatable {
         return combined(with: other, equalBy: ==, transform: transform)
     }
 
-    public func combined<T, R>(with other: ObservableArray<T>,
+    func combined<T, R>(with other: ObservableArray<T>,
                                equalBy equalityClosure: ((R, R) -> Bool)?,
                                transform: @escaping (ObservableType, [T]) -> [R]) -> ObservableArray<R> {
         let combined = transform(self.value, other.value)
@@ -103,7 +103,7 @@ public extension ObservableValueHolder {
         return observable
     }
 
-    public func combined<T, R>(with other: ObservableArray<T>,
+    func combined<T, R>(with other: ObservableArray<T>,
                                transform: @escaping (ObservableType, [T]) -> [R]) -> ObservableArray<R> where R: Equatable {
         return combined(with: other, equalBy: ==, transform: transform)
     }
@@ -111,7 +111,7 @@ public extension ObservableValueHolder {
 
 public extension ObservableArray {
 
-    public func combinedArray<R>(with other: Observable<T>, transform: @escaping ([Element], T) -> R) -> Observable<R> {
+    func combinedArray<R>(with other: Observable<T>, transform: @escaping ([Element], T) -> R) -> Observable<R> {
         let combined = transform(self.value, other.value)
         let observable = Observable(combined, options: options)
         self.bind(observable) { (value) in

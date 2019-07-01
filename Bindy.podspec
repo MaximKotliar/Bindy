@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "Bindy"
-  s.version      = "0.2.3"
+  s.version      = "0.2.4"
   s.summary      = "Simple, lightweight swift bindings."
 
   # This description is used to generate tags and improve search results.
@@ -63,6 +63,7 @@ Pod::Spec.new do |s|
 
   #s.platform     = :ios
   s.platform     = :ios, "9.0"
+  s.watchos.deployment_target = '2.0'
   s.swift_version = "4.2"
 
   #  When using multiple platforms

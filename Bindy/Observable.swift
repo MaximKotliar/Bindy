@@ -51,7 +51,7 @@ extension Observable {
 
 public extension Observable where T: Equatable {
 
-    public convenience init(_ value: T) {
+    convenience init(_ value: T) {
         self.init(value, equalityCheck: ==)
     }
 }
@@ -61,7 +61,7 @@ public protocol ExtendableClass: class {}
 extension NSObject: ExtendableClass {}
 
 public extension ExtendableClass {
-    public func attach<T>(to observable: Observable<T>, callback: @escaping (Self, T) -> Void) {
+    func attach<T>(to observable: Observable<T>, callback: @escaping (Self, T) -> Void) {
         observable.observe(self) { [unowned self] value in
             callback(self, value)
         }

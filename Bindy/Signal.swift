@@ -14,7 +14,7 @@ final public class Signal<T>: ObserveCapable<T> {
 }
 
 public extension Signal where T == Void {
-    public func send() {
+    func send() {
         send(())
     }
 }
