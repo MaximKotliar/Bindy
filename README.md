@@ -137,7 +137,7 @@ For any `Observable` type you can receive old value in closure, just pass two pa
 ```swift
 let observableString = Observable("test")
 
-observableString.binf(self) { oldString, newString in
+observableString.bind(self) { oldString, newString in
     print("String changed from \(oldString) to \(newString)")
 }
 ```
