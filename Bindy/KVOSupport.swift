@@ -14,7 +14,7 @@ extension NSObject: KVOObservable {}
 
 public extension KVOObservable {
 
-    public func observable<Value>(for keyPath: KeyPath<Self, Value>) -> Observable<Value> {
+    func observable<Value>(for keyPath: KeyPath<Self, Value>) -> Observable<Value> {
         let initial = self[keyPath: keyPath]
         let observable = Observable(initial)
         let kvoToken = self.observe(keyPath, options: [.new]) { [unowned observable] _, change in
@@ -28,7 +28,7 @@ public extension KVOObservable {
         return observable
     }
 
-    public subscript <Value>(_ keyPath: KeyPath<Self, Value>) -> Observable<Value> {
+    subscript <Value>(_ keyPath: KeyPath<Self, Value>) -> Observable<Value> {
         return observable(for: keyPath)
     }
 }

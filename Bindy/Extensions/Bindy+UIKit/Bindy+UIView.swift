@@ -5,11 +5,11 @@
 //  Created by Maxim Kotliar on 12/16/17.
 //  Copyright © 2017 Maxim Kotliar. All rights reserved.
 //
-
+#if os(iOS)
 import UIKit
 
 public extension UIView {
-    public var bind: Bindable<UIView> {
+    var bind: Bindable<UIView> {
         return Bindable(base: self)
     }
 }
@@ -25,7 +25,7 @@ public struct Animation {
 }
 
 public extension Property where Parent == UIView {
-    public func bind(to observable: Observable<Type>, with animation: Animation) {
+    func bind(to observable: Observable<Type>, with animation: Animation) {
         observable.observe(parent) { value in
             UIView.animate(withDuration: animation.duration,
                            delay: 0,
@@ -36,7 +36,7 @@ public extension Property where Parent == UIView {
         }
     }
 
-    public func to(_ observable: Observable<Type>, with animation: Animation) {
+    func to(_ observable: Observable<Type>, with animation: Animation) {
         bind(to: observable, with: animation)
     }
 }
@@ -78,3 +78,4 @@ extension Bindable where Base == UIView {
         }
     }
 }
+#endif

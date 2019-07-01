@@ -5,12 +5,12 @@
 //  Created by Maxim Kotliar on 12/16/17.
 //  Copyright © 2017 Maxim Kotliar. All rights reserved.
 //
-
+#if os(iOS)
 import UIKit
 
 public extension UITableView {
 
-    public func perform(updates: [ArrayUpdate],
+    func perform(updates: [ArrayUpdate],
                         in section: Int = 0,
                         insertAnimation: UITableView.RowAnimation = .automatic,
                         deleteAnimation: UITableView.RowAnimation = .automatic,
@@ -36,3 +36,4 @@ public extension UITableView {
         endUpdates()
     }
 }
+#endif
