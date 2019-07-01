@@ -119,7 +119,7 @@ lazy var shouldShowAds = {
 
 ### KVO support
 
-Bindy supports KVO, so you can create `Observable` from any KVC capable property with easy subscript syntax like:
+Bindy supports KVO, so you can create `Observable` from any KVO capable property with easy subscript syntax like:
 
 ```swift
 let textField = UITextField()
@@ -137,7 +137,7 @@ For any `Observable` type you can receive old value in closure, just pass two pa
 ```swift
 let observableString = Observable("test")
 
-observableString(self) { oldString, newString in
+observableString.binf(self) { oldString, newString in
     print("String changed from \(oldString) to \(newString)")
 }
 ```
