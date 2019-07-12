@@ -112,9 +112,7 @@ let isPremiumPurchased = Observable(true)
 let isInTrialPeriodEnded = Observable(false)
 let isAdsShowForced = Observable(false)
 
-lazy var shouldShowAds = {
-        return isAdsShowForced || !isPremiumPurchased && isInTrialPeriodEnded
-}()
+lazy var shouldShowAds = isAdsShowForced || !isPremiumPurchased && isInTrialPeriodEnded
 ```
 
 ### KVO support
