@@ -70,9 +70,7 @@ If you want to receive events with transformed type, you can use `transform` fun
 
 ```swift
 let speed = Observable(20)
-lazy var speedString = {
-        speed.transform { "\($0)km/h" }
-}()
+lazy var speedString = speed.transform { "\($0)km/h" }
     
 func setupBindings() {
     speedString.observe(self) { [unowned self] speedString in
@@ -91,11 +89,9 @@ let firstname = Observable("Maxim")
 let lastname = Observable("Kotliar")
 let age = Observable(24)
 
-lazy var fullName = {
-        return firstname
+lazy var fullName = firstname
             .combined(with: lastname) { "name: \($0) \($1)" }
             .combined(with: age) { "\($0), age: \($1)" }
-}()
 
 func setupBindings() {
     userInfo.observe(self) { [unowned self] info in
