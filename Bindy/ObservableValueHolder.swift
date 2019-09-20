@@ -34,6 +34,15 @@ public class ObservableValueHolder<ObservableType>: ObserveCapable<ObservableTyp
     public subscript<T>(dynamicMember keyPath: KeyPath<ObservableType, T>) -> T {
         return value[keyPath: keyPath]
     }
+
+    public subscript<T>(dynamicMember keyPath: WritableKeyPath<ObservableType, T>) -> T {
+        get {
+            return value[keyPath: keyPath]
+        }
+        set {
+            value[keyPath: keyPath] = newValue
+        }
+    }
 }
 #else
 public class ObservableValueHolder<ObservableType>: ObserveCapable<ObservableType> {

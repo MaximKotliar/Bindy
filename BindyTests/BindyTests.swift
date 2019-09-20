@@ -485,7 +485,7 @@ class BindyTests: XCTestCase {
     func testDynamicMemberLookup() {
         let view = UIView()
         let observable = Observable(view)
-        view.tag = 1
+        observable.tag = 1
         XCTAssert(observable.tag == 1)
     }
     #endif
