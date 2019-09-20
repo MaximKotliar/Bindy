@@ -9,7 +9,7 @@
 import Foundation
 
 public extension Observable {
-
+    
     func debounced(_ delay: TimeInterval) -> Observable<T> {
         let debounced = Observable<T>(value, options: options)
         var debounceFunc: ((T) -> Void)?
@@ -24,7 +24,7 @@ public extension Observable {
         }
         return debounced
     }
-
+    
     func throttled(_ delay: TimeInterval) -> Observable<T> {
         let throttled = Observable<T>(value, options: options)
         var throttledFunc: ((T) -> Void)?
@@ -42,7 +42,7 @@ public extension Observable {
 }
 
 public extension Signal {
-
+    
     func debounced(_ delay: TimeInterval) -> Signal<T> {
         let debounced = Signal<T>()
         var debounceFunc: ((T) -> Void)?
@@ -57,7 +57,7 @@ public extension Signal {
         }
         return debounced
     }
-
+    
     func throttled(_ delay: TimeInterval) -> Signal<T> {
         let throttled = Signal<T>()
         var throttledFunc: ((T) -> Void)?

@@ -9,7 +9,7 @@
 import Foundation
 
 extension Array {
-
+    
     subscript (safe index: Int) -> Element? {
         guard index < self.count else { return nil }
         return self[index]
@@ -17,7 +17,7 @@ extension Array {
 }
 
 extension Range {
-
+    
     @discardableResult
     public func intersect(_ other: Range) -> Range {
         guard upperBound > other.lowerBound else {
@@ -50,15 +50,15 @@ public struct ArrayUpdate {
 }
 
 public final class ObservableArray<T: Equatable>: ObservableValueHolder<[T]>, Collection, MutableCollection, CustomStringConvertible, CustomDebugStringConvertible, ExpressibleByArrayLiteral, RangeReplaceableCollection {
-
+    
     public typealias Element = T
-
+    
     public let updates = Signal<[ArrayUpdate]>()
-
+    
     public init() {
         super.init([], options: nil)
     }
-
+    
     override public var value: [T] {
         didSet {
             guard oldValue != value else { return }
@@ -87,11 +87,11 @@ public final class ObservableArray<T: Equatable>: ObservableValueHolder<[T]>, Co
     public required init(arrayLiteral elements: T...) {
         super.init(elements, options: nil)
     }
-
+    
     public required init(_ value: [T], options: [ObservableValueHolderOptionKey: Any]?) {
         super.init(value, options: options)
     }
-
+    
     // Subscripts
     public subscript(index: Int) -> T {
         get {
@@ -106,7 +106,7 @@ public final class ObservableArray<T: Equatable>: ObservableValueHolder<[T]>, Co
             }
         }
     }
-
+    
     public subscript(bounds: Range<Int>) -> ArraySlice<Element> {
         get {
             return value[bounds]
@@ -118,13 +118,13 @@ public final class ObservableArray<T: Equatable>: ObservableValueHolder<[T]>, Co
                           ArrayUpdate(.delete, Array(bounds.lowerBound..<bounds.upperBound))])
         }
     }
-
+    
     // Insertions
     public func insert(_ newElement: T, at i: Index) {
         value.insert(newElement, at: i)
         updates.send([ArrayUpdate(.insert, [i])])
     }
-
+    
     public func insert<C>(contentsOf newElements: C, at i: Int) where C : Collection, T == C.Element {
         guard !newElements.isEmpty else { return }
         let oldCount = value.count
@@ -132,45 +132,45 @@ public final class ObservableArray<T: Equatable>: ObservableValueHolder<[T]>, Co
         let insertedCount = value.count - oldCount
         updates.send([ArrayUpdate(.insert, Array(i..<i + insertedCount))])
     }
-
+    
     public func append(_ newElement: T) {
         value.append(newElement)
         updates.send([ArrayUpdate(.insert, [value.count - 1])])
     }
-
+    
     public func append<S>(contentsOf newElements: S) where S : Sequence, T == S.Element {
         let end = value.count
         value.append(contentsOf: newElements)
         guard end != value.count else { return }
         updates.send([ArrayUpdate(.insert, Array(end..<value.count))])
     }
-
+    
     // Deletions
     public func removeLast() -> Element {
         let element = value.removeLast()
         updates.send([ArrayUpdate(.delete, [value.count])])
         return element
     }
-
+    
     @discardableResult
     public func remove(at position: Int) -> Element {
         let element = value.remove(at: position)
         updates.send([ArrayUpdate(.delete, [position])])
         return element
     }
-
+    
     public func removeAll(keepingCapacity keepCapacity: Bool) {
         guard !value.isEmpty else { return }
         let oldCount = value.count
         value.removeAll(keepingCapacity: keepCapacity)
         updates.send([ArrayUpdate(.delete, Array(0..<oldCount))])
     }
-
+    
     // Subrange replacements
     public func replaceSubrange<C>(_ subrange: Range<Index>,
                                    with newElements: C) where C: Collection,
         C.Iterator.Element == T {
-
+            
             let oldCount = value.count
             value.replaceSubrange(subrange, with: newElements)
             let first = subrange.lowerBound
@@ -179,11 +179,11 @@ public final class ObservableArray<T: Equatable>: ObservableValueHolder<[T]>, Co
             updates.send([ArrayUpdate(.insert, Array(first..<end)),
                           ArrayUpdate(.delete, Array(subrange.lowerBound..<subrange.upperBound))])
     }
-
+    
     public func replaceAll(with new: [T]) {
         let old = value
         let maxCount = Swift.max(old.count, new.count)
-
+        
         var replacements: [Index] = []
         var insertions: [Index] = []
         var deletions: [Index] = []
@@ -202,7 +202,7 @@ public final class ObservableArray<T: Equatable>: ObservableValueHolder<[T]>, Co
                 break
             }
         }
-
+        
         var updates: [ArrayUpdate] = []
         if !replacements.isEmpty {
             updates.append(ArrayUpdate(.replace, replacements))
@@ -213,9 +213,9 @@ public final class ObservableArray<T: Equatable>: ObservableValueHolder<[T]>, Co
         if !deletions.isEmpty {
             updates.append(ArrayUpdate(.delete, deletions))
         }
-
+        
         value = new
-
+        
         if !updates.isEmpty {
             self.updates.send(updates)
         }
@@ -223,7 +223,7 @@ public final class ObservableArray<T: Equatable>: ObservableValueHolder<[T]>, Co
 }
 
 public extension ObservableArray {
-
+    
     func transform<U: Equatable>(_ transform: @escaping ([T]) -> U) -> Observable<U> {
         let transformedObserver = Observable<U>(transform(value), options: nil)
         observe(self) { [unowned self] (value) in
@@ -231,7 +231,7 @@ public extension ObservableArray {
         }
         return transformedObserver
     }
-
+    
     func transform<U: Equatable>(_ transform: @escaping ([T]) -> [U]) -> ObservableArray<U> {
         let transformedObserver = ObservableArray<U>(transform(value))
         observe(self) { [unowned self] (value) in
