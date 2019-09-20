@@ -20,22 +20,44 @@ public extension ObservableValueHolderOptionKey {
     static let equalityClosure: ObservableValueHolderOptionKey = "equalityClosure"
 }
 
+#if swift(>=5.1)
+@dynamicMemberLookup
 public class ObservableValueHolder<ObservableType>: ObserveCapable<ObservableType> {
-
     open var value: ObservableType
-
     var options: [ObservableValueHolderOptionKey: Any]?
 
+    public required init(_ value: ObservableType, options: [ObservableValueHolderOptionKey: Any]?) {
+        self.value = value
+        self.options = options
+    }
+
+    public subscript<T>(dynamicMember keyPath: KeyPath<ObservableType, T>) -> T {
+        return value[keyPath: keyPath]
+    }
+}
+#else
+public class ObservableValueHolder<ObservableType>: ObserveCapable<ObservableType> {
+    open var value: ObservableType
+    var options: [ObservableValueHolderOptionKey: Any]?
+
+    public required init(_ value: ObservableType, options: [ObservableValueHolderOptionKey: Any]?) {
+        self.value = value
+        self.options = options
+    }
+}
+#endif
+
+public extension ObservableValueHolder {
     @discardableResult
-    public func observe(_ owner: AnyObject,
-                        callback: @escaping (ObservableType) -> Void) -> Self {
+    func observe(_ owner: AnyObject,
+                 callback: @escaping (ObservableType) -> Void) -> Self {
         callback(value)
         return bind(owner, callback: callback)
     }
 
     @discardableResult
-    public func bind(_ owner: AnyObject,
-                     callback: @escaping (ObservableType, ObservableType) -> Void) -> Self {
+    func bind(_ owner: AnyObject,
+              callback: @escaping (ObservableType, ObservableType) -> Void) -> Self {
         let bind = bindings.object(forKey: owner) ?? Binding()
         bind.oldValueNewValueActions.append(callback)
         bindings.setObject(bind, forKey: owner)
@@ -43,8 +65,8 @@ public class ObservableValueHolder<ObservableType>: ObserveCapable<ObservableTyp
     }
 
     @discardableResult
-    public func bindToOldValue(_ owner: AnyObject,
-                     callback: @escaping (ObservableType) -> Void) -> Self {
+    func bindToOldValue(_ owner: AnyObject,
+                        callback: @escaping (ObservableType) -> Void) -> Self {
         let bind = bindings.object(forKey: owner) ?? Binding()
         bind.oldValueActions.append(callback)
         bindings.setObject(bind, forKey: owner)
@@ -52,23 +74,18 @@ public class ObservableValueHolder<ObservableType>: ObserveCapable<ObservableTyp
     }
 
     @discardableResult
-    public func observe(_ owner: AnyObject,
-                        callback: @escaping (ObservableType, ObservableType) -> Void) -> Self {
+    func observe(_ owner: AnyObject,
+                 callback: @escaping (ObservableType, ObservableType) -> Void) -> Self {
         callback(value, value)
         return bind(owner, callback: callback)
-    }
-
-    public required init(_ value: ObservableType, options: [ObservableValueHolderOptionKey: Any]?) {
-        self.value = value
-        self.options = options
     }
 }
 
 public extension ObservableValueHolder {
 
     func combined<T, R>(with other: Observable<T>,
-                               equalBy equalityClosure: ((R, R) -> Bool)?,
-                             transform: @escaping (ObservableType, T) -> R) -> Observable<R> {
+                        equalBy equalityClosure: ((R, R) -> Bool)?,
+                        transform: @escaping (ObservableType, T) -> R) -> Observable<R> {
         let combined = transform(self.value, other.value)
         var options = self.options ?? [:]
         options[.equalityClosure] = equalityClosure
@@ -83,13 +100,13 @@ public extension ObservableValueHolder {
     }
 
     func combined<T, R>(with other: Observable<T>,
-                               transform: @escaping (ObservableType, T) -> R) -> Observable<R> where R: Equatable {
+                        transform: @escaping (ObservableType, T) -> R) -> Observable<R> where R: Equatable {
         return combined(with: other, equalBy: ==, transform: transform)
     }
 
     func combined<T, R>(with other: ObservableArray<T>,
-                               equalBy equalityClosure: ((R, R) -> Bool)?,
-                               transform: @escaping (ObservableType, [T]) -> [R]) -> ObservableArray<R> {
+                        equalBy equalityClosure: ((R, R) -> Bool)?,
+                        transform: @escaping (ObservableType, [T]) -> [R]) -> ObservableArray<R> {
         let combined = transform(self.value, other.value)
         var options = self.options ?? [:]
         options[.equalityClosure] = equalityClosure
@@ -104,7 +121,7 @@ public extension ObservableValueHolder {
     }
 
     func combined<T, R>(with other: ObservableArray<T>,
-                               transform: @escaping (ObservableType, [T]) -> [R]) -> ObservableArray<R> where R: Equatable {
+                        transform: @escaping (ObservableType, [T]) -> [R]) -> ObservableArray<R> where R: Equatable {
         return combined(with: other, equalBy: ==, transform: transform)
     }
 }

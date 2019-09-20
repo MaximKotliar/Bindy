@@ -480,4 +480,13 @@ class BindyTests: XCTestCase {
         string.value = NonEquatable(test: "")
         waitForExpectations(timeout: 1, handler: nil)
     }
+
+    #if swift(>=5.1)
+    func testDynamicMemberLookup() {
+        let view = UIView()
+        let observable = Observable(view)
+        view.tag = 1
+        XCTAssert(observable.tag == 1)
+    }
+    #endif
 }
