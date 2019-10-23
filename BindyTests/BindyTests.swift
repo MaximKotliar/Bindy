@@ -488,5 +488,18 @@ class BindyTests: XCTestCase {
         observable.tag = 1
         XCTAssert(observable.tag == 1)
     }
+
+    @Observable var propertyWrappedObservable = 0
+
+    func testObservablePropertyWrapper() {
+        let asyncExpectation = expectation(description: "Expect to call")
+        $propertyWrappedObservable.bind(self) { tag in
+            XCTAssert(tag == 1)
+            asyncExpectation.fulfill()
+        }
+        propertyWrappedObservable = 1
+        XCTAssert(propertyWrappedObservable == 1)
+        waitForExpectations(timeout: 1, handler: nil)
+    }
     #endif
 }

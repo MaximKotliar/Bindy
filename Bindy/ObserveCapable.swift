@@ -26,9 +26,14 @@ public class ObserveCapable<ObservableType> {
 
     internal var bindings = NSMapTable<AnyObject, Binding>.weakToStrongObjects()
 
+    public init() {}
+}
+
+public extension ObserveCapable {
+
     @discardableResult
-    public func bind(_ owner: AnyObject,
-                     callback: @escaping (ObservableType) -> Void) -> Self {
+    func bind(_ owner: AnyObject,
+              callback: @escaping (ObservableType) -> Void) -> Self {
         let bind = bindings.object(forKey: owner) ?? Binding()
         bind.newValueActions.append(callback)
         bindings.setObject(bind, forKey: owner)
@@ -36,12 +41,14 @@ public class ObserveCapable<ObservableType> {
     }
 
     @discardableResult
-    public func unbind(_ owner: AnyObject) -> Bool {
+    func unbind(_ owner: AnyObject) -> Bool {
         let hasBinding = bindings.object(forKey: owner) != nil
         bindings.removeObject(forKey: owner)
         return hasBinding
     }
+}
 
+internal extension ObserveCapable {
     func fireBindings(with change: BindingsContainer<ObservableType>.Change) {
         guard let enumerator = self.bindings.objectEnumerator() else { return }
         switch change {
@@ -64,8 +71,6 @@ public class ObserveCapable<ObservableType> {
             }
         }
     }
-
-    public init() {}
 }
 
 extension ObserveCapable: Equatable {
