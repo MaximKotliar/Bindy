@@ -8,6 +8,47 @@
 
 import Foundation
 
+#if swift(>=5.1)
+@propertyWrapper
+public final class Observable<T>: ObservableValueHolder<T> {
+
+    let equalityClosure: ((T, T) -> Bool)?
+
+    public override var value: T {
+        didSet {
+            let isEqual = equalityClosure?(oldValue, value) ?? false
+            guard !isEqual else { return }
+            fireBindings(with: .oldValueNewValue(oldValue, value))
+        }
+    }
+
+    public required init(_ value: T, options: [ObservableValueHolderOptionKey: Any]? = nil) {
+        self.equalityClosure = options.flatMap { $0[.equalityClosure] as? (T, T) -> Bool }
+        super.init(value, options: options)
+    }
+
+    public convenience init(_ value: T, equalityCheck: ((T, T) -> Bool)?) {
+        self.init(value, options: equalityCheck.flatMap { [.equalityClosure: $0] } )
+    }
+
+    public convenience init(wrappedValue: T) {
+        self.init(wrappedValue)
+    }
+
+    public var wrappedValue: T {
+        get {
+            return value
+        }
+        set {
+            value = newValue
+        }
+    }
+
+    public var projectedValue: Observable<T> {
+          return self
+    }
+}
+#else
 public final class Observable<T>: ObservableValueHolder<T> {
 
     let equalityClosure: ((T, T) -> Bool)?
@@ -29,6 +70,7 @@ public final class Observable<T>: ObservableValueHolder<T> {
         self.init(value, options: equalityCheck.flatMap { [.equalityClosure: $0] } )
     }
 }
+#endif
 
 extension Observable {
 
@@ -67,4 +109,3 @@ public extension ExtendableClass {
         }
     }
 }
-
