@@ -502,4 +502,17 @@ class BindyTests: XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
     #endif
+
+    func testTransformedObserverChain() {
+        let view = UIView()
+        let transformed = view[\.tag].map { $0 + $0 }
+        let asyncExpectation = expectation(description: "Expect to call")
+        transformed.bind(self) { tag in
+            XCTAssert(tag == 4)
+            asyncExpectation.fulfill()
+        }
+        view.tag = 2
+        waitForExpectations(timeout: 1, handler: nil)
+    }
 }
+

@@ -22,6 +22,7 @@
 		19765A8B1FA7DE0700F9FCB8 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19765A8A1FA7DE0700F9FCB8 /* Observable.swift */; };
 		19765A901FA7DE5D00F9FCB8 /* ObservableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19765A8F1FA7DE5D00F9FCB8 /* ObservableArray.swift */; };
 		1986FAEC218C50D300A3E175 /* Transformations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1986FAEB218C50D300A3E175 /* Transformations.swift */; };
+		199E9F5C236B1ADF00CF435C /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199E9F5B236B1ADF00CF435C /* Helpers.swift */; };
 		19A231D122230116006D5382 /* HighOrderFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A231D022230116006D5382 /* HighOrderFunctions.swift */; };
 		19D44FBD20065689009233EE /* Invertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D44FBC20065689009233EE /* Invertable.swift */; };
 		B7D6D1A9715E162B745B9E65 /* Pods_Bindy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4E8B34FBAD50D3443F6EB5C /* Pods_Bindy.framework */; };
@@ -57,6 +58,7 @@
 		19765A8A1FA7DE0700F9FCB8 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		19765A8F1FA7DE5D00F9FCB8 /* ObservableArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableArray.swift; sourceTree = "<group>"; };
 		1986FAEB218C50D300A3E175 /* Transformations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transformations.swift; sourceTree = "<group>"; };
+		199E9F5B236B1ADF00CF435C /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		19A231D022230116006D5382 /* HighOrderFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighOrderFunctions.swift; sourceTree = "<group>"; };
 		19D44FBC20065689009233EE /* Invertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invertable.swift; sourceTree = "<group>"; };
 		5CDDEB36833C1C3411D475FF /* Pods-Bindy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bindy.release.xcconfig"; path = "Pods/Target Support Files/Pods-Bindy/Pods-Bindy.release.xcconfig"; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				1969D9F31FA7DC8600AA6FDB /* Bindy.h */,
 				1969D9F41FA7DC8600AA6FDB /* Info.plist */,
 				19765A8A1FA7DE0700F9FCB8 /* Observable.swift */,
+				199E9F5B236B1ADF00CF435C /* Helpers.swift */,
 				19765A8F1FA7DE5D00F9FCB8 /* ObservableArray.swift */,
 				1902B5991FA8479D001CC0BC /* Signal.swift */,
 				1935BD97221FB2C600A9585B /* KVOSupport.swift */,
@@ -332,6 +335,7 @@
 				19A231D122230116006D5382 /* HighOrderFunctions.swift in Sources */,
 				19765A8B1FA7DE0700F9FCB8 /* Observable.swift in Sources */,
 				1986FAEC218C50D300A3E175 /* Transformations.swift in Sources */,
+				199E9F5C236B1ADF00CF435C /* Helpers.swift in Sources */,
 				19D44FBD20065689009233EE /* Invertable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

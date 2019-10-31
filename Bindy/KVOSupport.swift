@@ -23,7 +23,7 @@ public extension KVOObservable {
         }
         // Empty binding for retain kvoToken
         observable.bind(observable) { _ in
-            let _ = kvoToken
+            Bindy.retain(kvoToken)
         }
         return observable
     }

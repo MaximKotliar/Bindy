@@ -76,8 +76,9 @@ extension Observable {
 
     public func transform<U>(_ transform: @escaping (T) -> U, options: [ObservableValueHolderOptionKey: Any]? = nil) -> Observable<U> {
         let transformedObserver = Observable<U>(transform(value), options: options)
-        observe(self) { [unowned self] (value) in
-            transformedObserver.value = transform(self.value)
+        observe(transformedObserver) { [unowned transformedObserver] value in
+            retain(self)
+            transformedObserver.value = transform(value)
         }
         return transformedObserver
     }
