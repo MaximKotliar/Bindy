@@ -21,6 +21,7 @@
 		197568492091AD2A005DA318 /* DSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197568482091AD2A005DA318 /* DSL.swift */; };
 		19765A8B1FA7DE0700F9FCB8 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19765A8A1FA7DE0700F9FCB8 /* Observable.swift */; };
 		19765A901FA7DE5D00F9FCB8 /* ObservableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19765A8F1FA7DE5D00F9FCB8 /* ObservableArray.swift */; };
+		19862CD9241916D800AF49F0 /* DispatchQueueExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19862CD8241916D800AF49F0 /* DispatchQueueExtensions.swift */; };
 		1986FAEC218C50D300A3E175 /* Transformations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1986FAEB218C50D300A3E175 /* Transformations.swift */; };
 		199E9F5C236B1ADF00CF435C /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199E9F5B236B1ADF00CF435C /* Helpers.swift */; };
 		19A231D122230116006D5382 /* HighOrderFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A231D022230116006D5382 /* HighOrderFunctions.swift */; };
@@ -57,6 +58,7 @@
 		197568482091AD2A005DA318 /* DSL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSL.swift; sourceTree = "<group>"; };
 		19765A8A1FA7DE0700F9FCB8 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		19765A8F1FA7DE5D00F9FCB8 /* ObservableArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableArray.swift; sourceTree = "<group>"; };
+		19862CD8241916D800AF49F0 /* DispatchQueueExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueueExtensions.swift; sourceTree = "<group>"; };
 		1986FAEB218C50D300A3E175 /* Transformations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transformations.swift; sourceTree = "<group>"; };
 		199E9F5B236B1ADF00CF435C /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		19A231D022230116006D5382 /* HighOrderFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighOrderFunctions.swift; sourceTree = "<group>"; };
@@ -146,9 +148,18 @@
 			path = Bindy;
 			sourceTree = "<group>";
 		};
+		19862CD7241916C600AF49F0 /* Dispatch */ = {
+			isa = PBXGroup;
+			children = (
+				19862CD8241916D800AF49F0 /* DispatchQueueExtensions.swift */,
+			);
+			path = Dispatch;
+			sourceTree = "<group>";
+		};
 		199A43742099F8D000EA165F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				19862CD7241916C600AF49F0 /* Dispatch */,
 				199A43762099F91B00EA165F /* Bindy+UIKit */,
 				19D44FBC20065689009233EE /* Invertable.swift */,
 			);
@@ -335,6 +346,7 @@
 				19A231D122230116006D5382 /* HighOrderFunctions.swift in Sources */,
 				19765A8B1FA7DE0700F9FCB8 /* Observable.swift in Sources */,
 				1986FAEC218C50D300A3E175 /* Transformations.swift in Sources */,
+				19862CD9241916D800AF49F0 /* DispatchQueueExtensions.swift in Sources */,
 				199E9F5C236B1ADF00CF435C /* Helpers.swift in Sources */,
 				19D44FBD20065689009233EE /* Invertable.swift in Sources */,
 			);
@@ -511,6 +523,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 0.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "MaximKotliar.-Bindy";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -535,6 +548,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 0.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "MaximKotliar.-Bindy";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;

@@ -10,13 +10,13 @@ import Foundation
 
 public extension Observable {
     
-    func debounced(_ delay: TimeInterval) -> Observable<T> {
+    func debounced(_ delay: TimeInterval, queue: DispatchQueue = .main, edge: DebounceEdge = .trailing) -> Observable<T> {
         let debounced = Observable<T>(value, options: options)
         var debounceFunc: ((T) -> Void)?
         bind(debounced) { [weak debounced] value in
             guard let debounced = debounced else { return }
             if debounceFunc == nil {
-                debounceFunc = debounce(delay: delay) {
+                debounceFunc = debounce(delay: delay, edge: edge, queue: queue) {
                     debounced.value = $0
                 }
             }
@@ -25,13 +25,13 @@ public extension Observable {
         return debounced
     }
     
-    func throttled(_ delay: TimeInterval) -> Observable<T> {
+    func throttled(_ delay: TimeInterval, queue: DispatchQueue = .main) -> Observable<T> {
         let throttled = Observable<T>(value, options: options)
         var throttledFunc: ((T) -> Void)?
         bind(throttled) { [weak throttled] value in
             guard let throttled = throttled else { return }
             if throttledFunc == nil {
-                throttledFunc = throttle(delay: delay) {
+                throttledFunc = throttle(delay: delay, queue: queue) {
                     throttled.value = $0
                 }
             }
@@ -43,13 +43,13 @@ public extension Observable {
 
 public extension Signal {
     
-    func debounced(_ delay: TimeInterval) -> Signal<T> {
+    func debounced(_ delay: TimeInterval, queue: DispatchQueue = .main, edge: DebounceEdge = .trailing) -> Signal<T> {
         let debounced = Signal<T>()
         var debounceFunc: ((T) -> Void)?
         bind(debounced) { [weak debounced] value in
             guard let debounced = debounced else { return }
             if debounceFunc == nil {
-                debounceFunc = debounce(delay: delay) {
+                debounceFunc = debounce(delay: delay, edge: edge, queue: queue) {
                     debounced.send($0)
                 }
             }
@@ -58,13 +58,13 @@ public extension Signal {
         return debounced
     }
     
-    func throttled(_ delay: TimeInterval) -> Signal<T> {
+    func throttled(_ delay: TimeInterval, queue: DispatchQueue) -> Signal<T> {
         let throttled = Signal<T>()
         var throttledFunc: ((T) -> Void)?
         bind(throttled) { [weak throttled] value in
             guard let throttled = throttled else { return }
             if throttledFunc == nil {
-                throttledFunc = throttle(delay: delay) {
+                throttledFunc = throttle(delay: delay, queue: queue) {
                     throttled.send($0)
                 }
             }
@@ -74,16 +74,32 @@ public extension Signal {
     }
 }
 
-private func debounce<T>(delay: TimeInterval, queue: DispatchQueue = .main, action: @escaping ((T) -> Void)) -> (T) -> Void {
-    var currentWorkItem: DispatchWorkItem?
-    return { (p: T) in
-        currentWorkItem?.cancel()
-        currentWorkItem = DispatchWorkItem { action(p) }
-        queue.asyncAfter(deadline: .now() + .milliseconds(Int(delay * 1000)), execute: currentWorkItem!)
+public enum DebounceEdge {
+    case leading
+    case trailing
+}
+
+private func debounce<T>(delay: TimeInterval, edge: DebounceEdge, queue: DispatchQueue, action: @escaping ((T) -> Void)) -> (T) -> Void {
+    switch edge {
+    case .leading:
+        var isLocked = false
+        return { (p: T) in
+            guard !isLocked else { return }
+            isLocked = true
+            queue.syncIfCurrentElseAsync { action(p) }
+            queue.asyncAfter(deadline: .now() + .milliseconds(Int(delay * 1000))) { isLocked = false }
+        }
+    case .trailing:
+        var currentWorkItem: DispatchWorkItem?
+        return { (p: T) in
+            currentWorkItem?.cancel()
+            currentWorkItem = DispatchWorkItem { action(p) }
+            queue.asyncAfter(deadline: .now() + .milliseconds(Int(delay * 1000)), execute: currentWorkItem!)
+        }
     }
 }
 
-private func throttle<T>(delay: TimeInterval, queue: DispatchQueue = .main, action: @escaping ((T) -> Void)) -> (T) -> Void {
+private func throttle<T>(delay: TimeInterval, queue: DispatchQueue, action: @escaping ((T) -> Void)) -> (T) -> Void {
     var currentWorkItem: DispatchWorkItem?
     var lastFire: TimeInterval = 0
     return { (p: T) in

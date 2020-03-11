@@ -514,5 +514,38 @@ class BindyTests: XCTestCase {
         view.tag = 2
         waitForExpectations(timeout: 1, handler: nil)
     }
+
+    func testLeadingDebounce() {
+        let val = Observable(0)
+        let debounced = val.debounced(3, edge: .leading)
+        let asyncExpectation = expectation(description: "Expect to call")
+        debounced.bind(self) { val in
+            if val == 1 {
+                asyncExpectation.fulfill()
+            } else {
+                XCTFail("debounced allowed passage of second event, but shouldn't")
+            }
+        }
+        val.value = 1
+        val.value = 2
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+
+    func testTrailingDebounce() {
+        let val = Observable(0)
+        let debounced = val.debounced(1, edge: .trailing)
+        let asyncExpectation = expectation(description: "Expect to call")
+        debounced.bind(self) { val in
+            if val == 1 {
+                XCTFail("First change shouldn't trigger binding")
+            }
+            if val == 2 {
+                asyncExpectation.fulfill()
+            }
+        }
+        val.value = 1
+        val.value = 2
+        waitForExpectations(timeout: 1, handler: nil)
+    }
 }
 
