@@ -547,5 +547,28 @@ class BindyTests: XCTestCase {
         val.value = 2
         waitForExpectations(timeout: 1, handler: nil)
     }
+
+    func testObserveSingleEvent() {
+        let value = Observable(0)
+        let asyncExpectation = expectation(description: "Expect to call")
+        let token = value.observeSingleEvent(matching: { (1...5).contains($0) }) { value in
+            print("call \(value)")
+            if value == 1 {
+                asyncExpectation.fulfill()
+            } else if value == 10 {
+                XCTFail("Condition not works")
+            } else {
+                XCTFail("Second change shouldn't trigger binding")
+            }
+        }
+        value.value = 10
+        value.value = 1
+        value.value = 2
+        DispatchQueue.main.async { [weak token] in
+            XCTAssert(token == nil)
+        }
+
+        waitForExpectations(timeout: 1, handler: nil)
+    }
 }
 

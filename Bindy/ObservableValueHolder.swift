@@ -88,6 +88,24 @@ public extension ObservableValueHolder {
         callback(value, value)
         return bind(owner, callback: callback)
     }
+
+
+    @discardableResult
+    func observeSingleEvent(matching condition: @escaping (ObservableType) -> Bool = { _ in true },
+                            callback: @escaping (ObservableType) -> Void) -> AnyObject {
+        let token = NSObject()
+        let unbind = { [weak self, weak token] in
+            guard let self = self, let token = token else { return }
+            self.unbind(token)
+        }
+        observe(token) { value in
+            retain(token)
+            guard condition(value) else { return }
+            unbind()
+            callback(value)
+        }
+        return token
+    }
 }
 
 public extension ObservableValueHolder {
@@ -108,8 +126,8 @@ public extension ObservableValueHolder {
         return observable
     }
 
-    func combined<T, R>(with other: Observable<T>,
-                        transform: @escaping (ObservableType, T) -> R) -> Observable<R> where R: Equatable {
+    func combined<T, R: Equatable>(with other: Observable<T>,
+                        transform: @escaping (ObservableType, T) -> R) -> Observable<R> {
         return combined(with: other, equalBy: ==, transform: transform)
     }
 
