@@ -8,70 +8,11 @@ class TestListener: NSObject {
 
 final class BindyTests: XCTestCase {
 
-    var observable: Observable<String>?
+    var testObservableListener: TestListener?
     var kvoObservable: Observable<CGRect>?
     var optionalObservable: Observable<String?>?
     var observableArray: ObservableArray<String>?
     var signal: Signal<String>?
-
-    func testObservable() {
-        let old = "Test"
-        let new = "Test_New"
-        let bindCallExpectation = expectation(description: "bind did call")
-        observable = Observable(old)
-        observable?.bind(self) { (newValue) in
-            guard newValue == new else { return }
-            bindCallExpectation.fulfill()
-        }
-        observable?.value = new
-        waitForExpectations(timeout: 1, handler: nil)
-    }
-
-    var testObservableListener: TestListener?
-    func testObservableCleanup() {
-        testObservableListener = TestListener()
-        observable = Observable("testString")
-
-        let bindNotCallExpectation = expectation(description: "bind did not call")
-        bindNotCallExpectation.isInverted = true
-
-        observable!.bind(testObservableListener!) { newValue in
-            self.testObservableListener!.tag = 3
-            bindNotCallExpectation.fulfill()
-        }
-        // Force listener to release
-        testObservableListener = nil
-        // Perform change
-        observable?.value = "testObservableCleanup"
-        waitForExpectations(timeout: 1, handler: nil)
-    }
-
-    func testOptionalObservable() {
-        let old = "Test"
-        let new: String? = nil
-        let asyncExpectation = expectation(description: "")
-        optionalObservable = Observable(old)
-        optionalObservable?.bind(self, callback: { (newValue) in
-            guard newValue == new else { return }
-            asyncExpectation.fulfill()
-        })
-        optionalObservable?.value = new
-        waitForExpectations(timeout: 1, handler: nil)
-    }
-
-    func testObservableArray() {
-        let old = ["Test"]
-        let new = ["Test", "1", "2", "3", "4"]
-        let newValueExpectation = expectation(description: "newValue")
-        observableArray = ObservableArray(old)
-        observableArray?.bind(self, callback: { (newValue) in
-            if newValue == new {
-                newValueExpectation.fulfill()
-            }
-        })
-        observableArray?.append(contentsOf: ["1", "2", "3", "4"])
-        waitForExpectations(timeout: 1, handler: nil)
-    }
     
     func testSignal() {
         let testSignal = "Test"
@@ -207,47 +148,6 @@ final class BindyTests: XCTestCase {
         intValue.value = 420
         XCTAssert(stringValue.value != "20")
         waitForExpectations(timeout: 1, handler: nil)
-    }
-
-    func testUIViewIsHidden() {
-        let isHidden = Observable(false)
-        var view: UIView? = UIView()
-        view?.bind.isHidden.to(isHidden)
-        isHidden.value = true
-        XCTAssert(view?.isHidden == true)
-        isHidden.value = false
-        XCTAssert(view?.isHidden == false)
-        isHidden.value = true
-        XCTAssert(view?.isHidden == true)
-        isHidden.unbind(view!)
-        view?.bind.isHidden.to(isHidden, inverted: true)
-        isHidden.value = false
-        XCTAssert(view?.isHidden == true)
-        view = nil
-        isHidden.value = false
-    }
-
-    func testUIViewIsUserInteractionEnabled() {
-        let isUserInteractionEnabled = Observable(false)
-        var view: UIView? = UIView()
-        view?.bind.isUserInteractionEnabled.to(isUserInteractionEnabled)
-        isUserInteractionEnabled.value = true
-        XCTAssert(view?.isUserInteractionEnabled == true)
-        isUserInteractionEnabled.value = false
-        XCTAssert(view?.isUserInteractionEnabled == false)
-        isUserInteractionEnabled.value = true
-        XCTAssert(view?.isUserInteractionEnabled == true)
-        view = nil
-        isUserInteractionEnabled.value = false
-    }
-
-    func testUIViewAlpha() {
-        let view = UIView()
-        let alpha = Observable<CGFloat>(0)
-        view.bind.alpha.to(alpha)
-        XCTAssert(view.alpha == alpha.value)
-        alpha.value = 0.5
-        XCTAssert(view.alpha == alpha.value)
     }
 
     func testBoolCombine() {
@@ -564,21 +464,13 @@ final class BindyTests: XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
 
-
     static var allTests = [
-        ("testObservable", testObservable),
-        ("testObservableCleanup", testObservableCleanup),
-        ("testOptionalObservable", testOptionalObservable),
-        ("testObservableArray", testObservableArray),
         ("testSignal", testSignal),
         ("testArrayUpdates", testArrayUpdates),
         ("testCombination", testCombination),
         ("testArrayCombination", testArrayCombination),
         ("testTransform", testTransform),
         ("testTransformCleanup", testTransformCleanup),
-        ("testUIViewIsHidden", testUIViewIsHidden),
-        ("testUIViewIsUserInteractionEnabled", testUIViewIsUserInteractionEnabled),
-        ("testUIViewAlpha", testUIViewAlpha),
         ("testBoolCombine", testBoolCombine),
         ("testEquatableCallsReduce", testEquatableCallsReduce),
         ("testOptionalEquatableCallsReduce", testOptionalEquatableCallsReduce),
