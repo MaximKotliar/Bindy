@@ -7,7 +7,7 @@ class TestListener: NSObject {
 }
 
 final class BindyTests: XCTestCase {
-    
+
     var observable: Observable<String>?
     var kvoObservable: Observable<CGRect>?
     var optionalObservable: Observable<String?>?
