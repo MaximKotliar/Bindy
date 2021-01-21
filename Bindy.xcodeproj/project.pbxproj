@@ -7,25 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1902B59A1FA8479D001CC0BC /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1902B5991FA8479D001CC0BC /* Signal.swift */; };
-		1902B5A21FA84AE3001CC0BC /* BindyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1902B5A11FA84AE3001CC0BC /* BindyTests.swift */; };
+		1128702125B9D71600E64D0D /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128700B25B9D71500E64D0D /* Observable.swift */; };
+		1128702225B9D71600E64D0D /* ObservableValueHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128700C25B9D71500E64D0D /* ObservableValueHolder.swift */; };
+		1128702325B9D71600E64D0D /* HighOrderFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128700D25B9D71500E64D0D /* HighOrderFunctions.swift */; };
+		1128702425B9D71600E64D0D /* KVOSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128700E25B9D71500E64D0D /* KVOSupport.swift */; };
+		1128702525B9D71600E64D0D /* ObservableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128700F25B9D71500E64D0D /* ObservableArray.swift */; };
+		1128702625B9D71600E64D0D /* ObserveCapable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128701025B9D71500E64D0D /* ObserveCapable.swift */; };
+		1128702725B9D71600E64D0D /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128701225B9D71500E64D0D /* Property.swift */; };
+		1128702825B9D71600E64D0D /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128701325B9D71500E64D0D /* Bindable.swift */; };
+		1128702925B9D71600E64D0D /* DSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128701425B9D71500E64D0D /* DSL.swift */; };
+		1128702B25B9D71600E64D0D /* Invertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128701725B9D71500E64D0D /* Invertable.swift */; };
+		1128702C25B9D71600E64D0D /* DispatchQueueExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128701925B9D71500E64D0D /* DispatchQueueExtensions.swift */; };
+		1128702D25B9D71600E64D0D /* Bindy+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128701B25B9D71500E64D0D /* Bindy+UITableView.swift */; };
+		1128702E25B9D71600E64D0D /* Bindy+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128701C25B9D71500E64D0D /* Bindy+UIView.swift */; };
+		1128702F25B9D71600E64D0D /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128701D25B9D71600E64D0D /* Helpers.swift */; };
+		1128703025B9D71600E64D0D /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128701E25B9D71600E64D0D /* Signal.swift */; };
+		1128703225B9D71600E64D0D /* Transformations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128702025B9D71600E64D0D /* Transformations.swift */; };
+		1128705925B9DE5E00E64D0D /* XCTestManifests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128705725B9DE5E00E64D0D /* XCTestManifests.swift */; };
+		1128705A25B9DE5E00E64D0D /* BindyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128705825B9DE5E00E64D0D /* BindyTests.swift */; };
+		1128706425B9E4D700E64D0D /* ObservableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128706225B9E4D700E64D0D /* ObservableTests.swift */; };
+		1128706525B9E4D700E64D0D /* UIObservationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128706325B9E4D700E64D0D /* UIObservationsTests.swift */; };
+		1128706C25B9F1DE00E64D0D /* TransformationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128706A25B9F1DE00E64D0D /* TransformationsTests.swift */; };
+		1128706D25B9F1DE00E64D0D /* CombinationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128706B25B9F1DE00E64D0D /* CombinationsTests.swift */; };
 		1902B5A41FA84AE3001CC0BC /* Bindy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1969D9F01FA7DC8600AA6FDB /* Bindy.framework */; };
-		1935BD98221FB2C600A9585B /* KVOSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1935BD97221FB2C600A9585B /* KVOSupport.swift */; };
-		1936A70B1FE6E220004CA64B /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1936A70A1FE6E220004CA64B /* Bindable.swift */; };
-		1936A70D1FE6E677004CA64B /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1936A70C1FE6E677004CA64B /* Property.swift */; };
-		19488F5E1FB0F8D80004E606 /* ObserveCapable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19488F5D1FB0F8D80004E606 /* ObserveCapable.swift */; };
-		19488F601FB1099B0004E606 /* ObservableValueHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19488F5F1FB1099B0004E606 /* ObservableValueHolder.swift */; };
-		194C1EDF1FE53A4B0009D1D0 /* Bindy+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194C1EDE1FE53A4B0009D1D0 /* Bindy+UITableView.swift */; };
-		194C1EE11FE53A720009D1D0 /* Bindy+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194C1EE01FE53A720009D1D0 /* Bindy+UIView.swift */; };
-		1969D9F51FA7DC8600AA6FDB /* Bindy.h in Headers */ = {isa = PBXBuildFile; fileRef = 1969D9F31FA7DC8600AA6FDB /* Bindy.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		197568492091AD2A005DA318 /* DSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197568482091AD2A005DA318 /* DSL.swift */; };
-		19765A8B1FA7DE0700F9FCB8 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19765A8A1FA7DE0700F9FCB8 /* Observable.swift */; };
-		19765A901FA7DE5D00F9FCB8 /* ObservableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19765A8F1FA7DE5D00F9FCB8 /* ObservableArray.swift */; };
-		19862CD9241916D800AF49F0 /* DispatchQueueExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19862CD8241916D800AF49F0 /* DispatchQueueExtensions.swift */; };
-		1986FAEC218C50D300A3E175 /* Transformations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1986FAEB218C50D300A3E175 /* Transformations.swift */; };
-		199E9F5C236B1ADF00CF435C /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199E9F5B236B1ADF00CF435C /* Helpers.swift */; };
-		19A231D122230116006D5382 /* HighOrderFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A231D022230116006D5382 /* HighOrderFunctions.swift */; };
-		19D44FBD20065689009233EE /* Invertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D44FBC20065689009233EE /* Invertable.swift */; };
 		B7D6D1A9715E162B745B9E65 /* Pods_Bindy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4E8B34FBAD50D3443F6EB5C /* Pods_Bindy.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,29 +44,34 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1902B5991FA8479D001CC0BC /* Signal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signal.swift; sourceTree = "<group>"; };
+		1128700B25B9D71500E64D0D /* Observable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		1128700C25B9D71500E64D0D /* ObservableValueHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableValueHolder.swift; sourceTree = "<group>"; };
+		1128700D25B9D71500E64D0D /* HighOrderFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighOrderFunctions.swift; sourceTree = "<group>"; };
+		1128700E25B9D71500E64D0D /* KVOSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KVOSupport.swift; sourceTree = "<group>"; };
+		1128700F25B9D71500E64D0D /* ObservableArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableArray.swift; sourceTree = "<group>"; };
+		1128701025B9D71500E64D0D /* ObserveCapable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObserveCapable.swift; sourceTree = "<group>"; };
+		1128701225B9D71500E64D0D /* Property.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
+		1128701325B9D71500E64D0D /* Bindable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
+		1128701425B9D71500E64D0D /* DSL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DSL.swift; sourceTree = "<group>"; };
+		1128701525B9D71500E64D0D /* Bindy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bindy.h; sourceTree = "<group>"; };
+		1128701725B9D71500E64D0D /* Invertable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Invertable.swift; sourceTree = "<group>"; };
+		1128701925B9D71500E64D0D /* DispatchQueueExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DispatchQueueExtensions.swift; sourceTree = "<group>"; };
+		1128701B25B9D71500E64D0D /* Bindy+UITableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bindy+UITableView.swift"; sourceTree = "<group>"; };
+		1128701C25B9D71500E64D0D /* Bindy+UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bindy+UIView.swift"; sourceTree = "<group>"; };
+		1128701D25B9D71600E64D0D /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		1128701E25B9D71600E64D0D /* Signal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Signal.swift; sourceTree = "<group>"; };
+		1128701F25B9D71600E64D0D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1128702025B9D71600E64D0D /* Transformations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transformations.swift; sourceTree = "<group>"; };
+		1128705725B9DE5E00E64D0D /* XCTestManifests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTestManifests.swift; sourceTree = "<group>"; };
+		1128705825B9DE5E00E64D0D /* BindyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BindyTests.swift; sourceTree = "<group>"; };
+		1128706225B9E4D700E64D0D /* ObservableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableTests.swift; sourceTree = "<group>"; };
+		1128706325B9E4D700E64D0D /* UIObservationsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIObservationsTests.swift; sourceTree = "<group>"; };
+		1128706A25B9F1DE00E64D0D /* TransformationsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransformationsTests.swift; sourceTree = "<group>"; };
+		1128706B25B9F1DE00E64D0D /* CombinationsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CombinationsTests.swift; sourceTree = "<group>"; };
 		1902B59F1FA84AE3001CC0BC /* BindyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BindyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1902B5A11FA84AE3001CC0BC /* BindyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindyTests.swift; sourceTree = "<group>"; };
 		1902B5A31FA84AE3001CC0BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1902B5AD1FA88040001CC0BC /* Bindy.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = Bindy.podspec; sourceTree = SOURCE_ROOT; };
-		1935BD97221FB2C600A9585B /* KVOSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVOSupport.swift; sourceTree = "<group>"; };
-		1936A70A1FE6E220004CA64B /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
-		1936A70C1FE6E677004CA64B /* Property.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
-		19488F5D1FB0F8D80004E606 /* ObserveCapable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserveCapable.swift; sourceTree = "<group>"; };
-		19488F5F1FB1099B0004E606 /* ObservableValueHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableValueHolder.swift; sourceTree = "<group>"; };
-		194C1EDE1FE53A4B0009D1D0 /* Bindy+UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bindy+UITableView.swift"; sourceTree = "<group>"; };
-		194C1EE01FE53A720009D1D0 /* Bindy+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bindy+UIView.swift"; sourceTree = "<group>"; };
 		1969D9F01FA7DC8600AA6FDB /* Bindy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bindy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1969D9F31FA7DC8600AA6FDB /* Bindy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bindy.h; sourceTree = "<group>"; };
-		1969D9F41FA7DC8600AA6FDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		197568482091AD2A005DA318 /* DSL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSL.swift; sourceTree = "<group>"; };
-		19765A8A1FA7DE0700F9FCB8 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
-		19765A8F1FA7DE5D00F9FCB8 /* ObservableArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableArray.swift; sourceTree = "<group>"; };
-		19862CD8241916D800AF49F0 /* DispatchQueueExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueueExtensions.swift; sourceTree = "<group>"; };
-		1986FAEB218C50D300A3E175 /* Transformations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transformations.swift; sourceTree = "<group>"; };
-		199E9F5B236B1ADF00CF435C /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
-		19A231D022230116006D5382 /* HighOrderFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighOrderFunctions.swift; sourceTree = "<group>"; };
-		19D44FBC20065689009233EE /* Invertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invertable.swift; sourceTree = "<group>"; };
 		5CDDEB36833C1C3411D475FF /* Pods-Bindy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bindy.release.xcconfig"; path = "Pods/Target Support Files/Pods-Bindy/Pods-Bindy.release.xcconfig"; sourceTree = "<group>"; };
 		8AC52963C1522156917717FA /* Pods-Bindy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bindy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Bindy/Pods-Bindy.debug.xcconfig"; sourceTree = "<group>"; };
 		E4E8B34FBAD50D3443F6EB5C /* Pods_Bindy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bindy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,20 +106,83 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		1902B5A01FA84AE3001CC0BC /* BindyTests */ = {
+		11286FF125B9D67100E64D0D /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				1902B5A11FA84AE3001CC0BC /* BindyTests.swift */,
+				1128701125B9D71500E64D0D /* Bindable Properties */,
+				1128701525B9D71500E64D0D /* Bindy.h */,
+				1128701425B9D71500E64D0D /* DSL.swift */,
+				1128701625B9D71500E64D0D /* Extensions */,
+				1128701D25B9D71600E64D0D /* Helpers.swift */,
+				1128700D25B9D71500E64D0D /* HighOrderFunctions.swift */,
+				1128701F25B9D71600E64D0D /* Info.plist */,
+				1128700E25B9D71500E64D0D /* KVOSupport.swift */,
+				1128700B25B9D71500E64D0D /* Observable.swift */,
+				1128700F25B9D71500E64D0D /* ObservableArray.swift */,
+				1128700C25B9D71500E64D0D /* ObservableValueHolder.swift */,
+				1128701025B9D71500E64D0D /* ObserveCapable.swift */,
+				1128701E25B9D71600E64D0D /* Signal.swift */,
+				1128702025B9D71600E64D0D /* Transformations.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		1128701125B9D71500E64D0D /* Bindable Properties */ = {
+			isa = PBXGroup;
+			children = (
+				1128701225B9D71500E64D0D /* Property.swift */,
+				1128701325B9D71500E64D0D /* Bindable.swift */,
+			);
+			path = "Bindable Properties";
+			sourceTree = "<group>";
+		};
+		1128701625B9D71500E64D0D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1128701725B9D71500E64D0D /* Invertable.swift */,
+				1128701825B9D71500E64D0D /* Dispatch */,
+				1128701A25B9D71500E64D0D /* Bindy+UIKit */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		1128701825B9D71500E64D0D /* Dispatch */ = {
+			isa = PBXGroup;
+			children = (
+				1128701925B9D71500E64D0D /* DispatchQueueExtensions.swift */,
+			);
+			path = Dispatch;
+			sourceTree = "<group>";
+		};
+		1128701A25B9D71500E64D0D /* Bindy+UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				1128701B25B9D71500E64D0D /* Bindy+UITableView.swift */,
+				1128701C25B9D71500E64D0D /* Bindy+UIView.swift */,
+			);
+			path = "Bindy+UIKit";
+			sourceTree = "<group>";
+		};
+		1128703E25B9D9B600E64D0D /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				1128706B25B9F1DE00E64D0D /* CombinationsTests.swift */,
+				1128706A25B9F1DE00E64D0D /* TransformationsTests.swift */,
+				1128706225B9E4D700E64D0D /* ObservableTests.swift */,
+				1128706325B9E4D700E64D0D /* UIObservationsTests.swift */,
+				1128705825B9DE5E00E64D0D /* BindyTests.swift */,
+				1128705725B9DE5E00E64D0D /* XCTestManifests.swift */,
 				1902B5A31FA84AE3001CC0BC /* Info.plist */,
 			);
-			path = BindyTests;
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		1969D9E61FA7DC8600AA6FDB = {
 			isa = PBXGroup;
 			children = (
-				1969D9F21FA7DC8600AA6FDB /* Bindy */,
-				1902B5A01FA84AE3001CC0BC /* BindyTests */,
+				1128703E25B9D9B600E64D0D /* Tests */,
+				11286FF125B9D67100E64D0D /* Sources */,
+				1902B5AD1FA88040001CC0BC /* Bindy.podspec */,
 				1969D9F11FA7DC8600AA6FDB /* Products */,
 				06FD270D43F0638FFAEF8928 /* Pods */,
 				61737E33FB05967FDFA1E182 /* Frameworks */,
@@ -124,64 +196,6 @@
 				1902B59F1FA84AE3001CC0BC /* BindyTests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		1969D9F21FA7DC8600AA6FDB /* Bindy */ = {
-			isa = PBXGroup;
-			children = (
-				199A43752099F90300EA165F /* Bindable Properties */,
-				199A43742099F8D000EA165F /* Extensions */,
-				1902B5AD1FA88040001CC0BC /* Bindy.podspec */,
-				1969D9F31FA7DC8600AA6FDB /* Bindy.h */,
-				1969D9F41FA7DC8600AA6FDB /* Info.plist */,
-				19765A8A1FA7DE0700F9FCB8 /* Observable.swift */,
-				199E9F5B236B1ADF00CF435C /* Helpers.swift */,
-				19765A8F1FA7DE5D00F9FCB8 /* ObservableArray.swift */,
-				1902B5991FA8479D001CC0BC /* Signal.swift */,
-				1935BD97221FB2C600A9585B /* KVOSupport.swift */,
-				19488F5D1FB0F8D80004E606 /* ObserveCapable.swift */,
-				19488F5F1FB1099B0004E606 /* ObservableValueHolder.swift */,
-				197568482091AD2A005DA318 /* DSL.swift */,
-				1986FAEB218C50D300A3E175 /* Transformations.swift */,
-				19A231D022230116006D5382 /* HighOrderFunctions.swift */,
-			);
-			path = Bindy;
-			sourceTree = "<group>";
-		};
-		19862CD7241916C600AF49F0 /* Dispatch */ = {
-			isa = PBXGroup;
-			children = (
-				19862CD8241916D800AF49F0 /* DispatchQueueExtensions.swift */,
-			);
-			path = Dispatch;
-			sourceTree = "<group>";
-		};
-		199A43742099F8D000EA165F /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				19862CD7241916C600AF49F0 /* Dispatch */,
-				199A43762099F91B00EA165F /* Bindy+UIKit */,
-				19D44FBC20065689009233EE /* Invertable.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		199A43752099F90300EA165F /* Bindable Properties */ = {
-			isa = PBXGroup;
-			children = (
-				1936A70A1FE6E220004CA64B /* Bindable.swift */,
-				1936A70C1FE6E677004CA64B /* Property.swift */,
-			);
-			path = "Bindable Properties";
-			sourceTree = "<group>";
-		};
-		199A43762099F91B00EA165F /* Bindy+UIKit */ = {
-			isa = PBXGroup;
-			children = (
-				194C1EDE1FE53A4B0009D1D0 /* Bindy+UITableView.swift */,
-				194C1EE01FE53A720009D1D0 /* Bindy+UIView.swift */,
-			);
-			path = "Bindy+UIKit";
 			sourceTree = "<group>";
 		};
 		61737E33FB05967FDFA1E182 /* Frameworks */ = {
@@ -199,7 +213,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1969D9F51FA7DC8600AA6FDB /* Bindy.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,11 +268,12 @@
 				TargetAttributes = {
 					1902B59E1FA84AE3001CC0BC = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 1230;
 						ProvisioningStyle = Automatic;
 					};
 					1969D9EF1FA7DC8600AA6FDB = {
 						CreatedOnToolsVersion = 9.0;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1230;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -325,7 +339,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1902B5A21FA84AE3001CC0BC /* BindyTests.swift in Sources */,
+				1128706525B9E4D700E64D0D /* UIObservationsTests.swift in Sources */,
+				1128705A25B9DE5E00E64D0D /* BindyTests.swift in Sources */,
+				1128706425B9E4D700E64D0D /* ObservableTests.swift in Sources */,
+				1128706C25B9F1DE00E64D0D /* TransformationsTests.swift in Sources */,
+				1128705925B9DE5E00E64D0D /* XCTestManifests.swift in Sources */,
+				1128706D25B9F1DE00E64D0D /* CombinationsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,22 +352,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				19765A901FA7DE5D00F9FCB8 /* ObservableArray.swift in Sources */,
-				19488F5E1FB0F8D80004E606 /* ObserveCapable.swift in Sources */,
-				1936A70D1FE6E677004CA64B /* Property.swift in Sources */,
-				194C1EDF1FE53A4B0009D1D0 /* Bindy+UITableView.swift in Sources */,
-				1936A70B1FE6E220004CA64B /* Bindable.swift in Sources */,
-				197568492091AD2A005DA318 /* DSL.swift in Sources */,
-				1935BD98221FB2C600A9585B /* KVOSupport.swift in Sources */,
-				194C1EE11FE53A720009D1D0 /* Bindy+UIView.swift in Sources */,
-				1902B59A1FA8479D001CC0BC /* Signal.swift in Sources */,
-				19488F601FB1099B0004E606 /* ObservableValueHolder.swift in Sources */,
-				19A231D122230116006D5382 /* HighOrderFunctions.swift in Sources */,
-				19765A8B1FA7DE0700F9FCB8 /* Observable.swift in Sources */,
-				1986FAEC218C50D300A3E175 /* Transformations.swift in Sources */,
-				19862CD9241916D800AF49F0 /* DispatchQueueExtensions.swift in Sources */,
-				199E9F5C236B1ADF00CF435C /* Helpers.swift in Sources */,
-				19D44FBD20065689009233EE /* Invertable.swift in Sources */,
+				1128702725B9D71600E64D0D /* Property.swift in Sources */,
+				1128703025B9D71600E64D0D /* Signal.swift in Sources */,
+				1128702F25B9D71600E64D0D /* Helpers.swift in Sources */,
+				1128702C25B9D71600E64D0D /* DispatchQueueExtensions.swift in Sources */,
+				1128702425B9D71600E64D0D /* KVOSupport.swift in Sources */,
+				1128702825B9D71600E64D0D /* Bindable.swift in Sources */,
+				1128702925B9D71600E64D0D /* DSL.swift in Sources */,
+				1128702625B9D71600E64D0D /* ObserveCapable.swift in Sources */,
+				1128702225B9D71600E64D0D /* ObservableValueHolder.swift in Sources */,
+				1128702325B9D71600E64D0D /* HighOrderFunctions.swift in Sources */,
+				1128703225B9D71600E64D0D /* Transformations.swift in Sources */,
+				1128702E25B9D71600E64D0D /* Bindy+UIView.swift in Sources */,
+				1128702D25B9D71600E64D0D /* Bindy+UITableView.swift in Sources */,
+				1128702B25B9D71600E64D0D /* Invertable.swift in Sources */,
+				1128702525B9D71600E64D0D /* ObservableArray.swift in Sources */,
+				1128702125B9D71600E64D0D /* Observable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,11 +385,14 @@
 		1902B5A81FA84AE3001CC0BC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = BindyTests/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = MaximKotliar.BindyTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -379,8 +401,10 @@
 		1902B5A91FA84AE3001CC0BC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = BindyTests/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = MaximKotliar.BindyTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -519,7 +543,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/Bindy/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -544,7 +568,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/Bindy/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
