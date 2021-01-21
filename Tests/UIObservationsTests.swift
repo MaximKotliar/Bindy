@@ -50,7 +50,7 @@ final class UIObservationsTests: XCTestCase {
         alpha.value = 0.5
         XCTAssert(view.alpha == alpha.value)
     }
-    
+
     static var allTests = [
         ("testUIViewIsHidden", testUIViewIsHidden),
         ("testUIViewIsUserInteractionEnabled", testUIViewIsUserInteractionEnabled),

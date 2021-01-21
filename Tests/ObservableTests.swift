@@ -14,7 +14,7 @@ final class ObservablesTests: XCTestCase {
     var testObservableListener: TestListener?
     var observableArray: ObservableArray<String>?
     var optionalObservable: Observable<String?>?
-    
+
     func testObservable() {
         let old = "Test"
         let new = "Test_New"
