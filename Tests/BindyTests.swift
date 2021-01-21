@@ -1,5 +1,4 @@
 import XCTest
-import UIKit
 @testable import Bindy
 
 class TestListener: NSObject {
@@ -50,66 +49,6 @@ final class BindyTests: XCTestCase {
         }
         array.replaceAll(with: ["5", "4", "3", "2", "1", "0"])
         XCTAssert(insertions == [5] && replacements == [0, 1, 3, 4])
-    }
-
-    func testCombination() {
-        enum Mode {
-            case cap
-            case lower
-            case def
-        }
-        let firstname = Observable("Maxim")
-        let age = Observable(24)
-        let mode = Observable(Mode.def)
-
-        var callCount = 0
-        firstname.combined(with: mode) { name, mode -> String in
-            switch mode {
-            case .cap:
-                return name.uppercased()
-            case .lower:
-                return name.lowercased()
-            case .def:
-                return name
-            }
-            }.combined(with: age) { "\($0) \($1)" }.bind(self) { (res) in
-                print(res)
-                callCount += 1
-        }
-
-        firstname.value = "Maximus"
-        mode.value = .lower
-        age.value = 25
-        mode.value = .cap
-        XCTAssert(callCount == 4)
-    }
-
-    func testArrayCombination() {
-
-        let tasks = ObservableArray(["one", "two", "three"])
-        let priority = ObservableArray([10, 20, 30])
-        let title = Observable("Tasks")
-
-        var callCount = 0
-        tasks.combined(with: priority) { (tasks, priority) -> [String] in
-            return zip(tasks, priority).map { "\($0.0) \($0.1)" }
-            }.combined(with: title) { (array, title) -> String in
-                return "\(title): [\(array.joined(separator: ", "))]"
-            }.observe(self) { (result) in
-                print(result)
-                    callCount += 1
-        }
-
-        tasks.append("four")
-        priority.append(4)
-        tasks.append("five")
-        priority.append(5)
-        tasks.append("six")
-        title.value = "Schedule"
-        priority.append(6)
-        tasks.remove(at: 2)
-        priority.remove(at: 2)
-        XCTAssert(callCount == 7)
     }
 
     let firstname = Observable("Maxim")
@@ -215,28 +154,6 @@ final class BindyTests: XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
 
-    func testObservableWithOldValue() {
-        let observable = Observable<String?>(nil)
-        let asyncExpectation = expectation(description: "Expect to call")
-        observable.bind(self) { oldValue, newValue in
-            guard oldValue == nil, newValue == "test" else { return }
-            asyncExpectation.fulfill()
-        }
-        observable.value = "test"
-        waitForExpectations(timeout: 1, handler: nil)
-    }
-
-    func testObservableWithOldValueOnly() {
-        let observable = Observable<String?>(nil)
-        let asyncExpectation = expectation(description: "Expect to call")
-        observable.bindToOldValue(self) { oldValue in
-            guard oldValue == nil else { return }
-            asyncExpectation.fulfill()
-        }
-        observable.value = "test"
-        waitForExpectations(timeout: 1, handler: nil)
-    }
-
     func testEquatableTransformEqualityCheck() {
         struct NonEquatable {
             let test: String
@@ -258,38 +175,6 @@ final class BindyTests: XCTestCase {
         }
         nonEquatable.value = NonEquatable(test: "2")
         nonEquatable.value = NonEquatable(test: "2")
-        waitForExpectations(timeout: 1, handler: nil)
-    }
-
-    func testKVOObservable() {
-        let view = UIView()
-        let observable = view.observable(for: \.frame)
-        let asyncExpectation = expectation(description: "Expect to call")
-        observable.bind(self) { old, new in
-            guard old.width == 0 else { return }
-            guard new.width == 1 else { return }
-            asyncExpectation.fulfill()
-        }
-        view.frame = CGRect(x: 1, y: 1, width: 1, height: 1)
-        waitForExpectations(timeout: 1, handler: nil)
-    }
-
-    func testKVOObservableCleanup() {
-        testObservableListener = TestListener()
-        let view = UIView()
-        kvoObservable = view[\.frame]
-
-        let bindNotCallExpectation = expectation(description: "bind did not call")
-        bindNotCallExpectation.isInverted = true
-
-        kvoObservable!.bind(testObservableListener!) { newValue in
-            self.testObservableListener!.tag = 4
-            bindNotCallExpectation.fulfill()
-        }
-        // Force listener to release
-        testObservableListener = nil
-        // Perform change
-        view.frame = CGRect(x: 1, y: 1, width: 1, height: 1)
         waitForExpectations(timeout: 1, handler: nil)
     }
 
@@ -401,20 +286,19 @@ final class BindyTests: XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
 
+    
+}
+
+extension BindyTests {
     static var allTests = [
         ("testSignal", testSignal),
         ("testArrayUpdates", testArrayUpdates),
-        ("testCombination", testCombination),
-        ("testArrayCombination", testArrayCombination),
         ("testTransform", testTransform),
         ("testTransformCleanup", testTransformCleanup),
         ("testBoolCombine", testBoolCombine),
         ("testEquatableCallsReduce", testEquatableCallsReduce),
         ("testOptionalEquatableCallsReduce", testOptionalEquatableCallsReduce),
-        ("testObservableWithOldValue", testObservableWithOldValue),
-        ("testObservableWithOldValueOnly", testObservableWithOldValueOnly),
         ("testEquatableTransformEqualityCheck", testEquatableTransformEqualityCheck),
-        ("testKVOObservable", testKVOObservable),
         ("testCombinedCallsReduceByEquality", testCombinedCallsReduceByEquality),
         ("testDynamicMemberLookup", testDynamicMemberLookup),
         ("testObservablePropertyWrapper", testObservablePropertyWrapper),

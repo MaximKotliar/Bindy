@@ -37,7 +37,7 @@ final class TransformationsTests: XCTestCase {
     }
 
     func testCompactMap() {
-        let observable = Observable(["test", "test" , nil])
+        let observable = Observable(["test", "test", nil])
         let compactMapped = observable.compactMap { $0 }
         let asyncExpectation = expectation(description: "Expect not call")
         asyncExpectation.isInverted = true

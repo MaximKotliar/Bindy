@@ -72,11 +72,35 @@ final class ObservablesTests: XCTestCase {
         observableArray?.append(contentsOf: ["1", "2", "3", "4"])
         waitForExpectations(timeout: 1, handler: nil)
     }
+    
+    func testObservableWithOldValue() {
+        let observable = Observable<String?>(nil)
+        let asyncExpectation = expectation(description: "Expect to call")
+        observable.bind(self) { oldValue, newValue in
+            guard oldValue == nil, newValue == "test" else { return }
+            asyncExpectation.fulfill()
+        }
+        observable.value = "test"
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+
+    func testObservableWithOldValueOnly() {
+        let observable = Observable<String?>(nil)
+        let asyncExpectation = expectation(description: "Expect to call")
+        observable.bindToOldValue(self) { oldValue in
+            guard oldValue == nil else { return }
+            asyncExpectation.fulfill()
+        }
+        observable.value = "test"
+        waitForExpectations(timeout: 1, handler: nil)
+    }
 
     static var allTests = [
         ("testObservable", testObservable),
         ("testObservableCleanup", testObservableCleanup),
         ("testOptionalObservable", testOptionalObservable),
-        ("testObservableArray", testObservableArray)
+        ("testObservableArray", testObservableArray),
+        ("testObservableWithOldValue", testObservableWithOldValue),
+        ("testObservableWithOldValueOnly", testObservableWithOldValueOnly)
     ]
 }
