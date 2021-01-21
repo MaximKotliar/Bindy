@@ -9,7 +9,7 @@ import XCTest
 @testable import Bindy
 
 final class ObservablesTests: XCTestCase {
-    
+
     var observable: Observable<String>?
     var testObservableListener: TestListener?
     var observableArray: ObservableArray<String>?

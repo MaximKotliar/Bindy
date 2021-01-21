@@ -9,7 +9,7 @@ import XCTest
 @testable import Bindy
 
 final class UIObservationsTests: XCTestCase {
-    
+
     func testUIViewIsHidden() {
         let isHidden = Observable(false)
         var view: UIView? = UIView()
@@ -54,6 +54,6 @@ final class UIObservationsTests: XCTestCase {
     static var allTests = [
         ("testUIViewIsHidden", testUIViewIsHidden),
         ("testUIViewIsUserInteractionEnabled", testUIViewIsUserInteractionEnabled),
-        ("testUIViewAlpha", testUIViewAlpha),
+        ("testUIViewAlpha", testUIViewAlpha)
     ]
 }
