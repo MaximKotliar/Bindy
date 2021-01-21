@@ -22,17 +22,17 @@ For now, Bindy has a couple of basic types
 * Observable - allows observing changing of value.
 * ObservableArray - conforms to MutableCollection protocol, so you can work with it like with a regular array: subscript index, replace objects, map, enumerate, etc... Also, ObservableArray has `updates` signal, which will notify you about any changes in the array, such as insert, replace, delete.
 
-### Observables Sample
+### Observables Sample (updated with property wrappers)
 
 ```swift
-let firstname = Observable("Salvador")
-let age = Observable(54)
+@Observable var firstname = "Salvador"
+@Observable var age = 54
 
 func setupBindings() {
-    age.bind(self) { [unowned self] newAge in
-            print("Happy \(newAge) birthday, \(self.firstname.value)")
+    $age.bind(self) { [unowned self] newAge in
+            print("Happy \(newAge) birthday, \(firstname)")
     }
-    age.value = 55
+    age = 55
 }
 ```
 
