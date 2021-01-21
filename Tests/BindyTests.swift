@@ -1,20 +1,13 @@
-//
-//  BindyTests.swift
-//  BindyTests
-//
-//  Created by Maxim Kotliar on 10/31/17.
-//  Copyright © 2017 Maxim Kotliar. All rights reserved.
-//
-
 import XCTest
-import Bindy
+import UIKit
+@testable import Bindy
 
 class TestListener: NSObject {
     var tag = 0
 }
 
-class BindyTests: XCTestCase {
-
+final class BindyTests: XCTestCase {
+    
     var observable: Observable<String>?
     var kvoObservable: Observable<CGRect>?
     var optionalObservable: Observable<String?>?
@@ -570,5 +563,40 @@ class BindyTests: XCTestCase {
 
         waitForExpectations(timeout: 1, handler: nil)
     }
-}
 
+
+    static var allTests = [
+        ("testObservable", testObservable),
+        ("testObservableCleanup", testObservableCleanup),
+        ("testOptionalObservable", testOptionalObservable),
+        ("testObservableArray", testObservableArray),
+        ("testSignal", testSignal),
+        ("testArrayUpdates", testArrayUpdates),
+        ("testCombination", testCombination),
+        ("testArrayCombination", testArrayCombination),
+        ("testTransform", testTransform),
+        ("testTransformCleanup", testTransformCleanup),
+        ("testUIViewIsHidden", testUIViewIsHidden),
+        ("testUIViewIsUserInteractionEnabled", testUIViewIsUserInteractionEnabled),
+        ("testUIViewAlpha", testUIViewAlpha),
+        ("testBoolCombine", testBoolCombine),
+        ("testEquatableCallsReduce", testEquatableCallsReduce),
+        ("testOptionalEquatableCallsReduce", testOptionalEquatableCallsReduce),
+        ("testObservableWithOldValue", testObservableWithOldValue),
+        ("testObservableWithOldValueOnly", testObservableWithOldValueOnly),
+        ("testEquatableTransformEqualityCheck", testEquatableTransformEqualityCheck),
+        ("testKVOObservable", testKVOObservable),
+        ("testMap", testMap),
+        ("testArrayMap", testArrayMap),
+        ("testCompactMap", testCompactMap),
+        ("testReduce", testReduce),
+        ("testFilter", testFilter),
+        ("testCombinedCallsReduceByEquality", testCombinedCallsReduceByEquality),
+        ("testDynamicMemberLookup", testDynamicMemberLookup),
+        ("testObservablePropertyWrapper", testObservablePropertyWrapper),
+        ("testTransformedObserverChain", testTransformedObserverChain),
+        ("testLeadingDebounce", testLeadingDebounce),
+        ("testTrailingDebounce", testTrailingDebounce),
+        ("testObserveSingleEvent", testObserveSingleEvent)
+    ]
+}

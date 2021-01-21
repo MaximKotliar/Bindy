@@ -1,2 +1,9 @@
+#macOS
+.DS_Store
+
 Pods/
 *.xcuserstate
+
+#SPM
+
+.swiftpm/
