@@ -28,7 +28,6 @@ final class ObservablesTests: XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
 
-    
     func testObservableCleanup() {
         testObservableListener = TestListener()
         observable = Observable("testString")
@@ -36,7 +35,7 @@ final class ObservablesTests: XCTestCase {
         let bindNotCallExpectation = expectation(description: "bind did not call")
         bindNotCallExpectation.isInverted = true
 
-        observable!.bind(testObservableListener!) { newValue in
+        observable!.bind(testObservableListener!) { _ in
             self.testObservableListener!.tag = 3
             bindNotCallExpectation.fulfill()
         }
@@ -73,7 +72,7 @@ final class ObservablesTests: XCTestCase {
         observableArray?.append(contentsOf: ["1", "2", "3", "4"])
         waitForExpectations(timeout: 1, handler: nil)
     }
-    
+
     static var allTests = [
         ("testObservable", testObservable),
         ("testObservableCleanup", testObservableCleanup),
