@@ -15,6 +15,8 @@ Add
 to your podfile, and run
 `pod install`
 
+SPM is supported too.
+
 ## Usage
 For now, Bindy has a couple of basic types
 
