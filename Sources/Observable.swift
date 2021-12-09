@@ -100,7 +100,7 @@ public extension Observable where T: Equatable {
 }
 
 
-public protocol ExtendableClass: class {}
+public protocol ExtendableClass: AnyObject {}
 extension NSObject: ExtendableClass {}
 
 public extension ExtendableClass {
